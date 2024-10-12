@@ -36,6 +36,15 @@ export const MEDIA_BLOCK = `
 }
 `
 
+export const CODE_BLOCK = `
+... on Codeblocks {
+    trackingCode
+    id
+    blockName
+    blockType
+}
+`
+
 export const ARCHIVE_BLOCK = `
 ...on Archive {
   blockType

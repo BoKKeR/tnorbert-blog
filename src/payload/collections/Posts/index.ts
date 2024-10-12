@@ -4,6 +4,7 @@ import { admins } from '../../access/admins'
 import { adminsOrPublished } from '../../access/adminsOrPublished'
 import { Archive } from '../../blocks/ArchiveBlock'
 import { CallToAction } from '../../blocks/CallToAction'
+import { CodeBlock } from '../../blocks/CodeBlock'
 import { Content } from '../../blocks/Content'
 import { MediaBlock } from '../../blocks/MediaBlock'
 import { hero } from '../../fields/hero'
@@ -120,7 +121,7 @@ export const Posts: CollectionConfig = {
               name: 'layout',
               type: 'blocks',
               required: true,
-              blocks: [CallToAction, Content, MediaBlock, Archive],
+              blocks: [CallToAction, Content, MediaBlock, Archive, CodeBlock],
             },
             {
               name: 'enablePremiumContent',
@@ -133,7 +134,7 @@ export const Posts: CollectionConfig = {
               access: {
                 read: ({ req }) => req.user,
               },
-              blocks: [CallToAction, Content, MediaBlock, Archive],
+              blocks: [CallToAction, Content, MediaBlock, Archive, CodeBlock],
             },
           ],
         },
