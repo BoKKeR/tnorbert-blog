@@ -35,8 +35,10 @@
     "next": "13.5.2",
     "payload": "^2.0.0",
     "payload-admin-bar": "^1.0.6",
+    "prism-react-renderer": "^2.4.0",
     "qs": "6.11.2",
     "react": "^18.2.0",
+    "react-code-block": "^1.0.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "7.45.4",
     "react-router-dom": "5.3.4"

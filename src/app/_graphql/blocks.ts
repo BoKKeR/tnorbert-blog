@@ -38,8 +38,9 @@ export const MEDIA_BLOCK = `
 
 export const CODE_BLOCK = `
 ... on Codeblocks {
-    trackingCode
+    code
     id
+    language
     blockName
     blockType
 }
