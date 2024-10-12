@@ -6,8 +6,8 @@ WORKDIR /home/node/app
 COPY package*.json ./
 
 COPY . .
-RUN yarn install
-RUN yarn build
+RUN npm install
+RUN npm build
 
 FROM base as runtime
 
