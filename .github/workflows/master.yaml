@@ -48,6 +48,7 @@ jobs:
           # Create or overwrite .env file
           env > .env
           # Print the contents of the .env file for debugging (optional)
+          echo .env
           ls -la
 
       - name: Build and push
