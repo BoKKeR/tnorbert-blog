@@ -9,7 +9,7 @@ COPY . .
 RUN npm install
 RUN npm install --platform=linuxmusl --arch=x64 sharp
 RUN npm run build
-RUN ls
+RUN ls -la
 
 FROM base AS runtime
 
