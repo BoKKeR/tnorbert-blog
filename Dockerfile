@@ -3,10 +3,11 @@ FROM node:18.8-alpine AS base
 FROM base AS builder
 
 WORKDIR /home/node/app
-COPY package*.json ./
 
 COPY . .
+
 RUN npm install
+RUN npm install --platform=linuxmusl --arch=x64 sharp
 RUN npm run build
 
 FROM base AS runtime
