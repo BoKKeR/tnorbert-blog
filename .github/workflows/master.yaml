@@ -50,9 +50,8 @@ jobs:
         run: |
           # Create or overwrite .env file
           env > .env
-          # Print the contents of the .env file for debugging (optional)
-          cat .env
-          ls -la
+      - name: Read .env file
+        run: ls -la
 
       - name: Build and push
         uses: docker/build-push-action@v4
