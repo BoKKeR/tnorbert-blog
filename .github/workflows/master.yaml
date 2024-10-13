@@ -43,6 +43,13 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+      - name: Generate .env file with all environment variables
+        run: |
+          # Create or overwrite .env file
+          env > .env
+          # Print the contents of the .env file for debugging (optional)
+          cat .env
+
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
