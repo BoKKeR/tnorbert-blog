@@ -9,6 +9,7 @@ COPY . .
 RUN npm install
 RUN npm install --platform=linuxmusl --arch=x64 sharp
 RUN npm run build
+RUN ls
 
 FROM base AS runtime
 
@@ -18,7 +19,6 @@ ENV PAYLOAD_CONFIG_PATH=dist/payload/payload.config.js
 WORKDIR /home/node/app
 
 COPY package.json ./
-RUN ls
 COPY --from=builder /home/node/app/.next ./.next
 COPY --from=builder /home/node/app/dist ./dist
 COPY --from=builder /home/node/app/build ./build
