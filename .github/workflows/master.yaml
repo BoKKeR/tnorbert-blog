@@ -52,6 +52,8 @@ jobs:
 
       - name: Build and push
         uses: docker/build-push-action@v4
+        env:
+          PAYLOAD_SECRET: test
         with:
           push: true
           tags: |
