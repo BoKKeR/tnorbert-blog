@@ -16,12 +16,14 @@ ENV NODE_ENV=production
 ENV PAYLOAD_CONFIG_PATH=dist/payload/payload.config.js
 
 WORKDIR /home/node/app
-COPY package.json ./
 
-RUN npm install
+COPY package.json ./
+RUN ls
 COPY --from=builder /home/node/app/.next ./.next
 COPY --from=builder /home/node/app/dist ./dist
 COPY --from=builder /home/node/app/build ./build
+
+RUN npm install
 
 EXPOSE 3000
 
