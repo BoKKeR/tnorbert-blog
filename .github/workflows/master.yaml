@@ -45,7 +45,8 @@ jobs:
 
       - name: Generate .env file with all environment variables
         env:
-            PAYLOAD_SECRET: test
+          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+          DATABASE_URI: ${{ secrets.DATABASE_URI }}
         run: |
           # Create or overwrite .env file
           env > .env
@@ -56,7 +57,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         env:
-          PAYLOAD_SECRET: test
+          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+          DATABASE_URI: ${{ secrets.DATABASE_URI }}
         with:
           push: true
           tags: |
