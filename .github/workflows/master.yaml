@@ -48,7 +48,7 @@ jobs:
           # Create or overwrite .env file
           env > .env
           # Print the contents of the .env file for debugging (optional)
-          cat .env
+          ls
 
       - name: Build and push
         uses: docker/build-push-action@v4
