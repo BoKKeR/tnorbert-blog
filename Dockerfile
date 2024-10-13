@@ -19,6 +19,7 @@ WORKDIR /home/node/app
 COPY package.json ./
 
 RUN npm install
+COPY --from=builder /home/node/app/.next ./.next
 COPY --from=builder /home/node/app/dist ./dist
 COPY --from=builder /home/node/app/build ./build
 
