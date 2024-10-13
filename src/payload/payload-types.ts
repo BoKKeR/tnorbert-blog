@@ -154,6 +154,26 @@ export interface Page {
         blockName?: string | null;
         blockType: 'archive';
       }
+    | {
+        language:
+          | 'jsx'
+          | 'tsx'
+          | 'swift'
+          | 'kotlin'
+          | 'objectivec'
+          | 'js-extras'
+          | 'reason'
+          | 'rust'
+          | 'graphql'
+          | 'yaml'
+          | 'go'
+          | 'cpp'
+          | 'markdown';
+        code: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'codeblocks';
+      }
   )[];
   slug?: string | null;
   meta?: {
