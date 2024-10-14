@@ -29,5 +29,4 @@ RUN npm install
 
 EXPOSE 3000
 
-RUN npm run build:next
-CMD ["node", "dist/server.js"]
+CMD sh -c "npm run build:next && node dist/server.js"
