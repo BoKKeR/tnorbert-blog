@@ -42,19 +42,6 @@ jobs:
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-
-      - name: Generate .env file with environment variables
-        env:
-          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
-          DATABASE_URI: ${{ secrets.DATABASE_URI }}
-        run: |
-          echo "PAYLOAD_SECRET=${{ secrets.PAYLOAD_SECRET }}" >> .env
-          echo "DATABASE_URI=${{ secrets.DATABASE_URI }}" >> .env
-      - name: Read .env file
-        run: cat .env
-
-      # - name: Setup upterm session
-      #   uses: lhotari/action-upterm@v1
       - name: Build and push
         uses: docker/build-push-action@v4
         env:
