@@ -9,7 +9,7 @@ else
 fi
 
 # Ensure required variables are set
-if [ -z "$REMOTE_DATABASE_URI" ] || [ -z "$DATABASE_URI" ] || [ -z "$REMOTE_COLLECTION" ] || [ -z "$LOCAL_COLLECTION" ]; then
+if [ -z "$REMOTE_DATABASE_URI" ] || [ -z "$DATABASE_URI" ]; then
   echo "One or more required variables are missing in the .env file."
   exit 1
 fi
