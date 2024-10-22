@@ -9,16 +9,16 @@
   --font-mono: 'Roboto Mono', monospace;
 
   --gutter-h: 180px;
-  --block-padding: 120px;
+  --block-padding: 30px;
 
   @include large-break {
-    --gutter-h: 144px;
-    --block-padding: 96px;
+    --gutter-h: 72px;
+    --block-padding:48px;
   }
 
   @include mid-break {
-    --gutter-h: 24px;
-    --block-padding: 60px;
+    --gutter-h: 12px;
+    --block-padding: 30px;
   }
 }
 
