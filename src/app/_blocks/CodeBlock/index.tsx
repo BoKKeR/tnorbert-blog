@@ -31,7 +31,7 @@ export const CodeBlock: React.FC<
     return null // Or some loading placeholder
   }
 
-  const codeTheme = theme === 'light' ? themes.duotoneLight : themes.vsDark
+  const codeTheme = theme === 'light' ? themes.dracula : themes.vsDark
   return (
     <Gutter>
       <div className={classes.grid}>
