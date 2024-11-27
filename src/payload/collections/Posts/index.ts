@@ -31,7 +31,7 @@ export const Posts: CollectionConfig = {
     afterRead: [populateArchiveBlock, populateAuthors],
   },
   versions: {
-    drafts: true,
+    drafts: false,
   },
   access: {
     read: adminsOrPublished,
