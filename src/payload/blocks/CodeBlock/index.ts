@@ -22,7 +22,7 @@ export const CodeBlock: Block = {
         { label: 'C++', value: 'cpp' },
         { label: 'Markdown', value: 'markdown' },
       ],
-      defaultValue: 'ts', // Set a default language if needed
+      defaultValue: 'YAML', // Set a default language if needed
       admin: {
         description: 'Select the language for the code block',
       },
