@@ -30,7 +30,9 @@ export const Posts: CollectionConfig = {
     afterChange: [revalidatePost],
     afterRead: [populateArchiveBlock, populateAuthors],
   },
-
+  versions: {
+    drafts: true,
+  },
   access: {
     read: adminsOrPublished,
     update: admins,
