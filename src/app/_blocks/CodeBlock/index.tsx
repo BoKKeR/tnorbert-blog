@@ -35,8 +35,6 @@ export const CodeBlock: React.FC<
 
   const copyCode = () => {
     // Logic to copy `code`
-    console.log(process.env.NEXT_PUBLIC_SERVER_URL)
-    console.log(process.env.NEXT_PRIVATE_DRAFT_SECRET)
     copyToClipboard(code)
   }
 
