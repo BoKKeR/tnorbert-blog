@@ -23,7 +23,10 @@ app.get('/', (_, res) => {
 })
 
 const start = async (): Promise<void> => {
-  console.log(process.env.NEXT_PRIVATE_DRAFT_SECRET)
+  console.log({ private: process.env.NEXT_PRIVATE_DRAFT_SECRET })
+  console.log({ private: process.env.NEXT_PRIVATE_DRAFT_SECRET })
+  console.log({ private: process.env.NEXT_PRIVATE_DRAFT_SECRET })
+  console.log({ private: process.env.NEXT_PRIVATE_DRAFT_SECRET })
   await payload.init({
     secret: process.env.PAYLOAD_SECRET || '',
     express: app,
