@@ -76,6 +76,7 @@ export const PostHero: React.FC<{
             )}
           </p>
           <div>
+            {console.log(process.env.NEXT_PUBLIC_SERVER_URL)}
             <p className={classes.description}>
               {`${description ? `${description} ` : ''}To edit this post, `}
               <Link href={`${process.env.NEXT_PUBLIC_SERVER_URL}/admin/collections/posts/${id}`}>

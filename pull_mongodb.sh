@@ -36,13 +36,13 @@ fi
 # Step 2: Restore the dump to the local MongoDB collection
 # Step 3: Restore all collections to the local MongoDB database
 echo "Restoring dump to local MongoDB..."
-
+echo $DUMP_PATH
 # Get all BSON files from the dump and restore them using nsInclude
 for collection in $(find "$DUMP_PATH" -name "*.bson" | sed "s|$DUMP_PATH/[^/]*\/||;s|\.bson$||"); do
   # Restore each collection using the --nsInclude flag
   # echo "${DUMP_PATH}/test/${collection}.bson"
 
-  mongorestore --uri="${DATABASE_URI}" --nsInclude="test.${collection}" "${DUMP_PATH}/test/${collection}.bson"
+  mongorestore --uri="${DATABASE_URI}" --nsInclude="tnorbert-payload.${collection}" "${DUMP_PATH}/tnorbert-paylod/${collection}.bson"
 
   if [ $? -ne 0 ]; then
     echo "Failed to restore collection ${collection} to local MongoDB."
