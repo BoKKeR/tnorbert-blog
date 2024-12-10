@@ -33,4 +33,4 @@ RUN npm install
 
 EXPOSE 3000
 
-CMD sh -c "./save-env.sh && npm run build:next && node dist/server.js"
+CMD sh -c "./home/node/app/save-env.sh && npm run build:next && node dist/server.js"
