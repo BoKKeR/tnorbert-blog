@@ -16,6 +16,10 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 const start = async (): Promise<void> => {
+  console.log({ private: process.env.NEXT_PRIVATE_DRAFT_SECRET })
+  console.log({ private: process.env.NEXT_PRIVATE_DRAFT_SECRET })
+  console.log({ payload_secret: process.env.PAYLOAD_SECRET })
+  console.log({ payload_secret: process.env.PAYLOAD_SECRET })
   await payload.init({
     secret: process.env.PAYLOAD_SECRET || '',
     express: app,
