@@ -27,6 +27,7 @@ COPY --from=builder /home/node/app/public ./public
 COPY --from=builder /home/node/app/src ./src
 COPY --from=builder /home/node/app/dist ./dist
 COPY --from=builder /home/node/app/build ./build
+COPY --from=builder /home/node/app/save-env.sh ./save-env.sh
 
 RUN npm install
 
