@@ -42,7 +42,7 @@ for collection in $(find "$DUMP_PATH" -name "*.bson" | sed "s|$DUMP_PATH/[^/]*\/
   # Restore each collection using the --nsInclude flag
   # echo "${DUMP_PATH}/test/${collection}.bson"
 
-  mongorestore --uri="${DATABASE_URI}" --nsInclude="tnorbert-payload.${collection}" "${DUMP_PATH}/tnorbert-paylod/${collection}.bson"
+  mongorestore --uri="${DATABASE_URI}" --nsInclude="tnorbert-payload.${collection}" "${DUMP_PATH}/tnorbert-payload/${collection}.bson"
 
   if [ $? -ne 0 ]; then
     echo "Failed to restore collection ${collection} to local MongoDB."
