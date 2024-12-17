@@ -81,7 +81,7 @@ export const PremiumContent: React.FC<{
   if (user === null) {
     return (
       <Gutter>
-        <VerticalPadding bottom="large" top="none">
+        <VerticalPadding bottom="medium" top="none">
           <Message
             message={
               <>
@@ -101,7 +101,7 @@ export const PremiumContent: React.FC<{
   if (isLoading) {
     return (
       <Gutter>
-        <VerticalPadding bottom="large" top="none">
+        <VerticalPadding bottom="medium" top="none">
           <LoadingShimmer />
         </VerticalPadding>
       </Gutter>
@@ -111,7 +111,7 @@ export const PremiumContent: React.FC<{
   if (!blocks || blocks.length === 0) {
     return (
       <Gutter>
-        <VerticalPadding bottom="large" top="none">
+        <VerticalPadding bottom="medium" top="none">
           <Message message="Log in to unlock this premium content." />
         </VerticalPadding>
       </Gutter>
