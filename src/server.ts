@@ -16,10 +16,10 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 const start = async (): Promise<void> => {
-  console.log({ private: process.env.NEXT_PRIVATE_DRAFT_SECRET })
-  console.log({ private: process.env.NEXT_PRIVATE_DRAFT_SECRET })
-  console.log({ payload_secret: process.env.PAYLOAD_SECRET })
-  console.log({ payload_secret: process.env.PAYLOAD_SECRET })
+  console.log({ NEXT_PRIVATE_REVALIDATION_KEY: process.env.NEXT_PRIVATE_REVALIDATION_KEY })
+  console.log({ NEXT_PRIVATE_DRAFT_SECRET: process.env.NEXT_PRIVATE_DRAFT_SECRET })
+  console.log({ PAYLOAD_PUBLIC_DRAFT_SECRET: process.env.PAYLOAD_PUBLIC_DRAFT_SECRET })
+  console.log({ PAYLOAD_SECRET: process.env.PAYLOAD_SECRET })
   await payload.init({
     secret: process.env.PAYLOAD_SECRET || '',
     express: app,
