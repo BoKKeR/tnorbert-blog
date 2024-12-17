@@ -18,6 +18,8 @@ ENV PAYLOAD_CONFIG_PATH=dist/payload/payload.config.js
 
 WORKDIR /home/node/app
 
+RUN apk add --no-cache bash
+
 COPY package.json ./
 COPY --from=builder /home/node/app/redirects.js ./redirects.js
 COPY --from=builder /home/node/app/csp.js ./csp.js
