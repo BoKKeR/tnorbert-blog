@@ -6,9 +6,8 @@ WORKDIR /home/node/app
 
 COPY . .
 
-RUN npm install
 RUN npm install --platform=linuxmusl --arch=x64 sharp
-RUN npm run build
+# RUN npm run build
 
 ENV NODE_ENV=production
 ENV PAYLOAD_CONFIG_PATH=dist/payload/payload.config.js
@@ -34,4 +33,4 @@ RUN apk add --no-cache bash
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "ls /home/node/app/ && bash /home/node/app/save-env.sh && ls -la /home/node/app/ && npm run build && npm run build:next && node dist/server.js"]
+CMD ["sh", "-c", "npm run build && npm run build:next && node dist/server.js"]
