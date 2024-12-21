@@ -3,9 +3,8 @@
 import React, { Fragment } from 'react'
 import Giscus from '@giscus/react'
 
+import { useTheme } from '../../../app/_providers/Theme'
 import { Gutter } from '../Gutter'
-
-import { useTheme } from '@/app/_providers/Theme'
 
 export const GiscusComments = () => {
   const { theme } = useTheme()
