@@ -110,7 +110,7 @@ $spacer-h: calc(var(--block-padding) / 2);
 .code-block {
   background-color: #111827; /* Equivalent to bg-gray-900 */
   padding: 1.5rem; /* Equivalent to p-6 */
-  border-radius: 0.75rem; /* Equivalent to rounded-xl */
+  // border-radius: 0.75rem; /* Equivalent to rounded-xl */
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
 
   /* Horizontal scrolling */
@@ -142,8 +142,10 @@ $spacer-h: calc(var(--block-padding) / 2);
 
 /* Button for copying code */
 .copy-button {
-  background-color: #ffffff; /* Equivalent to bg-white */
-  border-radius: 9999px; /* Equivalent to rounded-full */
+  cursor: pointer;
+  border: 2px solid rgb(157, 157, 157);
+  background-color: #ffffffd5; /* Equivalent to bg-white */
+  // border-radius: 10px; /* Equivalent to rounded-full */
   padding: 0.375rem 0.875rem; /* Equivalent to py-1.5 and px-3.5 */
   position: absolute;
   top: 0.5rem; /* Equivalent to top-2 */

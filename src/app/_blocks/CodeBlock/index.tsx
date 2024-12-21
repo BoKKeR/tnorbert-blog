@@ -18,51 +18,38 @@ export const CodeBlock: React.FC<
     id?: string
   }
 > = ({ code, language }) => {
-  // Track if the component has mounted
   const { theme } = useTheme()
 
   const [mounted, setMounted] = useState(false)
-
+  const [isCopied, setIsCopied] = useState(false)
   const [state, copyToClipboard] = useCopyToClipboard()
+
   useEffect(() => {
     setMounted(true)
   }, [])
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsCopied(false)
+    }, 2000)
+
+    return () => clearTimeout(timeout)
+  }, [isCopied])
+
   // Prevent mismatched SSR and client styles by only rendering code after mounting
   if (!mounted) {
-    return null // Or some loading placeholder
+    return null
   }
 
   const copyCode = () => {
-    // Logic to copy `code`
+    setIsCopied(true)
     copyToClipboard(code)
   }
 
-  const codeTheme = theme === 'light' ? themes.dracula : themes.vsDark
+  const codeTheme = theme === 'light' ? themes.vsDark : themes.dracula
   return (
     <Gutter>
-      {/* <div className={classes.grid}>
-        <div className={classes.overflow}>
-          <CodeComponent code={code} language={language} theme={codeTheme}>
-            <CodeComponent.Code className={classes['code-wrapper']}>
-              <div className={classes['table-row']}>
-                <CodeComponent.LineNumber className={classes['table-cell-line-number']} />
-                <CodeComponent.LineContent className={classes['table-cell-line-content']}>
-                  <CodeComponent.Token />
-                </CodeComponent.LineContent>
-              </div>
-            </CodeComponent.Code>
-            <button
-              className="bg-white rounded-full px-3.5 py-1.5 absolute top-2 right-2 text-sm font-semibold"
-              onClick={copyCode}
-            >
-              {state.value ? 'Copied!' : 'Copy code'}
-            </button>
-          </CodeComponent>
-        </div>
-      </div> */}
-
-      <CodeComponent code={code} language={language}>
+      <CodeComponent code={code} language={language} theme={codeTheme}>
         <div className={classes['code-container']}>
           <CodeComponent.Code className={classes['code-block']}>
             <div className="code-row">
@@ -73,8 +60,8 @@ export const CodeBlock: React.FC<
             </div>
           </CodeComponent.Code>
 
-          <button className="copy-button" onClick={copyCode}>
-            {state.value ? 'Copied!' : 'Copy code'}
+          <button className={classes['copy-button']} onClick={copyCode}>
+            {isCopied ? <>copied</> : <>copy</>}
           </button>
         </div>
       </CodeComponent>
