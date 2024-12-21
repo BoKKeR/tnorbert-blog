@@ -5,12 +5,15 @@ import Giscus from '@giscus/react'
 
 import { Gutter } from '../Gutter'
 
+import { useTheme } from '@/app/_providers/Theme'
+
 export const GiscusComments = () => {
+  const { theme } = useTheme()
   return (
     <Fragment>
       <Gutter>
         <div style={{ marginTop: '2rem' }}>
-          <h5>Join the Discussion</h5>
+          <h4>Join the Discussion on github</h4>
           <Giscus
             id="comments"
             repo="bokker/tnorbert-blog"
@@ -19,10 +22,10 @@ export const GiscusComments = () => {
             categoryId="DIC_kwDOM-_PCM4ClbMt"
             mapping="pathname"
             term="Github discussion module"
-            reactionsEnabled="1"
+            reactionsEnabled="0"
             emitMetadata="0"
             inputPosition="top"
-            theme="preferred_color_scheme"
+            theme={theme}
             lang="en"
             loading="lazy"
           />

@@ -1,11 +1,17 @@
 const policies = {
   'default-src': ["'self'"],
-  'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'", 'https://maps.googleapis.com'],
+  'script-src': [
+    "'self'",
+    "'unsafe-inline'",
+    "'unsafe-eval'",
+    'https://maps.googleapis.com',
+    'https://giscus.app/',
+  ],
   'child-src': ["'self'"],
-  'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+  'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com', 'https://giscus.app/'],
   'img-src': ["'self'", 'https://raw.githubusercontent.com'],
   'font-src': ["'self'"],
-  'frame-src': ["'self'"],
+  'frame-src': ["'self'", 'https://giscus.app/'],
   'connect-src': ["'self'", 'https://maps.googleapis.com'],
 }
 
