@@ -16,7 +16,7 @@ export const GiscusComments = () => {
           <Giscus
             id="comments"
             repo="bokker/tnorbert-blog"
-            repoId="R_kgDOM-_PCA="
+            repoId="R_kgDOM-_PCA"
             category="Announcements"
             categoryId="DIC_kwDOM-_PCM4ClbMt"
             mapping="pathname"
