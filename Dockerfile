@@ -1,36 +1,24 @@
-FROM node:18.8-alpine AS base
+FROM node:18.8-alpine as base
 
-FROM base AS builder
+FROM base as builder
 
 WORKDIR /home/node/app
+COPY package*.json ./
 
 COPY . .
+RUN yarn install
+RUN yarn build
 
-RUN npm install --platform=linuxmusl --arch=x64 sharp
-# RUN npm run build
+FROM base as runtime
 
 ENV NODE_ENV=production
-ENV PAYLOAD_CONFIG_PATH=dist/payload/payload.config.js
 
 WORKDIR /home/node/app
+COPY package*.json  ./
+COPY yarn.lock ./
 
-RUN apk add --no-cache bash
-
-# might not be able to do runtime only, since .env variables are prob not packed
-
-# COPY package.json ./
-# COPY --from=builder /home/node/app/redirects.js ./redirects.js
-# COPY --from=builder /home/node/app/csp.js ./csp.js
-# COPY --from=builder /home/node/app/next.config.js ./next.config.js
-# COPY --from=builder /home/node/app/tsconfig.json ./tsconfig.json
-# COPY --from=builder /home/node/app/public ./public
-# COPY --from=builder /home/node/app/src ./src
-# COPY --from=builder /home/node/app/dist ./dist
-# COPY --from=builder /home/node/app/build ./build
-# COPY --from=builder /home/node/app/save-env.sh ./save-env.sh
-
-# RUN npm install
+RUN yarn install --production
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "npm run build && npm run build:next && node dist/server.js"]
+CMD ["node", "dist/server.js"]
