@@ -1,7 +1,5 @@
 FROM node:20.9-alpine as base
 
-FROM base as builder
-
 WORKDIR /home/node/app
 COPY package*.json ./
 
