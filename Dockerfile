@@ -6,17 +6,14 @@ WORKDIR /home/node/app
 COPY package*.json ./
 
 COPY . .
-RUN yarn install
-RUN yarn build
-
-FROM base as runtime
+RUN npm run install
+RUN npm run build
 
 ENV NODE_ENV=production
 
 WORKDIR /home/node/app
-COPY package*.json ./
 
-RUN yarn install --production
+RUN npm run install --production
 
 EXPOSE 3000
 
