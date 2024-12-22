@@ -14,8 +14,7 @@ FROM base as runtime
 ENV NODE_ENV=production
 
 WORKDIR /home/node/app
-COPY package*.json  ./
-COPY yarn.lock ./
+COPY package*.json ./
 
 RUN yarn install --production
 
