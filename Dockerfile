@@ -1,7 +1,6 @@
 FROM node:20.9-alpine as base
 
 WORKDIR /home/node/app
-COPY package*.json ./
 
 COPY . .
 RUN npm install
