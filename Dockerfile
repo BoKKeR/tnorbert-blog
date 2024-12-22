@@ -6,14 +6,14 @@ WORKDIR /home/node/app
 COPY package*.json ./
 
 COPY . .
-RUN npm run install
+RUN npm install
 RUN npm run build
 
 ENV NODE_ENV=production
 
 WORKDIR /home/node/app
 
-RUN npm run install --production
+RUN npm install --production
 
 EXPOSE 3000
 
