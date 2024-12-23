@@ -6,7 +6,7 @@ WORKDIR /home/node/app
 
 COPY . .
 
-RUN cp .env .env.example
+RUN cp /home/node/app/.env /home/node/app/.env.example
 
 RUN npm install
 RUN npm run build
