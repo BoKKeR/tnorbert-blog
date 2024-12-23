@@ -6,8 +6,7 @@ WORKDIR /home/node/app
 
 COPY . .
 
-RUN export $(cat .env.example | xargs) &&
-  echo "Environment variables set from .env.example"
+RUN export $(cat .env.example | xargs)
 
 RUN npm install
 RUN npm run build
