@@ -10,4 +10,4 @@ RUN npm install
 
 EXPOSE 3000
 
-CMD ["bash", "-c", "npm run build && npm start"]
+CMD ["bash", "-c", "npm run build && node dist/server.js"]
