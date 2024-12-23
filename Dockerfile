@@ -1,4 +1,4 @@
-FROM node:20.9-alpine as base
+FROM node:20.9-alpine
 
 RUN apk add --no-cache bash
 
@@ -6,7 +6,7 @@ WORKDIR /home/node/app
 
 COPY . .
 
-RUN export $(cat .env.example | xargs)
+RUN cp .env .env.example
 
 RUN npm install
 RUN npm run build
