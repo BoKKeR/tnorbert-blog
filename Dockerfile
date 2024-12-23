@@ -12,4 +12,4 @@ RUN npm install --production
 
 EXPOSE 3000
 
-CMD ["bash", "-c", "npm run build && node dist/server.js"]
+CMD ["bash", "-c", "npm run build && npm start"]
