@@ -6,8 +6,12 @@ WORKDIR /home/node/app
 
 COPY . .
 
+RUN export $(cat .env.example | xargs) &&
+  echo "Environment variables set from .env.example"
+
 RUN npm install
+RUN npm run build
 
 EXPOSE 3000
 
-CMD ["bash", "-c", "npm run build && npm start"]
+CMD ["bash", "-c", "./replace_env_vars.sh .next .env.example && npm start"]
