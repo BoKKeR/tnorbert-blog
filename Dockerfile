@@ -4,8 +4,6 @@ RUN apk add --no-cache bash
 
 WORKDIR /home/node/app
 
-ENV NODE_ENV=production
-
 COPY . .
 
 RUN npm install
