@@ -35,7 +35,7 @@ export const contactForm: Partial<Form> = {
   createdAt: '2023-01-12T21:47:41.374Z',
   emails: [
     {
-      emailFrom: '"Payload" \u003Cdemo@payloadcms.com\u003E',
+      emailFrom: '"Payload" \u003Cinternal@tnorbert.com\u003E',
       emailTo: '{{email}}',
       message: {
         root: {
