@@ -22,7 +22,7 @@ rm -rf $DUMP_PATH
 
 # Step 1: Wipe the local MongoDB database
 echo "Wiping local MongoDB database..."
-mongosh "${DATABASE_URI}" --eval "db.getSiblingDB('tnorbert-payload').dropDatabase()"
+mongosh "${DATABASE_URI}" --eval "db.getSiblingDB('tnorbert-blog').dropDatabase()"
 
 # Step 1: Dump the remote MongoDB collection
 echo "Dumping remote MongoDB collection..."
@@ -42,7 +42,7 @@ for collection in $(find "$DUMP_PATH" -name "*.bson" | sed "s|$DUMP_PATH/[^/]*\/
   # Restore each collection using the --nsInclude flag
   # echo "${DUMP_PATH}/test/${collection}.bson"
 
-  mongorestore --uri="${DATABASE_URI}" --nsInclude="tnorbert-payload.${collection}" "${DUMP_PATH}/tnorbert-payload/${collection}.bson"
+  mongorestore --uri="${DATABASE_URI}" --nsInclude="tnorbert-blog.${collection}" "${DUMP_PATH}/tnorbert-blog/${collection}.bson"
 
   if [ $? -ne 0 ]; then
     echo "Failed to restore collection ${collection} to local MongoDB."
