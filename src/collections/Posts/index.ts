@@ -181,6 +181,10 @@ export const Posts: CollectionConfig<'posts'> = {
               data.updatedAt = new Date() // Or any field where you're storing the timestamp
             }
 
+            if (data && !data.authors) {
+              data.authors = [req.user?.id]
+            }
+
             if (data && !data.authors.includes(req.user?.id)) {
               data.authors.push(req.user?.id)
             }
