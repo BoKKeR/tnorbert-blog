@@ -61,5 +61,5 @@ rm -rf $DUMP_PATH
 
 echo "Data successfully copied from remote MongoDB to local MongoDB!"
 
-scp root@10.0.0.168:/mnt/disks/un_nvme/kubernetes/tnorbert-blog/\*.{jpeg,png,jpeg} ./media
+scp root@10.0.0.168:/mnt/disks/un_nvme/kubernetes/tnorbert-blog/\*.{jpeg,png,jpeg,webp} ./public/media
 echo "Images sucessfully downloaded"
