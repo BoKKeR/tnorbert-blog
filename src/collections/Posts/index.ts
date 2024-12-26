@@ -175,11 +175,15 @@ export const Posts: CollectionConfig<'posts'> = {
       },
       hooks: {
         beforeChange: [
-          ({ siblingData, value }) => {
-            if (siblingData._status === 'published' && !value) {
-              return new Date()
+          ({ req, siblingData, value, data }) => {
+            // Prefill timestamp if the post is being published
+            if (data && siblingData._status === 'published' && !value) {
+              data.updatedAt = new Date() // Or any field where you're storing the timestamp
             }
-            return value
+
+            if (data && !data.authors.includes(req.user?.id)) {
+              data.authors.push(req.user?.id)
+            }
           },
         ],
       },
