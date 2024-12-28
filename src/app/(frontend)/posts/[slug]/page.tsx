@@ -15,6 +15,7 @@ import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import GiscusComments from '@/components/Giscus'
+import SubstackEmail from '@/components/SubstackEmail'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -64,6 +65,7 @@ export default async function Post({ params: paramsPromise }: Args) {
       <div className="flex flex-col items-center gap-4 pt-8">
         <div className="container">
           <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
+          <SubstackEmail />
           <GiscusComments />
           {post.relatedPosts && post.relatedPosts.length > 0 && (
             <RelatedPosts
