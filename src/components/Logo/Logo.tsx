@@ -18,11 +18,11 @@ export const Logo = (props: Props) => {
     <img
       alt="Payload Logo"
       width={100}
-      height={70}
+      height={40}
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={clsx('max-w-[9.375rem] w-full h-[70px]', className)}
+      className={clsx('max-w-[10rem] h-[100px]', className)}
       src="logo-tn.png"
     />
   )
