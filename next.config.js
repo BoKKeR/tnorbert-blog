@@ -7,7 +7,7 @@ const formatURL = (url) => {
   return url.startsWith('http') ? url : `https://${url}`
 }
 
-const NEXT_PUBLIC_SERVER_URL = './'
+const NEXT_PUBLIC_SERVER_URL = 'http://localhost:3000'
 // const NEXT_PUBLIC_SERVER_URL = formatURL(process.env.VERCEL_PROJECT_PRODUCTION_URL)
 //   ? formatURL(process.env.VERCEL_PROJECT_PRODUCTION_URL)
 //   : undefined || process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
