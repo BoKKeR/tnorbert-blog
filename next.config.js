@@ -16,7 +16,7 @@ const NEXT_PUBLIC_SERVER_URL = formatURL(process.env.VERCEL_PROJECT_PRODUCTION_U
 const nextConfig = {
   images: {
     remotePatterns: [
-      ...['https://deploy-on-friday', 'http://localhost:3000'].map((item) => {
+      ...['https://deploy-on-friday.com', 'http://localhost:3000'].map((item) => {
         const url = new URL(item)
 
         return {
