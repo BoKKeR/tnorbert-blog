@@ -22,7 +22,7 @@ rm -rf $DUMP_PATH
 
 # Step 1: Wipe the local MongoDB database
 echo "Wiping local MongoDB database..."
-mongosh "${DATABASE_URI}" --eval "db.getSiblingDB('tnorbert-blog').dropDatabase()"
+mongosh "${DATABASE_URI}" --eval "db.getSiblingDB('tnorbert-payload').dropDatabase()"
 
 # Step 1: Dump the remote MongoDB collection
 echo "Dumping remote MongoDB collection..."
@@ -61,5 +61,5 @@ rm -rf $DUMP_PATH
 
 echo "Data successfully copied from remote MongoDB to local MongoDB!"
 
-scp root@10.0.0.168:/mnt/disks/un_nvme/kubernetes/tnorbert-blog/\*.{jpeg,png,jpeg,webp} ./public/media
+#scp root@10.0.0.168:/mnt/disks/un_nvme/kubernetes/tnorbert-blog/\*.{jpeg,png,jpeg,webp} ./public/media
 echo "Images sucessfully downloaded"
