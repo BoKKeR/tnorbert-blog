@@ -11,8 +11,12 @@ import PageClient from './page.client'
 export const dynamic = 'force-static'
 export const revalidate = 600
 
-export default async function Page() {
+export default async function Page(props: { searchParams: Promise<{ categories: string }> }) {
   const payload = await getPayload({ config: configPromise })
+  const filters = await props.searchParams
+  console.log({ filters })
+  // Build 'where' condition dynamically
+  // const whereCondition = category ? { categories: { equals: category } } : {}
 
   const posts = await payload.find({
     collection: 'posts',
@@ -25,6 +29,11 @@ export default async function Page() {
       categories: true,
       meta: true,
     },
+    // where: {
+    //   categories: {
+    //     in: ['67c0f0a0f1c6d74c3ab62646'],
+    //   },
+    // },
   })
 
   return (
