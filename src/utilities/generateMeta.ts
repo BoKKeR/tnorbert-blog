@@ -8,7 +8,7 @@ import { getServerSideURL } from './getURL'
 const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
   const serverUrl = getServerSideURL()
 
-  let url = serverUrl + '/website-template-OG.webp'
+  let url = serverUrl + '/website-template-OG.webp' // TODO: Replace
 
   if (image && typeof image === 'object' && 'url' in image) {
     const ogUrl = image.sizes?.og?.url
@@ -16,7 +16,7 @@ const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
     url = ogUrl ? serverUrl + ogUrl : serverUrl + image.url
   }
 
-  return url
+  return url + `?v=${Date.now()}`
 }
 
 export const generateMeta = async (args: {
