@@ -13,6 +13,9 @@ const MatomoComponent = () => {
       init({ url: MATOMO_URL, siteId: MATOMO_SITE_ID })
     }
     return () => {
+      console.log('initialised matomo')
+      console.log(MATOMO_SITE_ID)
+      console.log(MATOMO_URL)
       setInitialised(true)
     }
   }, [initialised, setInitialised])
