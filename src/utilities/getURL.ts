@@ -8,6 +8,13 @@ export const getServerSideURL = () => {
   }
 
   if (!url) {
+    console.log({ url })
+    console.log({ url })
+    console.log({ url })
+    console.log('no more url')
+    console.log('no more url')
+    console.log('no more url')
+    console.log('no more url')
     url = 'http://localhost:3000'
   }
 
