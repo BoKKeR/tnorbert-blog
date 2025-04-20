@@ -16,16 +16,14 @@ const NEXT_PUBLIC_SERVER_URL = formatURL(process.env.VERCEL_PROJECT_PRODUCTION_U
 const nextConfig = {
   images: {
     remotePatterns: [
-      ...['https://deploy-on-friday.com', 'http://localhost:3000', 'https://tnorbert.com'].map(
-        (item) => {
-          const url = new URL(item)
+      ...[NEXT_PUBLIC_SERVER_URL].map((item) => {
+        const url = new URL(item)
 
-          return {
-            hostname: url.hostname,
-            protocol: url.protocol.replace(':', ''),
-          }
-        },
-      ),
+        return {
+          hostname: url.hostname,
+          protocol: url.protocol.replace(':', ''),
+        }
+      }),
     ],
   },
   reactStrictMode: true,

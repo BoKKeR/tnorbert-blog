@@ -1,22 +1,17 @@
 import canUseDOM from './canUseDOM'
 
 export const getServerSideURL = () => {
-  let url = process.env.NEXT_PUBLIC_SERVER_URL
+  const url = process.env.NEXT_PUBLIC_SERVER_URL
+  // if (!url && process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+  //   if (url.includes('https:')) {
+  //     return 'localhost:3000'
+  //   }
+  //   return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  // }
 
-  if (!url && process.env.VERCEL_PROJECT_PRODUCTION_URL) {
-    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  }
-
-  if (!url) {
-    console.log({ url })
-    console.log({ url })
-    console.log({ url })
-    console.log('no more url')
-    console.log('no more url')
-    console.log('no more url')
-    console.log('no more url')
-    url = 'http://localhost:3000'
-  }
+  // if (!url) {
+  //   url = 'localhost:3000'
+  // }
 
   return url
 }
@@ -30,9 +25,17 @@ export const getClientSideURL = () => {
     return `${protocol}//${domain}${port ? `:${port}` : ''}`
   }
 
-  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
-    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  }
+  // if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+  //   if (process.env.VERCEL_PROJECT_PRODUCTION_URL.includes('http')) {
+  //     return process.env.VERCEL_PROJECT_PRODUCTION_URL
+  //   } else {
+  //     if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+
+  //     } else {
+  //       return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  //     }
+  //   }
+  // }
 
   return process.env.NEXT_PUBLIC_SERVER_URL || ''
 }
