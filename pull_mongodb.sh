@@ -20,10 +20,6 @@ DUMP_PATH="./mongo_backup"
 # Clean up previous dumps if any
 rm -rf $DUMP_PATH
 
-# Step 1: Wipe the local MongoDB database
-echo "Wiping local MongoDB database..."
-mongosh "${DATABASE_URI}" --eval "db.getSiblingDB('tnorbert-payload').dropDatabase()"
-
 # Step 1: Dump the remote MongoDB collection
 echo "Dumping remote MongoDB collection..."
 mongodump --uri="${REMOTE_DATABASE_URI}" --out="${DUMP_PATH}"
@@ -33,11 +29,15 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# Step 2: Restore the dump to the local MongoDB collection
+# Step 2: Wipe the local MongoDB database
+echo "Wiping local MongoDB database..."
+mongosh "${DATABASE_URI}" --eval "db.getSiblingDB('tnorbert-payload').dropDatabase()"
+
 # Step 3: Restore all collections to the local MongoDB database
 echo "Restoring dump to local MongoDB..."
 echo $DUMP_PATH
-# Get all BSON files from the dump and restore them using nsInclude
+Get all BSON files from the dump and restore them using nsInclude
+DUMP_PATH="./dump"
 for collection in $(find "$DUMP_PATH" -name "*.bson" | sed "s|$DUMP_PATH/[^/]*\/||;s|\.bson$||"); do
   # Restore each collection using the --nsInclude flag
   # echo "${DUMP_PATH}/test/${collection}.bson"
@@ -61,5 +61,5 @@ rm -rf $DUMP_PATH
 
 echo "Data successfully copied from remote MongoDB to local MongoDB!"
 
-#scp root@10.0.0.168:/mnt/disks/un_nvme/kubernetes/tnorbert-blog/\*.{jpeg,png,jpeg,webp} ./public/media
+scp root@10.0.0.168:/mnt/disks/un_nvme/kubernetes/tnorbert-blog/\*.{jpeg,png,jpg,webp} ./public/media
 echo "Images sucessfully downloaded"
