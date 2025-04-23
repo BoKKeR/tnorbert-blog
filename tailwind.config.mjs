@@ -114,6 +114,17 @@ export default {
                 fontWeight: 'normal',
                 marginBottom: '0.25em',
               },
+              // fixes code block having backtick
+              'code::before': { content: 'none' },
+              'code::after': { content: 'none' },
+              code: {
+                backgroundColor: theme('colors.gray.200'),
+                color: theme('colors.red.700'),
+                padding: '0.2em 0.4em',
+                borderRadius: '0.25rem',
+                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+                fontWeight: '400',
+              },
             },
           ],
         },
