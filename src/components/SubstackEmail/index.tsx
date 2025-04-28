@@ -1,10 +1,8 @@
 'use client'
 
-import useThemeValue from '@/utilities/useThemeValue'
 import React from 'react'
 
 export const SubstackEmail = () => {
-  const theme = useThemeValue()
   return (
     <>
       <div className="pt-8 flex flex-1 justify-center">
