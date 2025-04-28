@@ -11,10 +11,7 @@ export const SubstackEmail = () => {
         <iframe
           src="https://bokker.substack.com/embed"
           height="360"
-          className="border-4 border-dashed"
           style={{
-            borderRadius: '20px',
-            borderColor: `${theme === 'dark' ? '#a087d6' : 'grey'}`,
             width: '100%',
             maxWidth: 800,
           }}
