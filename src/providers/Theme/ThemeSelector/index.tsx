@@ -26,6 +26,7 @@ export const ThemeSelector: React.FC = () => {
       setTheme(themeToSet)
       setValue(themeToSet)
     }
+    window.dispatchEvent(new Event(themeLocalStorageKey)) // part of the useThemeValue hook
   }
 
   React.useEffect(() => {

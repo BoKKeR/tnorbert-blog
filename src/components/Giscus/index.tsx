@@ -2,10 +2,12 @@
 
 import React, { Fragment } from 'react'
 import Giscus from '@giscus/react'
-import { Gutter, useTheme } from '@payloadcms/ui'
+import { Gutter } from '@payloadcms/ui'
+import useThemeValue from '@/utilities/useThemeValue'
 
 export const GiscusComments = () => {
-  const { theme } = useTheme()
+  const theme = useThemeValue()
+
   return (
     <Fragment>
       <Gutter>
