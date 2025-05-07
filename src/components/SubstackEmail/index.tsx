@@ -5,7 +5,7 @@ import React from 'react'
 export const SubstackEmail = () => {
   return (
     <>
-      <div className="pt-8 flex flex-1 justify-center">
+      <div className="print:hidden pt-8 flex flex-1 justify-center">
         <iframe
           src="https://bokker.substack.com/embed"
           height="360"

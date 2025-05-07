@@ -11,7 +11,7 @@ export const GiscusComments = () => {
   return (
     <Fragment>
       <Gutter>
-        <div className="flex justify-center">
+        <div className="print:hidden flex justify-center">
           <div
             className="justify-center flex flex-1 flex-col pt-8"
             style={{
