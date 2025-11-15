@@ -11,6 +11,7 @@ import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical
 import { buildInitialFormState } from './buildInitialFormState'
 import { fields } from './fields'
 import { getClientSideURL } from '@/utilities/getURL'
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3'
 
 export type Value = unknown
 
@@ -53,6 +54,7 @@ export const FormBlock: React.FC<
   } = formMethods
 
   const [isLoading, setIsLoading] = useState(false)
+  const { executeRecaptcha } = useGoogleReCaptcha()
   const [hasSubmitted, setHasSubmitted] = useState<boolean>()
   const [error, setError] = useState<{ message: string; status?: string } | undefined>()
   const router = useRouter()
@@ -61,6 +63,28 @@ export const FormBlock: React.FC<
     (data: Data) => {
       let loadingTimerID: ReturnType<typeof setTimeout>
       const submitForm = async () => {
+        // Execute reCAPTCHA
+        if (!executeRecaptcha) {
+          console.log(executeRecaptcha)
+
+          setError({
+            message: 'reCAPTCHA not available. Please try again.',
+          })
+          return
+        }
+
+        let recaptchaToken: string
+
+        try {
+          recaptchaToken = await executeRecaptcha('form_submit')
+        } catch (err) {
+          console.warn('reCAPTCHA error:', err)
+          setError({
+            message: 'reCAPTCHA verification failed. Please try again.',
+          })
+          return
+        }
+
         setError(undefined)
 
         const dataToSend = Object.entries(data).map(([name, value]) => ({
@@ -78,6 +102,7 @@ export const FormBlock: React.FC<
             body: JSON.stringify({
               form: formID,
               submissionData: dataToSend,
+              recaptchaToken,
             }),
             headers: {
               'Content-Type': 'application/json',
@@ -121,7 +146,7 @@ export const FormBlock: React.FC<
 
       void submitForm()
     },
-    [router, formID, redirect, confirmationType],
+    [router, formID, redirect, confirmationType, executeRecaptcha],
   )
 
   return (
