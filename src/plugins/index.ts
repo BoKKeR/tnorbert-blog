@@ -64,8 +64,6 @@ export const plugins: Plugin[] = [
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const recaptchaToken = (req.data as any)?.recaptchaToken
 
-            console.log({ hello: 'extracting, .....', token: recaptchaToken, data: req.data })
-
             if (!recaptchaToken) {
               throw new Error('reCAPTCHA token is required')
             }
@@ -82,6 +80,9 @@ export const plugins: Plugin[] = [
 
               // Check the score (v3 returns a score from 0.0 to 1.0)
               const minScore = getMinScore()
+
+              console.log({ score: recaptchaResult.score })
+
               if (recaptchaResult.score !== undefined && recaptchaResult.score < minScore) {
                 console.warn(
                   `reCAPTCHA score too low: ${recaptchaResult.score} (minimum: ${minScore})`,
