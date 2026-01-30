@@ -15,15 +15,40 @@ type Args = {
   params: Promise<{
     pageNumber: string
   }>
+  searchParams: Promise<{ category?: string }>
 }
 
-export default async function Page({ params: paramsPromise }: Args) {
+export default async function Page({ params: paramsPromise, searchParams: searchParamsPromise }: Args) {
   const { pageNumber } = await paramsPromise
+  const searchParams = await searchParamsPromise
+  const categoryFilter = searchParams.category
   const payload = await getPayload({ config: configPromise })
 
   const sanitizedPageNumber = Number(pageNumber)
 
   if (!Number.isInteger(sanitizedPageNumber)) notFound()
+
+  // Build where condition based on category filter
+  const whereCondition: any = {}
+
+  if (categoryFilter) {
+    // Fetch the category by title to get its ID
+    const categories = await payload.find({
+      collection: 'categories',
+      where: {
+        title: {
+          equals: categoryFilter,
+        },
+      },
+      limit: 1,
+    })
+
+    if (categories.docs.length > 0) {
+      whereCondition.categories = {
+        in: [categories.docs[0].id],
+      }
+    }
+  }
 
   const posts = await payload.find({
     collection: 'posts',
@@ -31,6 +56,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     limit: 12,
     page: sanitizedPageNumber,
     overrideAccess: false,
+    ...(Object.keys(whereCondition).length > 0 ? { where: whereCondition } : {}),
   })
 
   return (
@@ -38,7 +64,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
-          <h1>Posts</h1>
+          <h1>{categoryFilter ? `${categoryFilter} Posts` : 'Posts'}</h1>
         </div>
       </div>
 
@@ -55,7 +81,11 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       <div className="container">
         {posts?.page && posts?.totalPages > 1 && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
+          <Pagination
+            page={posts.page}
+            totalPages={posts.totalPages}
+            categoryFilter={categoryFilter}
+          />
         )}
       </div>
     </div>
