@@ -18,6 +18,7 @@ type CMSLinkType = {
   size?: ButtonProps['size'] | null
   type?: 'custom' | 'reference' | null
   url?: string | null
+  currentPath?: string
 }
 
 export const CMSLink: React.FC<CMSLinkType> = (props) => {
@@ -31,6 +32,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     reference,
     size: sizeFromProps,
     url,
+    currentPath,
   } = props
 
   const href =
@@ -42,13 +44,24 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
 
   if (!href) return null
 
+  // Check if the link is active by comparing the base pathname (without query params)
+  const isActive = currentPath
+    ? href === '/'
+      ? currentPath === '/'
+      : currentPath === href || currentPath.startsWith(href + '/') || currentPath.startsWith(href + '?')
+    : false
+
   const size = appearance === 'link' ? 'clear' : sizeFromProps
   const newTabProps = newTab ? { rel: 'noopener noreferrer', target: '_blank' } : {}
 
   /* Ensure we don't break any styles set by richText */
   if (appearance === 'inline') {
     return (
-      <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
+      <Link
+        className={cn(className, isActive && 'font-semibold text-primary')}
+        href={href || url || ''}
+        {...newTabProps}
+      >
         {label && label}
         {children && children}
       </Link>
@@ -56,8 +69,8 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
   }
 
   return (
-    <Button asChild className={className} size={size} variant={appearance}>
-      <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
+    <Button asChild className={cn(className, isActive && 'font-semibold')} size={size} variant={appearance}>
+      <Link href={href || url || ''} {...newTabProps}>
         {label && label}
         {children && children}
       </Link>
