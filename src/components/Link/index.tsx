@@ -51,6 +51,11 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
       : currentPath === href || currentPath.startsWith(href + '/') || currentPath.startsWith(href + '?')
     : false
 
+  // Debug logging
+  if (currentPath && label) {
+    console.log('Link:', label, '| href:', href, '| currentPath:', currentPath, '| isActive:', isActive)
+  }
+
   const size = appearance === 'link' ? 'clear' : sizeFromProps
   const newTabProps = newTab ? { rel: 'noopener noreferrer', target: '_blank' } : {}
 
