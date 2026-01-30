@@ -19,12 +19,15 @@ export default async function Page(props: { searchParams: Promise<{ category?: s
   const whereCondition: any = {}
 
   if (categoryFilter) {
+    // Normalize category name (capitalize first letter)
+    const normalizedCategory = categoryFilter.charAt(0).toUpperCase() + categoryFilter.slice(1).toLowerCase()
+
     // Fetch the category by title to get its ID
     const categories = await payload.find({
       collection: 'categories',
       where: {
         title: {
-          equals: categoryFilter,
+          equals: normalizedCategory,
         },
       },
       limit: 1,
