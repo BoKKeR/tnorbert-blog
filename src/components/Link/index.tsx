@@ -44,11 +44,13 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
 
   if (!href) return null
 
-  // Check if the link is active by comparing the base pathname (without query params)
+  // Check if the link is active
   const isActive = currentPath
     ? href === '/'
-      ? currentPath === '/'
-      : currentPath === href || currentPath.startsWith(href + '/') || currentPath.startsWith(href + '?')
+      ? currentPath === '/' // Home page: exact match only
+      : currentPath === href || // Exact match (including query params)
+        (!href.includes('?') && currentPath.startsWith(href + '/')) || // Sub-path match (only if link has no query params)
+        (!href.includes('?') && currentPath.startsWith(href + '?')) // Query param match (only if link has no query params)
     : false
 
   // Debug logging
