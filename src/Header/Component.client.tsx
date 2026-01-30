@@ -2,7 +2,7 @@
 import { useHeaderTheme } from '@/providers/HeaderTheme'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 
 import type { Header } from '@/payload-types'
 
@@ -42,7 +42,9 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           </div>
         </Link>
         <div className="flex items-center gap-6">
-          <CategoryFilter />
+          <Suspense fallback={null}>
+            <CategoryFilter />
+          </Suspense>
           <HeaderNav data={data} />
         </div>
       </div>
