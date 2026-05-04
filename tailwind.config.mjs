@@ -90,11 +90,14 @@ export default {
         },
         success: 'hsl(var(--success))',
         error: 'hsl(var(--error))',
-        warning: 'hsl(var(--warning))',
+        warning: {
+          DEFAULT: 'hsl(var(--warning))',
+          foreground: 'hsl(var(--warning-foreground))',
+        },
       },
       fontFamily: {
-        mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
+        serif: ['var(--font-libre-baskerville)', 'Georgia', 'serif'],
+        mono: ['var(--font-geist-mono)', 'ui-monospace', 'monospace'],
       },
       keyframes: {
         'accordion-down': {
@@ -108,52 +111,49 @@ export default {
       },
       typography: ({ theme }) => ({
         DEFAULT: {
-          css: [
-            {
-              '--tw-prose-body': 'var(--text)',
-              '--tw-prose-headings': 'var(--text)',
-              h1: {
-                fontWeight: 'normal',
-                marginBottom: '0.25em',
-              },
-              // fixes code block having backtick
-              'code::before': { content: 'none' },
-              'code::after': { content: 'none' },
-              code: {
-                backgroundColor: theme('colors.gray.200'),
-                color: theme('colors.red.700'),
-                padding: '0.2em 0.4em',
-                borderRadius: '0.25rem',
-                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-                fontWeight: '400',
-              },
+          css: {
+            fontFamily: 'var(--font-libre-baskerville), Georgia, serif',
+            fontSize: '1.125rem', // 18px
+            lineHeight: '1.75',
+            maxWidth: '48rem',
+            color: 'hsl(var(--foreground))',
+            '--tw-prose-body': 'hsl(var(--foreground))',
+            '--tw-prose-headings': 'hsl(var(--foreground))',
+            '--tw-prose-links': 'hsl(var(--primary))',
+            '--tw-prose-bold': 'hsl(var(--foreground))',
+            '--tw-prose-code': 'hsl(var(--destructive))',
+            '--tw-prose-pre-bg': 'hsl(var(--card))',
+            h1: {
+              fontFamily: 'var(--font-libre-baskerville), Georgia, serif',
+              fontWeight: '700',
+              fontSize: '2.5rem',
             },
-          ],
-        },
-        base: {
-          css: [
-            {
-              h1: {
-                fontSize: '2.5rem',
-              },
-              h2: {
-                fontSize: '1.25rem',
-                fontWeight: 600,
-              },
+            h2: {
+              fontFamily: 'var(--font-libre-baskerville), Georgia, serif',
+              fontWeight: '600',
+              fontSize: '1.75rem',
             },
-          ],
-        },
-        md: {
-          css: [
-            {
-              h1: {
-                fontSize: '3.5rem',
-              },
-              h2: {
-                fontSize: '1.5rem',
-              },
+            h3: {
+              fontFamily: 'var(--font-libre-baskerville), Georgia, serif',
+              fontWeight: '600',
+              fontSize: '1.375rem',
             },
-          ],
+            h4: {
+              fontFamily: 'var(--font-libre-baskerville), Georgia, serif',
+              fontWeight: '600',
+              fontSize: '1.125rem',
+            },
+            'code::before': { content: 'none' },
+            'code::after': { content: 'none' },
+            code: {
+              fontFamily: 'var(--font-geist-mono), ui-monospace, monospace',
+              backgroundColor: 'hsl(var(--card))',
+              color: 'hsl(var(--destructive))',
+              padding: '0.2em 0.4em',
+              borderRadius: '0.25rem',
+              fontWeight: '400',
+            },
+          },
         },
       }),
     },

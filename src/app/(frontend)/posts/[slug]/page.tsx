@@ -52,7 +52,7 @@ export default async function Post({ params: paramsPromise }: Args) {
   if (!post) return <PayloadRedirects url={url} />
 
   return (
-    <article className="pt-16 pb-16">
+    <article className="pt-8 pb-16">
       <PageClient />
 
       {/* Allows redirects for valid pages too */}
@@ -68,10 +68,12 @@ export default async function Post({ params: paramsPromise }: Args) {
           <SubstackEmail />
           <GiscusComments />
           {post.relatedPosts && post.relatedPosts.length > 0 && (
-            <RelatedPosts
-              className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
-              docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-            />
+            <div className="print:hidden">
+              <RelatedPosts
+                className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
+                docs={post.relatedPosts.filter((post) => typeof post === 'object')}
+              />
+            </div>
           )}
         </div>
       </div>

@@ -17,7 +17,9 @@
     "lint:fix": "cross-env NODE_OPTIONS=--no-deprecation next lint --fix",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
     "reinstall": "cross-env NODE_OPTIONS=--no-deprecation rm -rf node_modules && rm pnpm-lock.yaml && pnpm --ignore-workspace install",
-    "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@giscus/react": "^3.0.0",
@@ -68,9 +70,11 @@
     "copyfiles": "^2.4.1",
     "eslint": "^9.16.0",
     "eslint-config-next": "15.1.0",
+    "fast-check": "^4.7.0",
     "postcss": "^8.4.38",
     "prettier": "^3.4.2",
-    "typescript": "5.7.2"
+    "typescript": "5.7.2",
+    "vitest": "^2.1.9"
   },
   "engines": {
     "node": "^18.20.2 || >=20.9.0"

@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+
   h1,
   h2,
   h3,
@@ -14,73 +15,101 @@
   }
 
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Brand palette */
+    --color-cream: 40 86% 93%;
+    /* #FAF3E1 */
+    --color-ink: 240 3% 12%;
+    /* #1E1E23 */
+    --color-green: 142 100% 34%;
+    /* #00AD38 */
+    --color-blue: 224 95% 60%;
+    /* #3A6CFA */
+    --color-orange: 19 100% 50%;
+    /* #FF5200 */
+    --color-amber: 38 100% 56%;
+    /* #FFA51E */
 
-    --card: 240 5% 96%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Semantic tokens */
+    --background: var(--color-cream);
+    --foreground: var(--color-ink);
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --card: 40 60% 96%;
+    --card-foreground: var(--color-ink);
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --popover: 40 60% 96%;
+    --popover-foreground: var(--color-ink);
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --primary: var(--color-green);
+    --primary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: var(--color-blue);
+    --accent-foreground: 0 0% 100%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --secondary: 40 40% 88%;
+    --secondary-foreground: var(--color-ink);
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --muted: 40 30% 90%;
+    --muted-foreground: 240 3% 40%;
 
-    --border: 240 6% 90%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --destructive: var(--color-orange);
+    --destructive-foreground: 0 0% 100%;
 
-    --radius: 0.2rem;
+    --warning: var(--color-amber);
+    --warning-foreground: var(--color-ink);
 
-    --success: 196 52% 74%;
-    --warning: 34 89% 85%;
-    --error: 10 100% 86%;
+    --border: 40 20% 82%;
+    --input: 40 20% 82%;
+    --ring: var(--color-green);
+
+    --radius: 0.25rem;
   }
 
   [data-theme='dark'] {
-    --background: 0 0% 0%;
-    --foreground: 210 40% 98%;
+    /* Brand palette (same raw values, redeclared for dark scope) */
+    --color-cream: 40 86% 93%;
+    /* #FAF3E1 */
+    --color-ink: 240 3% 12%;
+    /* #1E1E23 */
+    --color-green: 142 100% 34%;
+    /* #00AD38 */
+    --color-blue: 224 95% 60%;
+    /* #3A6CFA */
+    --color-orange: 19 100% 50%;
+    /* #FF5200 */
+    --color-amber: 38 100% 56%;
+    /* #FFA51E */
 
-    --card: 0 0% 4%;
-    --card-foreground: 210 40% 98%;
+    /* Semantic tokens — inverted for dark mode */
+    --background: var(--color-ink);
+    --foreground: var(--color-cream);
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --card: 240 3% 16%;
+    --card-foreground: var(--color-cream);
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --popover: 240 3% 16%;
+    --popover-foreground: var(--color-cream);
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --primary: var(--color-green);
+    --primary-foreground: 0 0% 100%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --accent: var(--color-blue);
+    --accent-foreground: 0 0% 100%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --secondary: 240 3% 20%;
+    --secondary-foreground: var(--color-cream);
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --muted: 240 3% 20%;
+    --muted-foreground: 240 3% 60%;
 
-    --border: 0, 0%, 15%, 0.5;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --destructive: var(--color-orange);
+    --destructive-foreground: 0 0% 100%;
 
-    --success: 196 100% 14%;
-    --warning: 34 51% 25%;
-    --error: 10 39% 43%;
+    --warning: var(--color-amber);
+    --warning-foreground: var(--color-ink);
+
+    --border: 240 3% 22%;
+    --input: 240 3% 22%;
+    --ring: var(--color-green);
   }
 }
 
@@ -88,8 +117,10 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    font-family: var(--font-libre-baskerville), Georgia, serif;
   }
 }
 

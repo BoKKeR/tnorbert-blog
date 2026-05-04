@@ -1,10 +1,22 @@
-import { formatDateTime } from 'src/utilities/formatDateTime'
 import React from 'react'
+import Link from 'next/link'
+import NextImage from 'next/image'
 
 import type { Post } from '@/payload-types'
 
-import { Media } from '@/components/Media'
 import { formatAuthors } from '@/utilities/formatAuthors'
+
+const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+})
+
+function formatDate(dateStr: string | null | undefined): string {
+  if (!dateStr) return ''
+  return dateFormatter.format(new Date(dateStr))
+}
 
 export const PostHero: React.FC<{
   post: Post
@@ -14,60 +26,81 @@ export const PostHero: React.FC<{
   const hasAuthors =
     populatedAuthors && populatedAuthors.length > 0 && formatAuthors(populatedAuthors) !== ''
 
+  const hasCategories = categories && Array.isArray(categories) && categories.length > 0
+
+  const heroImageObj = heroImage && typeof heroImage !== 'string' ? heroImage : null
+  const heroImageUrl = heroImageObj?.url ?? null
+  const heroImageAlt = heroImageObj?.alt ?? title ?? ''
+
+  const formattedDate = formatDate(publishedAt)
+
   return (
-    <div className="print:block print:mt-0 relative -mt-[10.4rem] flex items-end">
-      <div className="container z-10 relative lg:grid lg:grid-cols-[1fr_48rem_1fr] text-white pb-8">
-        <div className="col-start-1 col-span-1 md:col-start-2 md:col-span-2">
-          <div className="uppercase text-sm mb-6">
+    <div className="container py-8">
+      {/* Back-link — hidden in print */}
+      <div className="print:hidden mb-6">
+        <Link
+          href="/"
+          aria-label="Back to all posts"
+          className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+        >
+          ← All posts
+        </Link>
+      </div>
+
+      {/* Article metadata — visible in print */}
+      <div className="print:block">
+        {/* Category tag pills */}
+        {hasCategories && (
+          <div className="flex flex-wrap gap-1.5 mb-4">
             {categories?.map((category, index) => {
               if (typeof category === 'object' && category !== null) {
                 const { title: categoryTitle } = category
-
-                const titleToUse = categoryTitle || 'Untitled category'
-
-                const isLast = index === categories.length - 1
-
                 return (
-                  <React.Fragment key={index}>
-                    {titleToUse}
-                    {!isLast && <React.Fragment>, &nbsp;</React.Fragment>}
-                  </React.Fragment>
+                  <span
+                    key={index}
+                    className="rounded-sm px-2 py-0.5 text-xs font-medium bg-accent/10 text-accent border border-accent/20"
+                  >
+                    {categoryTitle || 'Untitled'}
+                  </span>
                 )
               }
               return null
             })}
           </div>
-
-          <div className="">
-            <h1 className="mb-6 text-3xl md:text-5xl lg:text-6xl">{title}</h1>
-          </div>
-
-          <div className="print:hidden flex flex-col md:flex-row gap-4 md:gap-16">
-            {hasAuthors && (
-              <div className="flex flex-col gap-4">
-                <div className="flex flex-col gap-1">
-                  <p className="text-sm">Author</p>
-
-                  <p>{formatAuthors(populatedAuthors)}</p>
-                </div>
-              </div>
-            )}
-            {publishedAt && (
-              <div className="flex flex-col gap-1">
-                <p className="text-sm">Date Published</p>
-
-                <time dateTime={publishedAt}>{formatDateTime(publishedAt)}</time>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-      <div className="print:hidden min-h-[80vh] select-none">
-        {heroImage && typeof heroImage !== 'string' && (
-          <Media fill priority imgClassName="-z-10 object-cover" resource={heroImage} />
         )}
-        <div className="absolute pointer-events-none left-0 bottom-0 w-full h-1/2 bg-gradient-to-t from-black to-transparent" />
+
+        {/* Post title */}
+        <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
+          {title}
+        </h1>
+
+        {/* Author + date line */}
+        {(hasAuthors || formattedDate) && (
+          <p className="text-sm text-muted-foreground mb-8">
+            {hasAuthors && (
+              <span>By {formatAuthors(populatedAuthors!)}</span>
+            )}
+            {hasAuthors && formattedDate && <span> · </span>}
+            {formattedDate && (
+              <time dateTime={publishedAt ?? undefined}>{formattedDate}</time>
+            )}
+          </p>
+        )}
       </div>
+
+      {/* Hero image — full width, 16:9 */}
+      {heroImageUrl && (
+        <div className="relative w-full aspect-video overflow-hidden rounded-sm">
+          <NextImage
+            src={heroImageUrl}
+            alt={heroImageAlt}
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
+      )}
     </div>
   )
 }

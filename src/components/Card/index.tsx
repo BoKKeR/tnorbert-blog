@@ -2,13 +2,31 @@
 import { cn } from '@/utilities/cn'
 import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
-import React, { Fragment } from 'react'
+import NextImage from 'next/image'
+import React from 'react'
 
 import type { Post } from '@/payload-types'
 
-import { Media } from '@/components/Media'
+export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title' | 'publishedAt' | 'heroImage'>
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
+const dateFormatter = new Intl.DateTimeFormat('en-GB', {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+})
+
+function formatDate(dateStr: string | null | undefined): string {
+  if (!dateStr) return ''
+  return dateFormatter.format(new Date(dateStr))
+}
+
+function truncateExcerpt(text: string | null | undefined): string {
+  if (!text) return ''
+  const cleaned = text.replace(/\s/g, ' ')
+  if (cleaned.length <= 160) return cleaned
+  return cleaned.slice(0, 160) + '…'
+}
 
 export const Card: React.FC<{
   alignItems?: 'center'
@@ -21,63 +39,107 @@ export const Card: React.FC<{
   const { card, link } = useClickableCard({})
   const { className, doc, relationTo, showCategories, title: titleFromProps } = props
 
-  const { slug, categories, meta, title } = doc || {}
-  const { description, image: metaImage } = meta || {}
+  const { slug, categories, meta, title, publishedAt, heroImage } = doc || {}
+  const { description } = meta || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
-  const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
+  const excerpt = truncateExcerpt(description)
+  const formattedDate = formatDate(publishedAt)
   const href = `/${relationTo}/${slug}`
+
+  // Resolve heroImage — it can be a string (ID) or a Media object
+  const heroImageObj = heroImage && typeof heroImage !== 'string' ? heroImage : null
+  const heroImageUrl = heroImageObj?.url ?? null
+  const heroImageAlt = heroImageObj?.alt ?? titleToUse ?? ''
 
   return (
     <article
       className={cn(
-        'border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer',
+        'border border-transparent rounded-sm overflow-hidden bg-card',
+        'transition-[border-color,box-shadow] duration-200',
+        'hover:border-primary hover:shadow-[0_2px_8px_rgba(0,0,0,0.12)]',
+        'hover:cursor-pointer',
         className,
       )}
       ref={card.ref}
     >
-      <div className="relative w-full ">
-        {!metaImage && <div className="">No image</div>}
-        {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="33vw" />}
+      {/* Hero image — 16:9 aspect ratio */}
+      <div className="relative w-full aspect-video overflow-hidden">
+        {heroImageUrl ? (
+          <NextImage
+            src={heroImageUrl}
+            alt={heroImageAlt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            width={undefined}
+            height={undefined}
+          />
+        ) : (
+          <div className="w-full h-full bg-primary/20 flex items-center justify-center">
+            <span className="font-serif text-primary font-bold text-lg tracking-tight select-none">
+              deployonfri.day
+            </span>
+          </div>
+        )}
       </div>
-      <div className="p-4">
-        {showCategories && hasCategories && (
-          <div className="uppercase text-sm mb-4">
-            {showCategories && hasCategories && (
-              <div>
-                {categories?.map((category, index) => {
-                  if (typeof category === 'object') {
-                    const { title: titleFromCategory } = category
 
-                    const categoryTitle = titleFromCategory || 'Untitled category'
+      {/* Card body */}
+      <div className="p-4 flex flex-col gap-2">
+        {/* Tags + date row */}
+        <div className="flex items-center justify-between gap-2 flex-wrap">
+          {/* Category pill badges */}
+          {showCategories && hasCategories && (
+            <div className="flex flex-wrap gap-1.5">
+              {categories?.map((category, index) => {
+                if (typeof category === 'object' && category !== null) {
+                  const { title: categoryTitle } = category
+                  return (
+                    <span
+                      key={index}
+                      className="rounded-sm px-2 py-0.5 text-xs font-medium bg-accent/10 text-accent border border-accent/20"
+                    >
+                      {categoryTitle || 'Untitled'}
+                    </span>
+                  )
+                }
+                return null
+              })}
+            </div>
+          )}
 
-                    const isLast = index === categories.length - 1
+          {/* Publication date */}
+          {formattedDate && (
+            <time
+              dateTime={publishedAt ?? undefined}
+              className="text-xs text-muted-foreground font-serif ml-auto shrink-0"
+            >
+              {formattedDate}
+            </time>
+          )}
+        </div>
 
-                    return (
-                      <Fragment key={index}>
-                        {categoryTitle}
-                        {!isLast && <Fragment>, &nbsp;</Fragment>}
-                      </Fragment>
-                    )
-                  }
-
-                  return null
-                })}
-              </div>
-            )}
-          </div>
-        )}
+        {/* Title */}
         {titleToUse && (
-          <div className="prose">
-            <h3>
-              <Link className="not-prose" href={href} ref={link.ref}>
-                {titleToUse}
-              </Link>
-            </h3>
-          </div>
+          <h2 className="font-serif text-lg font-semibold leading-snug text-card-foreground">
+            <Link
+              className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+              href={href}
+              ref={link.ref}
+              tabIndex={0}
+            >
+              {titleToUse}
+            </Link>
+          </h2>
         )}
-        {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
+
+        {/* Excerpt */}
+        {excerpt && (
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {excerpt}
+          </p>
+        )}
       </div>
     </article>
   )
