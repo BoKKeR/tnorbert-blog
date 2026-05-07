@@ -4,15 +4,10 @@ RUN apk add --no-cache bash
 
 WORKDIR /home/node/app
 
-# Install dependencies first (separate layer for better caching)
-COPY package.json package-lock.json* pnpm-lock.yaml* ./
-RUN npm install --legacy-peer-deps
-
-# Copy source and build at image build time
 COPY . .
-RUN npm run build
+
+RUN npm install --legacy-peer-deps
 
 EXPOSE 3000
 
-# At runtime, just start the already-built app
-CMD ["npm", "start"]
+CMD ["bash", "-c", "npm run build && npm start"]
