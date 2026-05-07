@@ -6,7 +6,7 @@ WORKDIR /home/node/app
 
 # Install dependencies first (separate layer for better caching)
 COPY package.json package-lock.json* pnpm-lock.yaml* ./
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 # Copy source and build at image build time
 COPY . .
