@@ -102,17 +102,17 @@ export default function AboutPage() {
                 About the Author
               </h1>
               <p className="lead">
-                I'm a software engineer who ships technical posts on Fridays and hobby projects on Saturdays.
+                I&apos;m a software engineer who ships technical posts on Fridays and hobby projects on Saturdays.
               </p>
               <p>
                 By day I work with Kubernetes, OAuth2, TypeScript, and self-hosted infrastructure — the kind of
-                problems that are genuinely interesting to solve and worth writing about. By weekend I'm at the
+                problems that are genuinely interesting to solve and worth writing about. By weekend I&apos;m at the
                 workbench with a soldering iron, an ESP32, and a half-finished idea.
               </p>
               <p>
                 This blog is my way of thinking out loud. Friday posts are technical deep-dives: cluster
                 configurations, authentication flows, language features, and the occasional war story. Saturday
-                posts are looser: electronics builds, personal projects, and whatever I'm currently obsessing over.
+                posts are looser: electronics builds, personal projects, and whatever I&apos;m currently obsessing over.
               </p>
               <p>
                 I believe in self-hosting, open standards, and writing things down. If something took me a day to
@@ -213,7 +213,7 @@ export default function AboutPage() {
           <div className="prose dark:prose-invert max-w-none mb-8">
             <h2 id="contact-heading">Get in Touch</h2>
             <p>
-              The best way to reach me is by email or via GitHub. I'm also on Mastodon if you prefer the
+              The best way to reach me is by email or via GitHub. I&apos;m also on Mastodon if you prefer the
               fediverse. If you found a post useful, a reply or a star on the relevant repo is always
               appreciated.
             </p>

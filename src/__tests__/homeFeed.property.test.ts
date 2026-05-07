@@ -84,7 +84,7 @@ const fridayPostArb: fc.Arbitrary<TestPost> = fc
   })
 
 /** A post whose categories contain at least one Saturday slug (may also have others) */
-const saturdayPostArb: fc.Arbitrary<TestPost> = fc
+const _saturdayPostArb: fc.Arbitrary<TestPost> = fc
   .record({
     id: fc.uuid(),
     publishedAt: isoDateArb,
