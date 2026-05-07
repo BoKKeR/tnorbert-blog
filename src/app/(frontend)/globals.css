@@ -116,6 +116,21 @@
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
     font-family: var(--font-libre-baskerville), Georgia, serif;
   }
+
+  /* Frame images inside post prose content */
+  .prose picture {
+    display: block;
+    border: 2px solid hsl(var(--primary));
+    padding: 0.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose picture img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 }
 
 html {

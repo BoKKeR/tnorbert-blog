@@ -16,7 +16,11 @@ interface HeaderClientProps {
 
 function LogotypeToggle() {
   const { theme, setTheme } = useTheme()
-  const isDark = theme === 'dark'
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    setIsDark(theme === 'dark')
+  }, [theme])
 
   function handleFridayClick(e: React.MouseEvent) {
     e.preventDefault()

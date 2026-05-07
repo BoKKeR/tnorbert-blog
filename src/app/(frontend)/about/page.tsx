@@ -105,7 +105,7 @@ export default function AboutPage() {
                 I&apos;m a software engineer who ships technical posts on Fridays and hobby projects on Saturdays.
               </p>
               <p>
-                By day I work with Kubernetes, OAuth2, TypeScript, and self-hosted infrastructure — the kind of
+                By day I work with Kubernetes, OAuth2, TypeScript, and self-hosted infrastructure - the kind of
                 problems that are genuinely interesting to solve and worth writing about. By weekend I&apos;m at the
                 workbench with a soldering iron, an ESP32, and a half-finished idea.
               </p>
