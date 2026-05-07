@@ -35,7 +35,7 @@ export const PostHero: React.FC<{
   const formattedDate = formatDate(publishedAt)
 
   return (
-    <div className="container py-8">
+    <div className="max-w-2xl mx-auto w-full px-4 py-8">
       {/* Back-link — hidden in print */}
       <div className="print:hidden mb-6">
         <Link
@@ -70,7 +70,7 @@ export const PostHero: React.FC<{
         )}
 
         {/* Post title */}
-        <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">
+        <h1 className="font-serif text-3xl md:text-4xl font-bold leading-tight mb-4">
           {title}
         </h1>
 
@@ -88,16 +88,17 @@ export const PostHero: React.FC<{
         )}
       </div>
 
-      {/* Hero image — full width, 16:9 */}
+      {/* Hero image — framed with colored border and padding */}
       {heroImageUrl && (
-        <div className="relative w-full aspect-video overflow-hidden rounded-sm">
+        <div className="border-2 border-primary p-2 mt-6">
           <NextImage
             src={heroImageUrl}
             alt={heroImageAlt}
-            fill
+            width={1200}
+            height={675}
             priority
-            className="object-cover"
-            sizes="100vw"
+            className="w-full h-auto object-cover block"
+            sizes="(max-width: 768px) 100vw, 672px"
           />
         </div>
       )}

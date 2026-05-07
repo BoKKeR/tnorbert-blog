@@ -62,15 +62,15 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       <PostHero post={post} />
 
-      <div className="flex flex-col items-center gap-4 pt-8 print:gap-0 print:pt-0">
-        <div className="container">
-          <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
+      <div className="flex flex-col gap-4 pt-8 pb-16 print:gap-0 print:pt-0">
+        <div className="max-w-2xl mx-auto w-full px-4">
+          <RichText className="w-full" data={post.content} enableGutter={false} />
           <SubstackEmail />
           <GiscusComments />
           {post.relatedPosts && post.relatedPosts.length > 0 && (
             <div className="print:hidden">
               <RelatedPosts
-                className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
+                className="mt-12"
                 docs={post.relatedPosts.filter((post) => typeof post === 'object')}
               />
             </div>

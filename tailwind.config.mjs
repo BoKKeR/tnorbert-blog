@@ -120,6 +120,7 @@ export default {
             '--tw-prose-body': 'hsl(var(--foreground))',
             '--tw-prose-headings': 'hsl(var(--foreground))',
             '--tw-prose-links': 'hsl(var(--primary))',
+            '--tw-prose-link-underline': 'hsl(var(--primary) / 0.3)',
             '--tw-prose-bold': 'hsl(var(--foreground))',
             '--tw-prose-code': 'hsl(var(--destructive))',
             '--tw-prose-pre-bg': 'hsl(var(--card))',

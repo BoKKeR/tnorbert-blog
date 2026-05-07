@@ -15,69 +15,63 @@
   }
 
   :root {
-    /* Brand palette */
-    --color-cream: 40 86% 93%;
-    /* #FAF3E1 */
-    --color-ink: 240 3% 12%;
-    /* #1E1E23 */
-    --color-green: 142 100% 34%;
-    /* #00AD38 */
-    --color-blue: 224 95% 60%;
-    /* #3A6CFA */
-    --color-orange: 19 100% 50%;
-    /* #FF5200 */
-    --color-amber: 38 100% 56%;
-    /* #FFA51E */
+    /* Brand palette — slightly desaturated for a calmer feel */
+    --color-cream: 40 60% 92%;
+    /* #F5EDD6 — warmer, less glaring */
+    --color-ink: 240 3% 18%;
+    /* #2B2B30 — softened near-black */
+    --color-green: 142 55% 36%;
+    /* muted sage green — kept for reference */
+    --color-blue: 224 60% 52%;
+    /* #3A5FD4 — less electric blue */
+    --color-orange: 19 88% 50%;
+    /* #F04E00 — orange-red, primary accent */
+    --color-amber: 38 85% 54%;
+    /* #F0A018 — warm amber */
 
     /* Semantic tokens */
     --background: var(--color-cream);
     --foreground: var(--color-ink);
 
-    --card: 40 60% 96%;
+    --card: 40 40% 96%;
     --card-foreground: var(--color-ink);
 
-    --popover: 40 60% 96%;
+    --popover: 40 40% 96%;
     --popover-foreground: var(--color-ink);
 
-    --primary: var(--color-green);
+    --primary: var(--color-orange);
     --primary-foreground: 0 0% 100%;
 
     --accent: var(--color-blue);
     --accent-foreground: 0 0% 100%;
 
-    --secondary: 40 40% 88%;
+    --secondary: 40 30% 86%;
     --secondary-foreground: var(--color-ink);
 
-    --muted: 40 30% 90%;
-    --muted-foreground: 240 3% 40%;
+    --muted: 40 20% 88%;
+    --muted-foreground: 240 3% 42%;
 
-    --destructive: var(--color-orange);
+    --destructive: 0 72% 48%;
     --destructive-foreground: 0 0% 100%;
 
     --warning: var(--color-amber);
     --warning-foreground: var(--color-ink);
 
-    --border: 40 20% 82%;
-    --input: 40 20% 82%;
-    --ring: var(--color-green);
+    --border: 40 15% 80%;
+    --input: 40 15% 80%;
+    --ring: var(--color-orange);
 
     --radius: 0.25rem;
   }
 
   [data-theme='dark'] {
     /* Brand palette (same raw values, redeclared for dark scope) */
-    --color-cream: 40 86% 93%;
-    /* #FAF3E1 */
-    --color-ink: 240 3% 12%;
-    /* #1E1E23 */
-    --color-green: 142 100% 34%;
-    /* #00AD38 */
-    --color-blue: 224 95% 60%;
-    /* #3A6CFA */
-    --color-orange: 19 100% 50%;
-    /* #FF5200 */
-    --color-amber: 38 100% 56%;
-    /* #FFA51E */
+    --color-cream: 40 60% 92%;
+    --color-ink: 240 3% 18%;
+    --color-green: 142 55% 36%;
+    --color-blue: 224 60% 52%;
+    --color-orange: 19 88% 50%;
+    --color-amber: 38 85% 54%;
 
     /* Semantic tokens — inverted for dark mode */
     --background: var(--color-ink);
@@ -89,27 +83,27 @@
     --popover: 240 3% 16%;
     --popover-foreground: var(--color-cream);
 
-    --primary: var(--color-green);
+    --primary: var(--color-orange);
     --primary-foreground: 0 0% 100%;
 
     --accent: var(--color-blue);
     --accent-foreground: 0 0% 100%;
 
-    --secondary: 240 3% 20%;
+    --secondary: 240 3% 22%;
     --secondary-foreground: var(--color-cream);
 
-    --muted: 240 3% 20%;
-    --muted-foreground: 240 3% 60%;
+    --muted: 240 3% 22%;
+    --muted-foreground: 240 3% 58%;
 
-    --destructive: var(--color-orange);
+    --destructive: 0 72% 48%;
     --destructive-foreground: 0 0% 100%;
 
     --warning: var(--color-amber);
     --warning-foreground: var(--color-ink);
 
-    --border: 240 3% 22%;
-    --input: 240 3% 22%;
-    --ring: var(--color-green);
+    --border: 240 3% 24%;
+    --input: 240 3% 24%;
+    --ring: var(--color-orange);
   }
 }
 

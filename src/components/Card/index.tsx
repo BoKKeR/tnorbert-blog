@@ -1,31 +1,22 @@
 'use client'
 import { cn } from '@/utilities/cn'
-import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
 import NextImage from 'next/image'
 import React from 'react'
 
 import type { Post } from '@/payload-types'
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title' | 'publishedAt' | 'heroImage'>
+export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title' | 'publishedAt' | 'heroImage' | 'populatedAuthors'>
 
 const dateFormatter = new Intl.DateTimeFormat('en-GB', {
-  weekday: 'long',
-  day: 'numeric',
-  month: 'long',
   year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
 })
 
 function formatDate(dateStr: string | null | undefined): string {
   if (!dateStr) return ''
   return dateFormatter.format(new Date(dateStr))
-}
-
-function truncateExcerpt(text: string | null | undefined): string {
-  if (!text) return ''
-  const cleaned = text.replace(/\s/g, ' ')
-  if (cleaned.length <= 160) return cleaned
-  return cleaned.slice(0, 160) + '…'
 }
 
 export const Card: React.FC<{
@@ -36,111 +27,97 @@ export const Card: React.FC<{
   showCategories?: boolean
   title?: string
 }> = (props) => {
-  const { card, link } = useClickableCard({})
   const { className, doc, relationTo, showCategories, title: titleFromProps } = props
 
-  const { slug, categories, meta, title, publishedAt, heroImage } = doc || {}
+  const { slug, categories, meta, title, publishedAt, heroImage, populatedAuthors } = doc || {}
   const { description } = meta || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
+  const hasAuthors = populatedAuthors && populatedAuthors.length > 0
+  const authorNames = hasAuthors
+    ? populatedAuthors!.map((a) => (typeof a === 'object' ? a.name : '')).filter(Boolean).join(', ')
+    : null
   const titleToUse = titleFromProps || title
-  const excerpt = truncateExcerpt(description)
   const formattedDate = formatDate(publishedAt)
   const href = `/${relationTo}/${slug}`
 
-  // Resolve heroImage — it can be a string (ID) or a Media object
   const heroImageObj = heroImage && typeof heroImage !== 'string' ? heroImage : null
   const heroImageUrl = heroImageObj?.url ?? null
   const heroImageAlt = heroImageObj?.alt ?? titleToUse ?? ''
 
   return (
-    <article
-      className={cn(
-        'border border-transparent rounded-sm overflow-hidden bg-card',
-        'transition-[border-color,box-shadow] duration-200',
-        'hover:border-primary hover:shadow-[0_2px_8px_rgba(0,0,0,0.12)]',
-        'hover:cursor-pointer',
-        className,
+    <article className={cn('group', className)}>
+      {/* Title */}
+      {titleToUse && (
+        <h2 className="font-serif text-2xl sm:text-3xl font-bold leading-tight mb-2">
+          <Link
+            href={href}
+            className="text-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+          >
+            {titleToUse}
+          </Link>
+        </h2>
       )}
-      ref={card.ref}
-    >
-      {/* Hero image — 16:9 aspect ratio */}
-      <div className="relative w-full aspect-video overflow-hidden">
-        {heroImageUrl ? (
-          <NextImage
-            src={heroImageUrl}
-            alt={heroImageAlt}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            width={undefined}
-            height={undefined}
-          />
-        ) : (
-          <div className="w-full h-full bg-primary/20 flex items-center justify-center">
-            <span className="font-serif text-primary font-bold text-lg tracking-tight select-none">
-              deployonfri.day
-            </span>
-          </div>
-        )}
-      </div>
 
-      {/* Card body */}
-      <div className="p-4 flex flex-col gap-2">
-        {/* Tags + date row */}
-        <div className="flex items-center justify-between gap-2 flex-wrap">
-          {/* Category pill badges */}
-          {showCategories && hasCategories && (
-            <div className="flex flex-wrap gap-1.5">
+      {/* Meta line: date :: author :: #tags */}
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground mb-4 font-mono">
+        {formattedDate && (
+          <time dateTime={publishedAt ?? undefined}>{formattedDate}</time>
+        )}
+        {authorNames && (
+          <>
+            <span aria-hidden="true">::</span>
+            <span>{authorNames}</span>
+          </>
+        )}
+        {hasCategories && showCategories && (
+          <>
+            <span aria-hidden="true">::</span>
+            <div className="flex flex-wrap gap-x-2">
               {categories?.map((category, index) => {
                 if (typeof category === 'object' && category !== null) {
                   const { title: categoryTitle } = category
                   return (
-                    <span
-                      key={index}
-                      className="rounded-sm px-2 py-0.5 text-xs font-medium bg-accent/10 text-accent border border-accent/20"
-                    >
-                      {categoryTitle || 'Untitled'}
+                    <span key={index} className="text-primary">
+                      #{categoryTitle?.toLowerCase().replace(/\s+/g, '-') || 'untitled'}
                     </span>
                   )
                 }
                 return null
               })}
             </div>
-          )}
-
-          {/* Publication date */}
-          {formattedDate && (
-            <time
-              dateTime={publishedAt ?? undefined}
-              className="text-xs text-muted-foreground font-serif ml-auto shrink-0"
-            >
-              {formattedDate}
-            </time>
-          )}
-        </div>
-
-        {/* Title */}
-        {titleToUse && (
-          <h2 className="font-serif text-lg font-semibold leading-snug text-card-foreground">
-            <Link
-              className="hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
-              href={href}
-              ref={link.ref}
-              tabIndex={0}
-            >
-              {titleToUse}
-            </Link>
-          </h2>
-        )}
-
-        {/* Excerpt */}
-        {excerpt && (
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {excerpt}
-          </p>
+          </>
         )}
       </div>
+
+      {/* Hero image */}
+      {heroImageUrl && (
+        <Link href={href} tabIndex={-1} aria-hidden="true">
+          <div className="border-2 border-primary p-2 mb-4 hover:border-primary/70 transition-colors">
+            <NextImage
+              src={heroImageUrl}
+              alt={heroImageAlt}
+              width={800}
+              height={450}
+              className="w-full h-auto object-cover block"
+              sizes="(max-width: 768px) 100vw, 800px"
+            />
+          </div>
+        </Link>
+      )}
+
+      {/* Excerpt + read more */}
+      {description && (
+        <p className="text-base text-foreground/80 leading-relaxed mb-3">
+          {description}{' '}
+          <Link
+            href={href}
+            className="text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm whitespace-nowrap"
+          >
+            Read more →
+          </Link>
+        </p>
+      )}
     </article>
   )
 }

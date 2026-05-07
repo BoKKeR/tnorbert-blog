@@ -7,116 +7,80 @@ import { Menu, X } from 'lucide-react'
 
 import type { Header } from '@/payload-types'
 
-import { DarkModeToggle } from '@/components/DarkModeToggle'
-import { FeedModeProvider, useFeedMode } from '@/components/HomeFeed/FeedModeContext'
+import { useTheme } from '@/providers/Theme'
 import { CMSLink } from '@/components/Link'
 
 interface HeaderClientProps {
   data: Header
 }
 
-// The logotype toggle — renders "Deploy on Friday / Saturday"
 function LogotypeToggle() {
-  const { feedMode, setFeedMode } = useFeedMode()
+  const { theme, setTheme } = useTheme()
+  const isDark = theme === 'dark'
 
-  function handleFridayClick() {
-    if (feedMode === 'friday') {
-      // Already active single word — reset to both
-      setFeedMode('both')
-    } else {
-      setFeedMode('friday')
-    }
+  function handleFridayClick(e: React.MouseEvent) {
+    e.preventDefault()
+    setTheme('light')
   }
 
-  function handleSaturdayClick() {
-    if (feedMode === 'saturday') {
-      // Already active single word — reset to both
-      setFeedMode('both')
-    } else {
-      setFeedMode('saturday')
-    }
+  function handleSaturdayClick(e: React.MouseEvent) {
+    e.preventDefault()
+    setTheme('dark')
   }
-
-  const fridayActive = feedMode === 'both' || feedMode === 'friday'
-  const saturdayActive = feedMode === 'both' || feedMode === 'saturday'
-
-  const fridayLabel =
-    feedMode === 'friday'
-      ? 'Show all posts (currently showing Friday posts only)'
-      : 'Show Friday posts only'
-
-  const saturdayLabel =
-    feedMode === 'saturday'
-      ? 'Show all posts (currently showing Saturday posts only)'
-      : 'Show Saturday posts only'
 
   return (
-    <Link
-      href="/"
-      className="flex items-baseline gap-1 text-foreground no-underline hover:no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-sm"
-      aria-label="deployonfri.day — home"
-      tabIndex={-1}
-    >
-      <span className="font-serif text-lg font-bold tracking-tight select-none pointer-events-none">
+    <div className="flex items-baseline gap-1">
+      <span className="font-serif text-lg font-bold tracking-tight text-foreground select-none">
         Deploy on
       </span>
       <button
         type="button"
-        onClick={(e) => {
-          e.preventDefault()
-          handleFridayClick()
-        }}
-        aria-pressed={feedMode === 'friday'}
-        aria-label={fridayLabel}
+        onClick={handleFridayClick}
+        aria-label="Switch to light mode"
+        aria-pressed={!isDark}
         className={[
-          'font-serif text-lg font-bold tracking-tight transition-opacity duration-150',
+          'font-serif text-lg font-bold tracking-tight transition-opacity duration-200',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 rounded-sm',
-          fridayActive ? 'opacity-100 text-primary' : 'opacity-40 hover:opacity-70',
+          !isDark ? 'opacity-100 text-primary' : 'opacity-40 hover:opacity-70 text-foreground',
         ].join(' ')}
       >
         Friday
       </button>
-      <span className="font-serif text-lg font-bold tracking-tight select-none pointer-events-none text-foreground/60">
+      <span className="font-serif text-lg font-bold tracking-tight text-foreground/50 select-none">
         /
       </span>
       <button
         type="button"
-        onClick={(e) => {
-          e.preventDefault()
-          handleSaturdayClick()
-        }}
-        aria-pressed={feedMode === 'saturday'}
-        aria-label={saturdayLabel}
+        onClick={handleSaturdayClick}
+        aria-label="Switch to dark mode"
+        aria-pressed={isDark}
         className={[
-          'font-serif text-lg font-bold tracking-tight transition-opacity duration-150',
+          'font-serif text-lg font-bold tracking-tight transition-opacity duration-200',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 rounded-sm',
-          saturdayActive ? 'opacity-100 text-accent' : 'opacity-40 hover:opacity-70',
+          isDark ? 'opacity-100 text-primary' : 'opacity-40 hover:opacity-70 text-foreground',
         ].join(' ')}
       >
         Saturday
       </button>
-    </Link>
+    </div>
   )
 }
 
-function HeaderInner({ data }: HeaderClientProps) {
+export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
   const navRef = useRef<HTMLDivElement>(null)
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false)
   }, [pathname])
 
-  // Scroll shadow effect
   useEffect(() => {
     function handleScroll() {
       setScrolled(window.scrollY > 0)
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
-    // Set initial state
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -136,35 +100,22 @@ function HeaderInner({ data }: HeaderClientProps) {
       ].join(' ')}
     >
       <div className="container flex items-center justify-between h-14 gap-4">
-        {/* Logotype */}
-        <LogotypeToggle />
+        {/* Logotype — clicking Friday = light, Saturday = dark */}
+        <Link href="/" tabIndex={-1} aria-hidden="true" className="focus:outline-none">
+          <LogotypeToggle />
+        </Link>
 
-        {/* Desktop nav */}
-        <nav
-          aria-label="Main navigation"
-          className="hidden md:flex items-center gap-4"
-        >
-          <Link href="/" className={navLinkClass}>
-            Home
-          </Link>
-          <Link href="/about" className={navLinkClass}>
-            About
-          </Link>
-          {/* CMS nav items */}
+        {/* Desktop nav — no separate dark mode button */}
+        <nav aria-label="Main navigation" className="hidden md:flex items-center gap-4">
+          <Link href="/" className={navLinkClass}>Home</Link>
+          <Link href="/about" className={navLinkClass}>About</Link>
           {navItems.map(({ link }, i) => (
-            <CMSLink
-              key={i}
-              {...link}
-              appearance="link"
-              className={navLinkClass}
-            />
+            <CMSLink key={i} {...link} appearance="link" className={navLinkClass} />
           ))}
-          <DarkModeToggle />
         </nav>
 
-        {/* Mobile controls */}
-        <div className="flex md:hidden items-center gap-2">
-          <DarkModeToggle />
+        {/* Mobile hamburger */}
+        <div className="flex md:hidden items-center">
           <button
             type="button"
             aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -173,11 +124,10 @@ function HeaderInner({ data }: HeaderClientProps) {
             onClick={() => setMobileOpen((prev) => !prev)}
             className="flex items-center justify-center w-9 h-9 rounded-sm text-foreground hover:text-primary hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
-            {mobileOpen ? (
-              <X className="w-5 h-5" aria-hidden="true" />
-            ) : (
-              <Menu className="w-5 h-5" aria-hidden="true" />
-            )}
+            {mobileOpen
+              ? <X className="w-5 h-5" aria-hidden="true" />
+              : <Menu className="w-5 h-5" aria-hidden="true" />
+            }
           </button>
         </div>
       </div>
@@ -192,34 +142,14 @@ function HeaderInner({ data }: HeaderClientProps) {
           mobileOpen ? 'max-h-64 border-b border-border' : 'max-h-0',
         ].join(' ')}
       >
-        <nav
-          aria-label="Mobile navigation"
-          className="container flex flex-col gap-1 py-3"
-        >
-          <Link href="/" className={`${navLinkClass} block py-2`}>
-            Home
-          </Link>
-          <Link href="/about" className={`${navLinkClass} block py-2`}>
-            About
-          </Link>
+        <nav aria-label="Mobile navigation" className="container flex flex-col gap-1 py-3">
+          <Link href="/" className={`${navLinkClass} block py-2`}>Home</Link>
+          <Link href="/about" className={`${navLinkClass} block py-2`}>About</Link>
           {navItems.map(({ link }, i) => (
-            <CMSLink
-              key={i}
-              {...link}
-              appearance="link"
-              className={`${navLinkClass} block py-2`}
-            />
+            <CMSLink key={i} {...link} appearance="link" className={`${navLinkClass} block py-2`} />
           ))}
         </nav>
       </div>
     </header>
-  )
-}
-
-export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
-  return (
-    <FeedModeProvider>
-      <HeaderInner data={data} />
-    </FeedModeProvider>
   )
 }

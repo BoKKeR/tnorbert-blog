@@ -19,6 +19,7 @@ export async function HomeFeed() {
       meta: true,
       heroImage: true,
       publishedAt: true,
+      populatedAuthors: true,
     },
     where: {
       _status: {
