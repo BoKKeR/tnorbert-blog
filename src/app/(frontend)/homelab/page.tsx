@@ -163,6 +163,48 @@ export default function HomelabPage() {
         </div>
       </section>
 
+      {/* Storage */}
+      <section aria-labelledby="storage-heading" className="mb-14">
+        <h2 id="storage-heading" className="font-serif text-xl font-bold mb-6 pb-2 border-b border-border">
+          Storage
+        </h2>
+
+        <p className="text-sm text-foreground/80 leading-relaxed mb-6">
+          Persistent storage runs on{' '}
+          <span className="font-mono text-xs bg-muted px-1 py-0.5 rounded-sm">Rook-Ceph</span> across
+          all three worker nodes. Each M920Q has a{' '}
+          <span className="font-semibold">TinyRiser PCIe expansion card</span> — a proprietary riser
+          that adds a PCIe x4 slot to the M920Q&apos;s otherwise sealed chassis, making it possible to
+          install NVMe or additional SATA drives that the machine would otherwise not support. Ceph
+          uses these drives as OSDs and presents block and filesystem storage classes to the cluster.
+        </p>
+
+        {/* Cluster stats */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          {['XX TB raw', 'XX OSDs', '3× replication', 'block + filesystem'].map((pill) => (
+            <span
+              key={pill}
+              className="text-xs px-2 py-1 rounded-sm bg-accent/10 text-accent border border-accent/20 font-mono"
+            >
+              {pill}
+            </span>
+          ))}
+        </div>
+
+        {/* Per-node drive inventory */}
+        <h3 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-4">
+          Drive Inventory
+        </h3>
+        <dl className="flex flex-col gap-3">
+          {cephNodes.map((node) => (
+            <div key={node.name} className="flex gap-4 py-2 border-b border-border/50 last:border-0">
+              <dt className="shrink-0 w-28 text-sm font-mono text-muted-foreground">{node.name}</dt>
+              <dd className="text-sm text-foreground/80">{node.drives.join(' · ')}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       {/* TODO: remaining sections */}
 
       {/* Footer */}
