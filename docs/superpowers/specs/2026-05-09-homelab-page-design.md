@@ -66,7 +66,7 @@ The page follows the existing blog style: single-column `max-w-2xl`, serif headi
 - Explains how a request reaches the blog:
   1. DNS resolves to Cloudflare (proxied)
   2. Cloudflare handles DDoS protection + TLS at edge
-  3. Request forwarded to ingress controller (placeholder: fill in actual — nginx/Traefik/etc.) running in cluster
+  3. Request forwarded to Envoy (ingress controller) running in cluster
   4. Ingress routes to Kubernetes Service → Pod
 - cert-manager issues TLS certificates via Let's Encrypt DNS-01 challenge
 - Internal DNS via CoreDNS for service discovery
