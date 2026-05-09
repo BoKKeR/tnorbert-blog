@@ -246,6 +246,39 @@ export default function HomelabPage() {
         </div>
       </section>
 
+      {/* Monitoring */}
+      <section aria-labelledby="monitoring-heading" className="mb-14">
+        <h2 id="monitoring-heading" className="font-serif text-xl font-bold mb-6 pb-2 border-b border-border">
+          Monitoring
+        </h2>
+        <p className="text-sm text-foreground/80 leading-relaxed mb-6">
+          The full observability stack — metrics, logs, and dashboards — runs inside the cluster.
+          Prometheus scrapes node-exporter, kube-state-metrics, and annotated application pods.
+          Loki collects all pod logs via Promtail. Grafana is the single pane of glass for both.
+          Alertmanager routes firing alerts.
+        </p>
+        <div className="flex flex-col gap-3">
+          {[
+            { name: 'Prometheus', category: 'Metrics', description: 'Scrapes node-exporter, kube-state-metrics, ceph-exporter, and app pods. Retention: XX days.' },
+            { name: 'Grafana', category: 'Dashboards', description: 'Node health, cluster overview, Ceph pool and OSD status, application metrics, and Loki log explorer.' },
+            { name: 'Loki + Promtail', category: 'Logs', description: 'All pod logs shipped via Promtail DaemonSet. Queryable in Grafana with LogQL.' },
+            { name: 'Alertmanager', category: 'Alerting', description: 'Routes firing alerts to notification channels. Silences and inhibition rules manage noise.' },
+          ].map((item) => (
+            <div key={item.name} className="flex gap-4 items-start py-3 border-b border-border/50 last:border-0">
+              <div className="shrink-0 w-32">
+                <span className="text-xs px-1.5 py-0.5 rounded-sm border font-mono bg-warning/10 text-warning-foreground border-warning/20">
+                  {item.category}
+                </span>
+              </div>
+              <div className="min-w-0">
+                <p className="font-serif font-semibold text-sm text-foreground mb-0.5">{item.name}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* TODO: remaining sections */}
 
       {/* Footer */}
