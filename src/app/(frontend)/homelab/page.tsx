@@ -72,7 +72,42 @@ export default function HomelabPage() {
         </p>
       </div>
 
-      {/* TODO: sections go here */}
+      {/* Cluster Overview */}
+      <section aria-labelledby="overview-heading" className="mb-14">
+        <h2 id="overview-heading" className="font-serif text-xl font-bold mb-6 pb-2 border-b border-border">
+          Cluster Overview
+        </h2>
+        <div className="flex flex-wrap gap-2 mb-6">
+          {[
+            '6 nodes',
+            '3 controllers · 3 workers',
+            'XX pods running',
+            'k8s vX.XX.X',
+          ].map((pill) => (
+            <span
+              key={pill}
+              className="text-xs px-2 py-1 rounded-sm bg-primary/10 text-primary border border-primary/20 font-mono"
+            >
+              {pill}
+            </span>
+          ))}
+        </div>
+        <dl className="flex flex-col gap-3">
+          {[
+            { label: 'Hardware', value: 'Lenovo Thinkcentre M920Q (TinyRiser) — Intel 8th-gen, mini-PC form factor with PCIe expansion via TinyRiser card' },
+            { label: 'Networking', value: '1 GbE management · 25 GbE node-to-node on all 3 worker nodes' },
+            { label: 'Controllers', value: '3 nodes — run control plane components and also schedule workload pods (no NoSchedule taint)' },
+            { label: 'Workers', value: '3 nodes — primary workload hosts, Ceph OSD nodes, 25 GbE interconnect' },
+          ].map((item) => (
+            <div key={item.label} className="flex gap-4 py-2 border-b border-border/50 last:border-0">
+              <dt className="shrink-0 w-28 text-sm font-mono text-muted-foreground">{item.label}</dt>
+              <dd className="text-sm text-foreground/80">{item.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {/* TODO: remaining sections */}
 
       {/* Footer */}
       <div className="border-t border-border pt-8">
