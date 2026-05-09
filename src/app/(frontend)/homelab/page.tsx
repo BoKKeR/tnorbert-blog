@@ -205,6 +205,47 @@ export default function HomelabPage() {
         </dl>
       </section>
 
+      {/* Management */}
+      <section aria-labelledby="management-heading" className="mb-14">
+        <h2 id="management-heading" className="font-serif text-xl font-bold mb-6 pb-2 border-b border-border">
+          Management
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Flux */}
+          <div className="border border-border rounded-sm p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <h3 className="font-serif font-bold text-foreground">Flux</h3>
+              <span className="text-xs px-1.5 py-0.5 rounded-sm border font-mono bg-primary/10 text-primary border-primary/20">
+                GitOps
+              </span>
+            </div>
+            <p className="text-sm text-foreground/80 leading-relaxed">
+              All cluster state is declared in Git. Flux watches the repository and reconciles
+              the cluster to match — Helm releases via{' '}
+              <span className="font-mono text-xs">HelmRelease</span> CRDs, Kubernetes manifests
+              applied automatically. Drift is detected and corrected without manual intervention.
+              Image update automation bumps tags and opens PRs.
+            </p>
+          </div>
+
+          {/* Ansible */}
+          <div className="border border-border rounded-sm p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <h3 className="font-serif font-bold text-foreground">Ansible</h3>
+              <span className="text-xs px-1.5 py-0.5 rounded-sm border font-mono bg-accent/10 text-accent border-accent/20">
+                Provisioning
+              </span>
+            </div>
+            <p className="text-sm text-foreground/80 leading-relaxed">
+              Node bootstrapping and OS-level configuration are handled by Ansible playbooks —
+              kernel parameters, containerd setup, kubeadm join, and Kubernetes version upgrades.
+              Playbooks are idempotent; re-running them against any node brings it to the desired
+              state without side effects.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* TODO: remaining sections */}
 
       {/* Footer */}
