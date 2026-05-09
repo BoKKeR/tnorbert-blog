@@ -113,6 +113,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         <nav aria-label="Main navigation" className="hidden md:flex items-center gap-4">
           <Link href="/" className={navLinkClass}>Home</Link>
           <Link href="/about" className={navLinkClass}>About</Link>
+          <Link href="/homelab" className={navLinkClass}>Homelab</Link>
           {navItems.map(({ link }, i) => (
             <CMSLink key={i} {...link} appearance="link" className={navLinkClass} />
           ))}
@@ -149,6 +150,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         <nav aria-label="Mobile navigation" className="container flex flex-col gap-1 py-3">
           <Link href="/" className={`${navLinkClass} block py-2`}>Home</Link>
           <Link href="/about" className={`${navLinkClass} block py-2`}>About</Link>
+          <Link href="/homelab" className={`${navLinkClass} block py-2`}>Homelab</Link>
           {navItems.map(({ link }, i) => (
             <CMSLink key={i} {...link} appearance="link" className={`${navLinkClass} block py-2`} />
           ))}
