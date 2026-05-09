@@ -107,6 +107,62 @@ export default function HomelabPage() {
         </dl>
       </section>
 
+      {/* Node Grid */}
+      <section aria-labelledby="nodes-heading" className="mb-14">
+        <h2 id="nodes-heading" className="font-serif text-xl font-bold mb-6 pb-2 border-b border-border">
+          Nodes
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {clusterNodes.map((node) => (
+            <div key={node.name} className="border border-border rounded-sm p-4 flex flex-col gap-3">
+              {/* Name + badges */}
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-mono text-sm font-bold text-foreground">{node.name}</span>
+                <span
+                  className={`text-xs px-1.5 py-0.5 rounded-sm border font-mono ${
+                    node.role === 'controller'
+                      ? 'bg-accent/10 text-accent border-accent/20'
+                      : 'bg-primary/10 text-primary border-primary/20'
+                  }`}
+                >
+                  {node.role}
+                </span>
+                {node.role === 'worker' && (
+                  <span className="text-xs px-1.5 py-0.5 rounded-sm border font-mono bg-warning/10 text-warning-foreground border-warning/20">
+                    25GbE
+                  </span>
+                )}
+                {node.role === 'controller' && (
+                  <span className="text-xs text-muted-foreground font-mono">(schedules pods)</span>
+                )}
+              </div>
+
+              {/* Specs */}
+              <dl className="flex flex-col gap-1 text-xs">
+                <div className="flex gap-2">
+                  <dt className="w-12 shrink-0 font-mono text-muted-foreground">CPU</dt>
+                  <dd className="text-foreground/80">{node.cpu}</dd>
+                </div>
+                <div className="flex gap-2">
+                  <dt className="w-12 shrink-0 font-mono text-muted-foreground">RAM</dt>
+                  <dd className="text-foreground/80">{node.ram}</dd>
+                </div>
+                <div className="flex gap-2">
+                  <dt className="w-12 shrink-0 font-mono text-muted-foreground">Drives</dt>
+                  <dd className="text-foreground/80">{node.drives.join(' · ')}</dd>
+                </div>
+              </dl>
+
+              {/* Stats */}
+              <div className="flex gap-4 pt-2 border-t border-border/50 text-xs font-mono text-muted-foreground">
+                <span>↑ {node.uptime} uptime</span>
+                <span>{node.pods} pods</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* TODO: remaining sections */}
 
       {/* Footer */}
