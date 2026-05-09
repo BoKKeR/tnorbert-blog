@@ -54,7 +54,7 @@ const cephNodes: CephNode[] = [
 
 export default function HomelabPage() {
   return (
-    <main className="max-w-2xl mx-auto px-4 py-10 pb-24">
+    <main className="max-w-2xl mx-auto px-4 pt-10 pb-24">
       {/* Back link */}
       <div className="mb-8">
         <Link href="/" className="text-sm text-muted-foreground hover:text-primary transition-colors font-mono">
@@ -128,7 +128,7 @@ export default function HomelabPage() {
                   {node.role}
                 </span>
                 {node.role === 'worker' && (
-                  <span className="text-xs px-1.5 py-0.5 rounded-sm border font-mono bg-warning/10 text-warning-foreground border-warning/20">
+                  <span className="text-xs px-1.5 py-0.5 rounded-sm border font-mono bg-warning/10 text-warning border-warning/20">
                     25GbE
                   </span>
                 )}
@@ -266,7 +266,7 @@ export default function HomelabPage() {
           ].map((item) => (
             <div key={item.name} className="flex gap-4 items-start py-3 border-b border-border/50 last:border-0">
               <div className="shrink-0 w-32">
-                <span className="text-xs px-1.5 py-0.5 rounded-sm border font-mono bg-warning/10 text-warning-foreground border-warning/20">
+                <span className="text-xs px-1.5 py-0.5 rounded-sm border font-mono bg-warning/10 text-warning border-warning/20">
                   {item.category}
                 </span>
               </div>
