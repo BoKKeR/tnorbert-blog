@@ -323,7 +323,7 @@ export default function HomelabPage() {
                 )}
               </div>
               {/* Content */}
-              <div className={`pb-6 min-w-0 ${idx === arr.length - 1 ? '' : ''}`}>
+              <div className="pb-6 min-w-0">
                 <p className="font-serif font-semibold text-sm text-foreground mb-1">{item.label}</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.detail}</p>
               </div>
