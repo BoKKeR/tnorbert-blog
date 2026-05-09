@@ -279,7 +279,67 @@ export default function HomelabPage() {
         </div>
       </section>
 
-      {/* TODO: remaining sections */}
+      {/* Traffic Flow */}
+      <section aria-labelledby="traffic-heading" className="mb-14">
+        <h2 id="traffic-heading" className="font-serif text-xl font-bold mb-6 pb-2 border-b border-border">
+          Traffic Flow
+        </h2>
+        <p className="text-sm text-foreground/80 leading-relaxed mb-8">
+          How a request for this site travels from a browser to a pod.
+        </p>
+
+        {/* Flow steps */}
+        <ol className="flex flex-col gap-0">
+          {[
+            {
+              step: '1',
+              label: 'DNS → Cloudflare',
+              detail: 'The domain resolves to a Cloudflare-proxied IP. Cloudflare handles DDoS protection, caching, and TLS at the edge.',
+            },
+            {
+              step: '2',
+              label: 'Cloudflare → Envoy',
+              detail: 'Cloudflare forwards the request to the cluster\'s public IP. Envoy (ingress controller) terminates TLS using a certificate issued by cert-manager via Let\'s Encrypt DNS-01 challenge.',
+            },
+            {
+              step: '3',
+              label: 'Envoy → Service',
+              detail: 'Envoy matches the host/path against HTTPRoute rules and routes to the corresponding Kubernetes Service.',
+            },
+            {
+              step: '4',
+              label: 'Service → Pod',
+              detail: 'kube-proxy (iptables) load-balances across the healthy pods backing the Service. The request reaches the Next.js container.',
+            },
+          ].map((item, idx, arr) => (
+            <li key={item.step} className="flex gap-4">
+              {/* Connector line */}
+              <div className="flex flex-col items-center">
+                <div className="w-7 h-7 shrink-0 rounded-sm border border-border bg-muted flex items-center justify-center font-mono text-xs text-muted-foreground">
+                  {item.step}
+                </div>
+                {idx < arr.length - 1 && (
+                  <div className="w-px flex-1 bg-border my-1" />
+                )}
+              </div>
+              {/* Content */}
+              <div className={`pb-6 min-w-0 ${idx === arr.length - 1 ? '' : ''}`}>
+                <p className="font-serif font-semibold text-sm text-foreground mb-1">{item.label}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{item.detail}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        {/* Internal DNS note */}
+        <div className="mt-2 border border-border rounded-sm p-4 bg-muted/30">
+          <p className="text-xs font-mono text-muted-foreground">
+            <span className="text-foreground font-semibold">Internal DNS:</span> CoreDNS handles
+            service discovery inside the cluster. Services are reachable at{' '}
+            <span className="font-mono">service.namespace.svc.cluster.local</span>.
+          </p>
+        </div>
+      </section>
 
       {/* Footer */}
       <div className="border-t border-border pt-8">
