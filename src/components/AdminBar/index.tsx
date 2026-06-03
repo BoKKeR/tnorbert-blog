@@ -1,6 +1,6 @@
 'use client'
 
-import type { PayloadAdminBarProps } from 'payload-admin-bar'
+import type { PayloadAdminBarProps, PayloadMeUser } from 'payload-admin-bar'
 
 import { cn } from '@/utilities/cn'
 import { PayloadAdminBar } from 'payload-admin-bar'
@@ -38,7 +38,7 @@ export const AdminBar: React.FC<{
       .catch(() => setDocId(undefined))
   }, [postSlug, show])
 
-  const onAuthChange = React.useCallback((user: { id?: string } | null) => {
+  const onAuthChange = React.useCallback((user: PayloadMeUser) => {
     setShow(!!user?.id)
   }, [])
 
