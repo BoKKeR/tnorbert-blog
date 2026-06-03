@@ -134,6 +134,9 @@ function LightboxDialog({
 
             {/* Caption + counter */}
             <div className="mt-4 text-center max-w-[90vw]">
+              {current.image.alt && (
+                <p className="text-sm text-white/70 leading-relaxed mb-1 italic">{current.image.alt}</p>
+              )}
               {caption && (
                 <p className="text-sm text-white/60 leading-relaxed mb-2">{caption}</p>
               )}
