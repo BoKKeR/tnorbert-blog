@@ -131,6 +131,13 @@
     width: 100%;
     height: auto;
   }
+
+  /* MediaBlock owns its own frame div — suppress the picture border inside it */
+  .prose .mediablock-frame picture {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 html {
