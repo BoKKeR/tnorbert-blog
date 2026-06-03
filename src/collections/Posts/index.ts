@@ -49,6 +49,11 @@ export const Posts: CollectionConfig<'posts'> = {
     },
   },
   admin: {
+    components: {
+      edit: {
+        PublishButton: '@/components/PublishConfirmButton#PublishConfirmButton',
+      },
+    },
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) => {
@@ -177,9 +182,8 @@ export const Posts: CollectionConfig<'posts'> = {
       hooks: {
         beforeChange: [
           ({ req, siblingData, value, data }) => {
-            // Prefill timestamp if the post is being published
-            if (data && siblingData._status === 'published' && !value) {
-              data.updatedAt = new Date() // Or any field where you're storing the timestamp
+            if (siblingData._status === 'published' && !value) {
+              return new Date().toISOString()
             }
 
             if (data && !data.authors) {
@@ -189,6 +193,8 @@ export const Posts: CollectionConfig<'posts'> = {
             if (data && !data.authors.includes(req.user?.id)) {
               data.authors.push(req.user?.id)
             }
+
+            return value
           },
         ],
       },
