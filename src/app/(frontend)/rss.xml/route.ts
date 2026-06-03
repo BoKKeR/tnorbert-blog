@@ -21,19 +21,10 @@ export async function GET(): Promise<Response> {
   const { docs: posts } = await payload.find({
     collection: 'posts',
     draft: false,
-    limit: 100,
+    limit: 1000,
     overrideAccess: false,
     pagination: false,
     sort: '-publishedAt',
-    where: { _status: { equals: 'published' } },
-    select: {
-      title: true,
-      slug: true,
-      publishedAt: true,
-      updatedAt: true,
-      meta: true,
-      populatedAuthors: true,
-    },
   })
 
   const lastBuildDate =
