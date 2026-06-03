@@ -44,7 +44,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
     })
     idRef.current = id
     return unregister
-  }, [register])
+  }, [register, media])
 
   let caption
   if (media && typeof media === 'object') caption = media.caption

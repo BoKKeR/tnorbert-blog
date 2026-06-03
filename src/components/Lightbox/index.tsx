@@ -80,13 +80,14 @@ function LightboxDialog({
     <dialog
       ref={dialogRef}
       onClose={onClose}
-      onClick={(e) => {
-        // Click on the backdrop (the <dialog> element itself, not its children)
-        if (e.target === dialogRef.current) onClose()
-      }}
       className="lightbox-dialog m-0 border-0 p-0 w-screen h-screen max-w-none max-h-none"
     >
-      <div className="relative flex flex-col items-center justify-center w-full h-full bg-black/[.93]">
+      <div
+        className="relative flex flex-col items-center justify-center w-full h-full bg-black/[.93]"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) onClose()
+        }}
+      >
         {/* Close button */}
         <button
           type="button"
