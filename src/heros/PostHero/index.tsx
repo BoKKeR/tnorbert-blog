@@ -38,7 +38,7 @@ export const PostHero: React.FC<{
     <div>
       {/* Full-bleed hero image — cancels article's pt-8, fades into background */}
       {heroImageUrl && (
-        <div className="relative w-full h-72 md:h-[26rem] -mt-8 overflow-hidden print:hidden">
+        <div className="relative w-full h-[36rem] md:h-[52rem] -mt-8 overflow-hidden print:hidden">
           <NextImage
             src={heroImageUrl}
             alt={heroImageAlt}
