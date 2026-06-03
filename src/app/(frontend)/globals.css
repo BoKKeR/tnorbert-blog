@@ -141,3 +141,18 @@ html[data-theme='dark'],
 html[data-theme='light'] {
   opacity: initial;
 }
+
+/* Lightbox */
+dialog.lightbox-dialog {
+  position: fixed;
+  inset: 0;
+}
+
+dialog.lightbox-dialog[open] {
+  animation: lightbox-fade 150ms ease-out;
+}
+
+@keyframes lightbox-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
