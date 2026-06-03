@@ -72,7 +72,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
           />
         </button>
         {media && typeof media === 'object' && media.alt && (
-          <p className="text-xs text-muted-foreground mt-1.5 italic leading-snug">
+          <p className="text-xs text-muted-foreground mt-1.5 mb-0 italic leading-snug">
             {media.alt}
           </p>
         )}
