@@ -33,6 +33,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="48x48" />
+        <link rel="alternate" type="application/rss+xml" title="deployonfri.day" href="/rss.xml" />
       </head>
       <body>
         <Providers>
