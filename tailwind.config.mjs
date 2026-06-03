@@ -145,6 +145,7 @@ export default {
               fontWeight: '600',
               fontSize: '1.125rem',
             },
+            hr: { marginTop: '1.5em', marginBottom: '1.5em' },
             'code::before': { content: 'none' },
             'code::after': { content: 'none' },
             code: {
