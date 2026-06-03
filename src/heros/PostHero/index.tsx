@@ -44,7 +44,7 @@ export const PostHero: React.FC<{
             alt={heroImageAlt}
             fill
             priority
-            className="object-cover"
+            className="object-cover object-top"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
