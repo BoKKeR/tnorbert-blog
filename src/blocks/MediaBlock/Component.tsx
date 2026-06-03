@@ -70,6 +70,11 @@ export const MediaBlock: React.FC<Props> = (props) => {
           src={staticImage}
         />
       </button>
+      {media && typeof media === 'object' && media.alt && (
+        <p className="text-xs text-muted-foreground mt-1.5 italic leading-snug">
+          {media.alt}
+        </p>
+      )}
       {caption && (
         <div
           className={cn('mt-6', { container: !disableInnerContainer }, captionClassName)}
