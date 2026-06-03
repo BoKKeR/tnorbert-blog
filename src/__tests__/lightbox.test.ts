@@ -128,3 +128,26 @@ describe('nextIndex', () => {
     )
   })
 })
+
+// ── MediaBlock static analysis ───────────────────────────────────────────────
+
+describe('MediaBlock static requirements', () => {
+  const src = fs.readFileSync(
+    path.resolve(process.cwd(), 'src/blocks/MediaBlock/Component.tsx'),
+    'utf-8',
+  )
+
+  it("has 'use client' directive at the top", () => {
+    expect(src).toMatch(/^['"]use client['"]/)
+  })
+
+  it('imports useLightbox from the Lightbox component', () => {
+    expect(src).toMatch(/useLightbox.*from.*Lightbox/)
+  })
+
+  it('calls register and open from useLightbox()', () => {
+    expect(src).toMatch(/useLightbox\(\)/)
+    expect(src).toMatch(/\bregister\b/)
+    expect(src).toMatch(/\bopen\b/)
+  })
+})
