@@ -64,7 +64,7 @@ export default async function Post({ params: paramsPromise }: Args) {
       <PostHero post={post} />
 
       <LightboxProvider>
-        <div className="flex flex-col gap-4 pt-8 pb-16 print:gap-0 print:pt-0">
+        <div className="flex flex-col gap-4 pt-4 pb-16 print:gap-0 print:pt-0">
           <div className="max-w-2xl mx-auto w-full px-4">
             <RichText className="w-full" data={post.content} enableGutter={false} />
             <SubstackEmail />

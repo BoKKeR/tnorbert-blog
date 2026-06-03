@@ -52,7 +52,7 @@ export const PostHero: React.FC<{
       )}
 
       {/* Article metadata */}
-      <div className="max-w-2xl mx-auto w-full px-4 py-8">
+      <div className="max-w-2xl mx-auto w-full px-4 pt-8 pb-2">
         {/* Back-link — hidden in print */}
         <div className="print:hidden mb-6">
           <Link
@@ -93,7 +93,7 @@ export const PostHero: React.FC<{
 
           {/* Author + date line */}
           {(hasAuthors || formattedDate) && (
-            <p className="text-sm text-muted-foreground mb-8">
+            <p className="text-sm text-muted-foreground mb-0">
               {hasAuthors && <span>By {formatAuthors(populatedAuthors!)}</span>}
               {hasAuthors && formattedDate && <span> · </span>}
               {formattedDate && (
