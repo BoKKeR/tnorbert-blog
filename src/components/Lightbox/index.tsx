@@ -117,7 +117,7 @@ function LightboxDialog({
               <img
                 src={current.image.src}
                 alt={current.image.alt}
-                className="max-w-[90vw] max-h-[70vh] object-contain rounded-sm"
+                className="w-[90vw] h-[70vh] object-contain rounded-sm"
               />
 
               {total > 1 && (
