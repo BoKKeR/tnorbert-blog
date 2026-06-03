@@ -102,6 +102,11 @@ export const Card: React.FC<{
               className="w-full h-auto object-cover block"
               sizes="(max-width: 768px) 100vw, 800px"
             />
+            {heroImageObj?.alt && (
+              <p className="text-xs text-muted-foreground mt-1.5 italic leading-snug">
+                {heroImageObj.alt}
+              </p>
+            )}
           </div>
         </Link>
       )}
