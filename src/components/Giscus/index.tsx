@@ -9,7 +9,7 @@ export const GiscusComments = () => {
 
   return (
     <Fragment>
-      <div className="print:hidden max-w-[48rem] mx-auto pt-12 pb-8">
+      <div className="print:hidden max-w-[48rem] mx-auto pt-4 pb-8">
         <hr className="border-border my-8" />
         <h2 className="text-xl font-serif">Join the Discussion on github</h2>
         <Giscus
