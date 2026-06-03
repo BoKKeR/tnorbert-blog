@@ -16,6 +16,7 @@ import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import GiscusComments from '@/components/Giscus'
 import SubstackEmail from '@/components/SubstackEmail'
+import { LightboxProvider } from '@/components/Lightbox'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -62,21 +63,23 @@ export default async function Post({ params: paramsPromise }: Args) {
 
       <PostHero post={post} />
 
-      <div className="flex flex-col gap-4 pt-8 pb-16 print:gap-0 print:pt-0">
-        <div className="max-w-2xl mx-auto w-full px-4">
-          <RichText className="w-full" data={post.content} enableGutter={false} />
-          <SubstackEmail />
-          <GiscusComments />
-          {post.relatedPosts && post.relatedPosts.length > 0 && (
-            <div className="print:hidden">
-              <RelatedPosts
-                className="mt-12"
-                docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-              />
-            </div>
-          )}
+      <LightboxProvider>
+        <div className="flex flex-col gap-4 pt-8 pb-16 print:gap-0 print:pt-0">
+          <div className="max-w-2xl mx-auto w-full px-4">
+            <RichText className="w-full" data={post.content} enableGutter={false} />
+            <SubstackEmail />
+            <GiscusComments />
+            {post.relatedPosts && post.relatedPosts.length > 0 && (
+              <div className="print:hidden">
+                <RelatedPosts
+                  className="mt-12"
+                  docs={post.relatedPosts.filter((post) => typeof post === 'object')}
+                />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </LightboxProvider>
     </article>
   )
 }

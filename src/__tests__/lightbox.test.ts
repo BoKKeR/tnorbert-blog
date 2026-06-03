@@ -151,3 +151,21 @@ describe('MediaBlock static requirements', () => {
     expect(src).toMatch(/\bopen\b/)
   })
 })
+
+// ── Post page static analysis ────────────────────────────────────────────────
+
+describe('Post page static requirements', () => {
+  const src = fs.readFileSync(
+    path.resolve(process.cwd(), 'src/app/(frontend)/posts/[slug]/page.tsx'),
+    'utf-8',
+  )
+
+  it('imports LightboxProvider', () => {
+    expect(src).toMatch(/LightboxProvider.*from.*Lightbox/)
+  })
+
+  it('renders <LightboxProvider> wrapping content', () => {
+    expect(src).toMatch(/<LightboxProvider/)
+    expect(src).toMatch(/<\/LightboxProvider>/)
+  })
+})
