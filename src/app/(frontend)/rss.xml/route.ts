@@ -21,22 +21,26 @@ export async function GET(): Promise<Response> {
   const { docs: posts } = await payload.find({
     collection: 'posts',
     draft: false,
+    depth: 0,
     limit: 1000,
     overrideAccess: false,
     pagination: false,
     sort: '-publishedAt',
+    where: { _status: { equals: 'published' } },
   })
 
   const lastBuildDate =
-    posts[0]?.publishedAt ? new Date(posts[0].publishedAt).toUTCString() : new Date().toUTCString()
+    posts[0]?.publishedAt
+      ? new Date(posts[0].publishedAt).toUTCString()
+      : new Date().toUTCString()
 
   const items = posts
-    .filter((p) => p.slug && p.publishedAt)
+    .filter((p) => p.slug)
     .map((p) => {
       const url = `${siteUrl}/posts/${p.slug}`
       const title = escapeXml(p.title ?? '')
       const description = p.meta?.description ? escapeXml(p.meta.description) : ''
-      const pubDate = new Date(p.publishedAt!).toUTCString()
+      const pubDate = new Date(p.publishedAt ?? p.updatedAt).toUTCString()
       const author = p.populatedAuthors?.[0]?.name
         ? escapeXml(p.populatedAuthors[0].name)
         : ''
