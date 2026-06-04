@@ -30,14 +30,14 @@ export function PublishConfirmButton() {
   const canPublish = modified || !hasPublishedDoc
 
   const handlePublish = useCallback(() => {
-    if (!window.confirm('Are you sure you want to publish this article?')) return
+    if (!hasPublishedDoc && !window.confirm('Are you sure you want to publish this article?')) return
 
     const action = `${serverURL}${api}${
       globalSlug ? `/globals/${globalSlug}` : `/${collectionSlug}${id ? `/${id}` : ''}`
     }`
     submit({ action, overrides: { _status: 'published' } })
     setHasPublishedDoc(true)
-  }, [submit, serverURL, api, collectionSlug, globalSlug, id, setHasPublishedDoc])
+  }, [submit, serverURL, api, collectionSlug, globalSlug, id, hasPublishedDoc, setHasPublishedDoc])
 
   if (!hasPublishPermission) return null
 
