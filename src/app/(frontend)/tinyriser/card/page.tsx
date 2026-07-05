@@ -11,7 +11,7 @@ export default function TinyRiserCardPage() {
         @media print {
           html, body { margin: 0; padding: 0; background: white; }
           .screen-only { display: none !important; }
-          .card { width: 148mm; height: 74mm; margin: 0; box-shadow: none; border: none; }
+          .card { width: 148mm; height: 74mm; margin: 0; box-shadow: none !important; border: none; }
           @page { size: 148mm 74mm; margin: 0; }
         }
       `}</style>
@@ -66,6 +66,7 @@ export default function TinyRiserCardPage() {
             bgColor="#ffffff"
             fgColor="#111111"
             level="M"
+            aria-label="QR code linking to deployonfri.day/tinyriser"
           />
           <p
             style={{
