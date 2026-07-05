@@ -8,6 +8,10 @@ module.exports = {
   siteUrl: SITE_URL,
   generateRobotsTxt: true,
   exclude: ['/posts-sitemap.xml', '/pages-sitemap.xml', '/*', '/posts/*'],
+  additionalPaths: async (config) => [
+    await config.transform(config, '/tinyriser'),
+    // /tinyriser/card intentionally omitted — print utility, not a public page
+  ],
   robotsTxtOptions: {
     policies: [
       {
