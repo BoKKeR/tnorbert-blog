@@ -51,6 +51,7 @@
     "payload": "3.9.0",
     "payload-admin-bar": "^1.0.6",
     "prism-react-renderer": "^2.3.1",
+    "qrcode.react": "^4.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-google-recaptcha-v3": "^1.11.0",
