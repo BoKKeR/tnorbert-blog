@@ -245,6 +245,16 @@ export default function TinyRiserPage() {
           Buy →
         </a>
       </div>
+
+      {/* Cross-link footer */}
+      <div className="mt-8 pt-6 border-t border-border">
+        <Link
+          href="/thinkcentre"
+          className="text-sm text-muted-foreground hover:text-primary transition-colors font-mono"
+        >
+          PCIe card compatibility + community builds →
+        </Link>
+      </div>
     </main>
   )
 }

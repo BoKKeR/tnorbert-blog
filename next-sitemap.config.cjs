@@ -10,6 +10,7 @@ module.exports = {
   exclude: ['/posts-sitemap.xml', '/pages-sitemap.xml', '/*', '/posts/*'],
   additionalPaths: async (config) => [
     await config.transform(config, '/tinyriser'),
+    await config.transform(config, '/thinkcentre'),
     // /tinyriser/card intentionally omitted — print utility, not a public page
   ],
   robotsTxtOptions: {
