@@ -236,7 +236,7 @@ export default function ThinkCentrePage() {
                 <div>
                   <span className="font-mono text-4xl font-bold text-foreground">€30</span>
                   <p className="text-xs font-mono text-muted-foreground mt-1">
-                    + shipping &nbsp;·&nbsp; Ships from EU
+                    €8 flat shipping worldwide &nbsp;·&nbsp; Ships from Sweden
                   </p>
                 </div>
 
