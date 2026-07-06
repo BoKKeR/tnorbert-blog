@@ -210,37 +210,95 @@ export default function ThinkCentrePage() {
         </section>
 
         {/* ── TinyRiser product block ───────────────────────────────────────── */}
-        <div className="mb-14 rounded-sm border border-border overflow-hidden">
+        <div className="mb-14 rounded-sm border border-primary/40 bg-primary/[0.03] overflow-hidden">
           {/* Label bar */}
-          <div className="px-5 py-2.5 bg-muted/60 border-b border-border flex items-center gap-2">
-            <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+          <div className="px-5 py-2.5 bg-primary/10 border-b border-primary/20 flex items-center gap-2">
+            <span className="text-xs font-mono uppercase tracking-widest text-primary">
               Made by the author
             </span>
           </div>
 
-          {/* Hero: text left, image right */}
-          <div className="p-5 sm:p-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
-              {/* Text column */}
-              <div className="order-2 sm:order-1 flex flex-col gap-4">
+          {/* Hero: diagonal split between M920Q and Tiny6 */}
+          <div className="relative p-5 sm:p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
+
+              {/* ── M920Q column ── */}
+              <div className="flex flex-col gap-4 sm:pr-8 pb-8 sm:pb-0 border-b border-border sm:border-b-0">
+                {/* Board image */}
+                <div className="relative w-full h-40 rounded-sm overflow-hidden border border-border bg-muted">
+                  <ClickableImage
+                    fill
+                    priority
+                    src={`${TC_IMG}/Tinyriser-v2-front-irl.webp`}
+                    alt="TinyRiser v2 PCIe expansion board"
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 280px"
+                  />
+                </div>
+
                 <div>
-                  <h2 className="font-serif text-2xl font-bold text-foreground mb-2">TinyRiser</h2>
-                  <p className="text-sm text-foreground/80 leading-relaxed">
-                    PCIe expansion board for the M920Q / M720Q. The sealed chassis has no expansion
-                    slot — TinyRiser adds one. Route a PCIe x4 connection from the proprietary riser
-                    interface to any compatible card.
+                  <h2 className="font-serif text-xl font-bold text-foreground mb-0.5">
+                    TinyRiser M920Q
+                  </h2>
+                  <p className="text-xs font-mono text-muted-foreground">
+                    M920Q &nbsp;·&nbsp; M720Q &nbsp;·&nbsp; M920x
                   </p>
                 </div>
 
-                {/* Price + shipping */}
+                <p className="text-sm text-foreground/80 leading-relaxed">
+                  PCIe x4 expansion board for the 8th-gen sealed chassis. Adds a full PCIe slot
+                  via the proprietary riser interface — NVMe, SFP+, GPU, or any compatible card.
+                </p>
+
                 <div>
-                  <span className="font-mono text-4xl font-bold text-foreground">€30</span>
-                  <p className="text-xs font-mono text-muted-foreground mt-1">
-                    €8 flat shipping worldwide &nbsp;·&nbsp; Ships from Sweden
+                  <span className="font-mono text-3xl font-bold text-foreground">€30</span>
+                  <p className="text-xs font-mono text-muted-foreground mt-0.5">
+                    + €8 flat shipping &nbsp;·&nbsp; Ships from Sweden
                   </p>
                 </div>
 
-                {/* CTA */}
+                <div className="flex flex-col gap-2">
+                  <a
+                    href="SHOP_URL_PLACEHOLDER"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="self-start inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm bg-primary text-primary-foreground font-mono text-sm font-semibold hover:bg-primary/90 transition-colors"
+                  >
+                    Order now →
+                  </a>
+                  <Link
+                    href="/tinyriser"
+                    className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    Full product page + assembly details →
+                  </Link>
+                </div>
+              </div>
+
+              {/* ── Tiny6 column ── */}
+              <div className="flex flex-col gap-4 sm:pl-8 pt-8 sm:pt-0">
+                <div>
+                  <h2 className="font-serif text-xl font-bold text-foreground mb-0.5">
+                    TinyRiser Tiny6
+                  </h2>
+                  <p className="text-xs font-mono text-muted-foreground">
+                    P340 Tiny Gen 2 &nbsp;·&nbsp; M70q Gen 3 &nbsp;·&nbsp; and newer
+                  </p>
+                </div>
+
+                <p className="text-sm text-foreground/80 leading-relaxed">
+                  Same PCIe x4 expansion concept, different chassis connector — fits the
+                  6th-generation ThinkCentre Tiny riser interface. Compatible cards are
+                  identical to the M920Q version.
+                </p>
+
+                <div>
+                  <span className="font-mono text-3xl font-bold text-foreground">€30</span>
+                  <p className="text-xs font-mono text-muted-foreground mt-0.5">
+                    + €8 flat shipping &nbsp;·&nbsp; Ships from Sweden
+                  </p>
+                </div>
+
                 <a
                   href="SHOP_URL_PLACEHOLDER"
                   target="_blank"
@@ -249,32 +307,31 @@ export default function ThinkCentrePage() {
                 >
                   Order now →
                 </a>
-
-                {/* Secondary link */}
-                <Link
-                  href="/tinyriser"
-                  className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Full product page + assembly details →
-                </Link>
-              </div>
-
-              {/* Image column */}
-              <div className="order-1 sm:order-2 relative w-full h-52 sm:h-64 rounded-sm overflow-hidden border border-border bg-muted">
-                <ClickableImage
-                  fill
-                  src={`${TC_IMG}/Tinyriser-v2-front-irl.webp`}
-                  alt="TinyRiser v2 PCIe expansion board"
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 320px"
-                />
               </div>
             </div>
+
+            {/* Diagonal separator "/" — desktop only */}
+            <svg
+              aria-hidden="true"
+              className="hidden sm:block absolute inset-0 w-full h-full pointer-events-none"
+              preserveAspectRatio="none"
+              viewBox="0 0 1 1"
+            >
+              <line
+                x1="0"
+                y1="1"
+                x2="1"
+                y2="0"
+                vectorEffect="non-scaling-stroke"
+                style={{ stroke: 'hsl(var(--border))' }}
+                strokeWidth="1"
+              />
+            </svg>
           </div>
 
           {/* Expandable: What It Unlocks */}
-          <details className="group border-t border-border">
-            <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden px-5 sm:px-6 py-4 flex items-center justify-between select-none hover:bg-muted/40 transition-colors">
+          <details className="group border-t border-primary/20">
+            <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden px-5 sm:px-6 py-4 flex items-center justify-between select-none hover:bg-primary/5 transition-colors">
               <span className="font-serif font-semibold text-sm text-foreground">
                 What It Unlocks
               </span>
@@ -282,7 +339,7 @@ export default function ThinkCentrePage() {
                 ▾
               </span>
             </summary>
-            <div className="px-5 sm:px-6 pb-5 border-t border-border/50">
+            <div className="px-5 sm:px-6 pb-5 border-t border-primary/10">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4">
                 {USE_CASES.map((uc) => (
                   <div
@@ -310,8 +367,8 @@ export default function ThinkCentrePage() {
           </details>
 
           {/* Expandable: How It's Made */}
-          <details className="group border-t border-border">
-            <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden px-5 sm:px-6 py-4 flex items-center justify-between select-none hover:bg-muted/40 transition-colors">
+          <details className="group border-t border-primary/20">
+            <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden px-5 sm:px-6 py-4 flex items-center justify-between select-none hover:bg-primary/5 transition-colors">
               <span className="font-serif font-semibold text-sm text-foreground">
                 How It&apos;s Made
               </span>
@@ -319,7 +376,7 @@ export default function ThinkCentrePage() {
                 ▾
               </span>
             </summary>
-            <div className="px-5 sm:px-6 pb-5 border-t border-border/50">
+            <div className="px-5 sm:px-6 pb-5 border-t border-primary/10">
               <p className="text-xs text-muted-foreground mt-4 mb-4 leading-relaxed">
                 Each board is hand-assembled — stencil, reflow, drag soldering, microscope
                 inspection. Every board is tested in an M920Q before it ships.
