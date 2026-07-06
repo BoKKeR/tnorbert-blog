@@ -218,115 +218,87 @@ export default function ThinkCentrePage() {
             </span>
           </div>
 
-          {/* Hero: diagonal split between M920Q and Tiny6 */}
-          <div className="relative p-5 sm:p-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
+          {/* Hero: text left, image right */}
+          <div className="p-5 sm:p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
 
-              {/* ── M920Q column ── */}
-              <div className="flex flex-col gap-4 sm:pr-8 pb-8 sm:pb-0 border-b border-border sm:border-b-0">
-                {/* Board image */}
-                <div className="relative w-full h-40 rounded-sm overflow-hidden border border-border bg-muted">
-                  <ClickableImage
-                    fill
-                    priority
-                    src={`${TC_IMG}/Tinyriser-v2-front-irl.webp`}
-                    alt="TinyRiser v2 PCIe expansion board"
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, 280px"
-                  />
-                </div>
+              {/* Text column */}
+              <div className="order-2 sm:order-1 flex flex-col gap-4">
+                <h2 className="font-serif text-2xl font-bold text-foreground">TinyRiser</h2>
 
-                <div>
-                  <h2 className="font-serif text-xl font-bold text-foreground mb-0.5">
-                    TinyRiser M920Q
-                  </h2>
-                  <p className="text-xs font-mono text-muted-foreground">
-                    M920Q &nbsp;·&nbsp; M720Q &nbsp;·&nbsp; M920x
-                  </p>
+                {/* Variant compatibility cards */}
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="border border-border rounded-sm p-3 flex flex-col gap-1.5">
+                    <p className="text-xs font-mono font-semibold text-foreground">M920Q</p>
+                    <p className="text-xs font-mono text-muted-foreground leading-relaxed">
+                      M920Q · M720Q · M920x
+                    </p>
+                  </div>
+                  <div className="border border-primary/30 bg-primary/5 rounded-sm p-3 flex flex-col gap-1.5">
+                    <p className="text-xs font-mono font-semibold text-foreground">Tiny6</p>
+                    <p className="text-xs font-mono text-muted-foreground leading-relaxed">
+                      P340 Tiny Gen 2 · M70q Gen 3+
+                    </p>
+                    <span className="self-start text-xs font-mono bg-accent/10 text-accent border border-accent/20 px-1.5 py-0.5 rounded-sm">
+                      + USB port
+                    </span>
+                  </div>
                 </div>
 
                 <p className="text-sm text-foreground/80 leading-relaxed">
-                  PCIe x4 expansion board for the 8th-gen sealed chassis. Adds a full PCIe slot
-                  via the proprietary riser interface — NVMe, SFP+, GPU, or any compatible card.
+                  PCIe x4 expansion board for the sealed ThinkCentre Tiny chassis. Adds a full
+                  PCIe slot via the proprietary riser interface — NVMe, SFP+, GPU, or any
+                  compatible card. Both variants support the same cards.
                 </p>
 
+                {/* Price + shipping */}
                 <div>
-                  <span className="font-mono text-3xl font-bold text-foreground">€30</span>
-                  <p className="text-xs font-mono text-muted-foreground mt-0.5">
+                  <span className="font-mono text-4xl font-bold text-foreground">€30</span>
+                  <p className="text-xs font-mono text-muted-foreground mt-1">
                     + €8 flat shipping &nbsp;·&nbsp; Ships from Sweden
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-2">
+                {/* CTAs */}
+                <div className="flex flex-wrap gap-2">
                   <a
                     href="SHOP_URL_PLACEHOLDER"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="self-start inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm bg-primary text-primary-foreground font-mono text-sm font-semibold hover:bg-primary/90 transition-colors"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-primary text-primary-foreground font-mono text-sm font-semibold hover:bg-primary/90 transition-colors"
                   >
-                    Order now →
+                    Order M920Q →
                   </a>
-                  <Link
-                    href="/tinyriser"
-                    className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors"
+                  <a
+                    href="SHOP_URL_PLACEHOLDER"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-sm bg-primary text-primary-foreground font-mono text-sm font-semibold hover:bg-primary/90 transition-colors"
                   >
-                    Full product page + assembly details →
-                  </Link>
+                    Order Tiny6 →
+                  </a>
                 </div>
+
+                <Link
+                  href="/tinyriser"
+                  className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Full product page + assembly details →
+                </Link>
               </div>
 
-              {/* ── Tiny6 column ── */}
-              <div className="flex flex-col gap-4 sm:pl-8 pt-8 sm:pt-0">
-                <div>
-                  <h2 className="font-serif text-xl font-bold text-foreground mb-0.5">
-                    TinyRiser Tiny6
-                  </h2>
-                  <p className="text-xs font-mono text-muted-foreground">
-                    P340 Tiny Gen 2 &nbsp;·&nbsp; M70q Gen 3 &nbsp;·&nbsp; and newer
-                  </p>
-                </div>
-
-                <p className="text-sm text-foreground/80 leading-relaxed">
-                  Same PCIe x4 expansion concept, different chassis connector — fits the
-                  6th-generation ThinkCentre Tiny riser interface. Compatible cards are
-                  identical to the M920Q version.
-                </p>
-
-                <div>
-                  <span className="font-mono text-3xl font-bold text-foreground">€30</span>
-                  <p className="text-xs font-mono text-muted-foreground mt-0.5">
-                    + €8 flat shipping &nbsp;·&nbsp; Ships from Sweden
-                  </p>
-                </div>
-
-                <a
-                  href="SHOP_URL_PLACEHOLDER"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="self-start inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm bg-primary text-primary-foreground font-mono text-sm font-semibold hover:bg-primary/90 transition-colors"
-                >
-                  Order now →
-                </a>
+              {/* Image column */}
+              <div className="order-1 sm:order-2 relative w-full h-52 sm:h-64 rounded-sm overflow-hidden border border-border bg-muted">
+                <ClickableImage
+                  fill
+                  priority
+                  src={`${TC_IMG}/Tinyriser-v2-front-irl.webp`}
+                  alt="TinyRiser v2 PCIe expansion board"
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 320px"
+                />
               </div>
             </div>
-
-            {/* Diagonal separator "/" — desktop only */}
-            <svg
-              aria-hidden="true"
-              className="hidden sm:block absolute inset-0 w-full h-full pointer-events-none"
-              preserveAspectRatio="none"
-              viewBox="0 0 1 1"
-            >
-              <line
-                x1="0"
-                y1="1"
-                x2="1"
-                y2="0"
-                vectorEffect="non-scaling-stroke"
-                style={{ stroke: 'hsl(var(--border))' }}
-                strokeWidth="1"
-              />
-            </svg>
           </div>
 
           {/* Expandable: What It Unlocks */}
