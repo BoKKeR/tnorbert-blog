@@ -4,11 +4,12 @@ import React from 'react'
 import { LightboxProvider } from '@/components/Lightbox'
 import { ClickableImage } from '@/components/ClickableImage'
 import { PCIE_NETWORKING, PCIE_STORAGE, PCIE_GPUS, BUILDS, PRINTS } from './data'
+import { USE_CASES, ASSEMBLY_STEPS } from '../tinyriser/data'
 
 export const metadata: Metadata = {
   title: 'ThinkCentre Tiny — deployonfri.day',
   description:
-    'A curated reference for Lenovo ThinkCentre Tiny homelab nodes — PCIe expansion card compatibility, community builds, and 3D printed enclosures.',
+    'A curated reference for Lenovo ThinkCentre Tiny homelab nodes — PCIe expansion card compatibility, community builds, and the TinyRiser expansion board.',
 }
 
 const BUILD_TAG_STYLES: Record<string, string> = {
@@ -17,6 +18,14 @@ const BUILD_TAG_STYLES: Record<string, string> = {
   networking: 'bg-warning/10 text-warning border-warning/20',
   storage: 'bg-primary/10 text-primary border-primary/20',
 }
+
+const USE_CASE_TAG_STYLES: Record<string, string> = {
+  storage: 'bg-primary/10 text-primary border-primary/20',
+  networking: 'bg-accent/10 text-accent border-accent/20',
+  compute: 'bg-warning/10 text-warning border-warning/20',
+}
+
+const TC_IMG = 'https://raw.githubusercontent.com/BoKKeR/awesome-thinkcentres/master/images'
 
 type CardWithImage = { name: string; tag: string; note: string; image?: string }
 
@@ -92,6 +101,149 @@ export default function ThinkCentrePage() {
             repository.
           </p>
         </div>
+
+        {/* ── TinyRiser product block ───────────────────────────────────────── */}
+        <div className="mb-14 rounded-sm border border-border overflow-hidden">
+          {/* Label bar */}
+          <div className="px-5 py-2.5 bg-muted/60 border-b border-border flex items-center gap-2">
+            <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
+              Made by the author
+            </span>
+          </div>
+
+          {/* Hero: text left, image right */}
+          <div className="p-5 sm:p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-start">
+              {/* Text column */}
+              <div className="order-2 sm:order-1 flex flex-col gap-4">
+                <div>
+                  <h2 className="font-serif text-2xl font-bold text-foreground mb-2">TinyRiser</h2>
+                  <p className="text-sm text-foreground/80 leading-relaxed">
+                    PCIe expansion board for the M920Q / M720Q. The sealed chassis has no expansion
+                    slot — TinyRiser adds one. Route a PCIe x4 connection from the proprietary riser
+                    interface to any compatible card.
+                  </p>
+                </div>
+
+                {/* Price + shipping */}
+                <div>
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-mono text-4xl font-bold text-foreground">€30</span>
+                  </div>
+                  <p className="text-xs font-mono text-muted-foreground mt-1">
+                    + shipping &nbsp;·&nbsp; Ships from EU
+                  </p>
+                </div>
+
+                {/* CTA */}
+                <a
+                  href="SHOP_URL_PLACEHOLDER"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="self-start inline-flex items-center gap-1.5 px-5 py-2.5 rounded-sm bg-primary text-primary-foreground font-mono text-sm font-semibold hover:bg-primary/90 transition-colors"
+                >
+                  Order now →
+                </a>
+
+                {/* Secondary link */}
+                <Link
+                  href="/tinyriser"
+                  className="text-xs font-mono text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Full product page + assembly details →
+                </Link>
+              </div>
+
+              {/* Image column */}
+              <div className="order-1 sm:order-2 relative w-full h-52 sm:h-64 rounded-sm overflow-hidden border border-border bg-muted">
+                <ClickableImage
+                  fill
+                  priority
+                  src={`${TC_IMG}/Tinyriser-v2-front-irl.webp`}
+                  alt="TinyRiser v2 PCIe expansion board"
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 320px"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Expandable: What It Unlocks */}
+          <details className="group border-t border-border">
+            <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden px-5 sm:px-6 py-4 flex items-center justify-between select-none hover:bg-muted/40 transition-colors">
+              <span className="font-serif font-semibold text-sm text-foreground">
+                What It Unlocks
+              </span>
+              <span className="text-muted-foreground text-base leading-none transition-transform duration-200 group-open:rotate-180">
+                ▾
+              </span>
+            </summary>
+            <div className="px-5 sm:px-6 pb-5 border-t border-border/50">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4">
+                {USE_CASES.map((uc) => (
+                  <div
+                    key={uc.title}
+                    className="border border-border rounded-sm p-3 flex flex-col gap-2"
+                  >
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-serif font-bold text-sm text-foreground">
+                        {uc.title}
+                      </span>
+                      <span
+                        className={`text-xs px-1.5 py-0.5 rounded-sm border font-mono ${
+                          USE_CASE_TAG_STYLES[uc.tag] ??
+                          'bg-muted text-muted-foreground border-border'
+                        }`}
+                      >
+                        {uc.tag}
+                      </span>
+                    </div>
+                    <p className="text-xs text-foreground/70 leading-relaxed">{uc.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </details>
+
+          {/* Expandable: How It's Made */}
+          <details className="group border-t border-border">
+            <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden px-5 sm:px-6 py-4 flex items-center justify-between select-none hover:bg-muted/40 transition-colors">
+              <span className="font-serif font-semibold text-sm text-foreground">
+                How It&apos;s Made
+              </span>
+              <span className="text-muted-foreground text-base leading-none transition-transform duration-200 group-open:rotate-180">
+                ▾
+              </span>
+            </summary>
+            <div className="px-5 sm:px-6 pb-5 border-t border-border/50">
+              <p className="text-xs text-muted-foreground mt-4 mb-4 leading-relaxed">
+                Each board is hand-assembled — stencil, reflow, drag soldering, microscope
+                inspection. Every board is tested in an M920Q before it ships.
+              </p>
+              <ol className="flex flex-col gap-0">
+                {ASSEMBLY_STEPS.map((item, idx) => (
+                  <li key={item.step} className="flex gap-3">
+                    <div className="flex flex-col items-center">
+                      <div className="w-6 h-6 shrink-0 rounded-sm border border-border bg-muted flex items-center justify-center font-mono text-xs text-muted-foreground">
+                        {item.step}
+                      </div>
+                      {idx < ASSEMBLY_STEPS.length - 1 && (
+                        <div className="w-px flex-1 bg-border my-1" />
+                      )}
+                    </div>
+                    <div className="pb-4 min-w-0">
+                      <p className="font-serif font-semibold text-xs text-foreground mb-0.5">
+                        {item.label}
+                      </p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{item.detail}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </details>
+        </div>
+        {/* ── end TinyRiser block ──────────────────────────────────────────── */}
 
         {/* PCIe Expansion Cards */}
         <section aria-labelledby="pcie-heading" className="mb-14">
@@ -244,9 +396,6 @@ export default function ThinkCentrePage() {
 
         {/* Footer / cross-links */}
         <div className="border-t border-border pt-8 flex flex-col gap-3">
-          <Link href="/tinyriser" className="text-sm text-primary hover:underline font-mono">
-            Building a cluster? I make the TinyRiser PCIe expansion board →
-          </Link>
           <a
             href="https://github.com/BoKKeR/awesome-thinkcentres"
             target="_blank"
