@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { USE_CASES, ASSEMBLY_STEPS, UPGRADES } from './data'
@@ -33,13 +34,23 @@ export default function TinyRiserPage() {
         <h1 className="font-serif text-3xl md:text-4xl font-bold leading-tight mb-4">
           TinyRiser
         </h1>
-        <p className="text-base text-foreground/80 leading-relaxed">
+        <p className="text-base text-foreground/80 leading-relaxed mb-6">
           A PCIe expansion board for the Lenovo ThinkCentre M920Q, M720Q, and M920x. The M920Q
           is a capable mini-PC — but its sealed chassis has no PCIe slot. TinyRiser adds one: a
           PCIe x4 connection routed from the M920Q&apos;s proprietary riser interface, giving you
           NVMe drives, SFP+ NICs, GPU cards, and more in a machine that would otherwise top out
           at its built-in M.2 slot.
         </p>
+        <div className="relative w-full h-56 sm:h-72 rounded-sm overflow-hidden border border-border bg-muted">
+          <Image
+            src="https://raw.githubusercontent.com/BoKKeR/awesome-thinkcentres/master/images/Tinyriser-v2-front-irl.webp"
+            alt="TinyRiser v2 PCIe expansion board"
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 672px) 100vw, 672px"
+          />
+        </div>
       </div>
 
       {/* What it unlocks */}

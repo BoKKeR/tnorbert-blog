@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { PCIE_NETWORKING, PCIE_STORAGE, PCIE_GPUS, BUILDS, PRINTS } from './data'
@@ -14,6 +15,43 @@ const BUILD_TAG_STYLES: Record<string, string> = {
   k8s: 'bg-accent/10 text-accent border-accent/20',
   networking: 'bg-warning/10 text-warning border-warning/20',
   storage: 'bg-primary/10 text-primary border-primary/20',
+}
+
+type CardWithImage = { name: string; tag: string; note: string; image?: string }
+
+function PcieRow({
+  card,
+  tagStyle,
+}: {
+  card: CardWithImage
+  tagStyle: string
+}) {
+  return (
+    <div className="flex gap-3 py-3 border-b border-border/50 last:border-0 items-start">
+      {'image' in card && card.image ? (
+        <div className="shrink-0 w-14 h-10 rounded-sm overflow-hidden border border-border/50 bg-muted">
+          <Image
+            src={card.image}
+            alt={card.name}
+            width={56}
+            height={40}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      ) : null}
+      <div className="shrink-0 w-36">
+        <dt className="text-sm font-mono text-foreground font-semibold leading-tight">
+          {card.name}
+        </dt>
+        <dd className="mt-1">
+          <span className={`text-xs px-1.5 py-0.5 rounded-sm border font-mono ${tagStyle}`}>
+            {card.tag}
+          </span>
+        </dd>
+      </div>
+      <dd className="text-sm text-foreground/80 pt-0.5">{card.note}</dd>
+    </div>
+  )
 }
 
 export default function ThinkCentrePage() {
@@ -65,72 +103,42 @@ export default function ThinkCentrePage() {
           chassis.
         </p>
 
-        {/* Networking */}
-        <h3 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-4">
+        <h3 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-3">
           Networking
         </h3>
-        <dl className="flex flex-col gap-3 mb-8">
+        <dl className="flex flex-col mb-8">
           {PCIE_NETWORKING.map((card) => (
-            <div
+            <PcieRow
               key={card.name}
-              className="flex gap-4 py-2 border-b border-border/50 last:border-0"
-            >
-              <div className="shrink-0 w-44">
-                <dt className="text-sm font-mono text-foreground font-semibold">{card.name}</dt>
-                <dd className="mt-0.5">
-                  <span className="text-xs px-1.5 py-0.5 rounded-sm border font-mono bg-accent/10 text-accent border-accent/20">
-                    {card.tag}
-                  </span>
-                </dd>
-              </div>
-              <dd className="text-sm text-foreground/80">{card.note}</dd>
-            </div>
+              card={card}
+              tagStyle="bg-accent/10 text-accent border-accent/20"
+            />
           ))}
         </dl>
 
-        {/* Storage */}
-        <h3 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-4">
+        <h3 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-3">
           Storage
         </h3>
-        <dl className="flex flex-col gap-3 mb-8">
+        <dl className="flex flex-col mb-8">
           {PCIE_STORAGE.map((card) => (
-            <div
+            <PcieRow
               key={card.name}
-              className="flex gap-4 py-2 border-b border-border/50 last:border-0"
-            >
-              <div className="shrink-0 w-44">
-                <dt className="text-sm font-mono text-foreground font-semibold">{card.name}</dt>
-                <dd className="mt-0.5">
-                  <span className="text-xs px-1.5 py-0.5 rounded-sm border font-mono bg-primary/10 text-primary border-primary/20">
-                    {card.tag}
-                  </span>
-                </dd>
-              </div>
-              <dd className="text-sm text-foreground/80">{card.note}</dd>
-            </div>
+              card={card}
+              tagStyle="bg-primary/10 text-primary border-primary/20"
+            />
           ))}
         </dl>
 
-        {/* GPU */}
-        <h3 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-4">
+        <h3 className="text-sm font-mono uppercase tracking-widest text-muted-foreground mb-3">
           GPU
         </h3>
-        <dl className="flex flex-col gap-3">
+        <dl className="flex flex-col">
           {PCIE_GPUS.map((card) => (
-            <div
+            <PcieRow
               key={card.name}
-              className="flex gap-4 py-2 border-b border-border/50 last:border-0"
-            >
-              <div className="shrink-0 w-44">
-                <dt className="text-sm font-mono text-foreground font-semibold">{card.name}</dt>
-                <dd className="mt-0.5">
-                  <span className="text-xs px-1.5 py-0.5 rounded-sm border font-mono bg-warning/10 text-warning border-warning/20">
-                    {card.tag}
-                  </span>
-                </dd>
-              </div>
-              <dd className="text-sm text-foreground/80">{card.note}</dd>
-            </div>
+              card={card}
+              tagStyle="bg-warning/10 text-warning border-warning/20"
+            />
           ))}
         </dl>
       </section>
@@ -150,20 +158,35 @@ export default function ThinkCentrePage() {
               href={build.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-border rounded-sm p-4 flex flex-col gap-3 hover:border-primary/40 transition-colors"
+              className="border border-border rounded-sm overflow-hidden flex flex-col hover:border-primary/40 transition-colors"
             >
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="font-serif font-bold text-sm text-foreground">{build.title}</span>
-                <span
-                  className={`text-xs px-1.5 py-0.5 rounded-sm border font-mono ${
-                    BUILD_TAG_STYLES[build.tag] ?? 'bg-muted text-muted-foreground border-border'
-                  }`}
-                >
-                  {build.tag}
-                </span>
+              {'image' in build && build.image ? (
+                <div className="relative w-full h-36 bg-muted">
+                  <Image
+                    src={build.image}
+                    alt={build.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                  />
+                </div>
+              ) : null}
+              <div className="p-4 flex flex-col gap-2 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-serif font-bold text-sm text-foreground">
+                    {build.title}
+                  </span>
+                  <span
+                    className={`text-xs px-1.5 py-0.5 rounded-sm border font-mono ${
+                      BUILD_TAG_STYLES[build.tag] ?? 'bg-muted text-muted-foreground border-border'
+                    }`}
+                  >
+                    {build.tag}
+                  </span>
+                </div>
+                <p className="text-sm text-foreground/80 leading-relaxed">{build.description}</p>
+                <span className="text-xs font-mono text-primary mt-auto">Read more →</span>
               </div>
-              <p className="text-sm text-foreground/80 leading-relaxed">{build.description}</p>
-              <span className="text-xs font-mono text-primary mt-auto">Read more →</span>
             </a>
           ))}
         </div>
@@ -177,16 +200,25 @@ export default function ThinkCentrePage() {
         >
           3D Printed Components
         </h2>
-        <dl className="flex flex-col gap-3">
+        <dl className="flex flex-col">
           {PRINTS.map((p) => (
             <div
               key={p.name}
-              className="flex gap-4 py-2 border-b border-border/50 last:border-0"
+              className="flex gap-3 py-3 border-b border-border/50 last:border-0 items-start"
             >
-              <div className="shrink-0 w-44">
-                <dt className="text-sm font-mono text-foreground font-semibold">{p.name}</dt>
-              </div>
+              {'image' in p && p.image ? (
+                <div className="shrink-0 w-14 h-10 rounded-sm overflow-hidden border border-border/50 bg-muted">
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    width={56}
+                    height={40}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ) : null}
               <dd className="flex flex-col gap-1 min-w-0">
+                <dt className="text-sm font-mono text-foreground font-semibold">{p.name}</dt>
                 <span className="text-sm text-foreground/80">{p.description}</span>
                 <a
                   href={p.href}
