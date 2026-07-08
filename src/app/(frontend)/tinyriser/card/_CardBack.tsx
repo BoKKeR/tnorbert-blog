@@ -60,9 +60,7 @@ export function CardBack() {
               letterSpacing: '-0.02em',
             }}
           >
-            {'// I show you mine,'}
-            <br />
-            {'// you show me yours.'}
+            {'// what did you unlock?'}
           </p>
           <table
             style={{
@@ -105,16 +103,14 @@ export function CardBack() {
           </table>
         </div>
 
-        <p
-          style={{
-            fontSize: '6.5pt',
-            color: '#9ca3af',
-            margin: 0,
-            fontFamily: mono,
-          }}
-        >
-          deployonfri.day/homelab
-        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1mm' }}>
+          <p style={{ fontSize: '6.5pt', color: '#9ca3af', margin: 0, fontFamily: mono }}>
+            deployonfri.day/homelab
+          </p>
+          <p style={{ fontSize: '6.5pt', color: '#374151', margin: 0, fontFamily: mono }}>
+            share yours → deployonfri.day/contact
+          </p>
+        </div>
       </div>
     </div>
   )
