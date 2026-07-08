@@ -41,15 +41,12 @@ export default function TinyRiserCardPage() {
         </p>
       </div>
 
-      {/* Back is mirrored so it reads correctly after folding */}
       <div
         className="fold-card"
         style={{ display: 'flex', width: '296mm', margin: '0 auto' }}
       >
         <CardFace />
-        <div style={{ transform: 'scaleX(-1)' }}>
-          <CardBack />
-        </div>
+        <CardBack />
       </div>
     </>
   )

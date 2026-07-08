@@ -48,9 +48,7 @@ export default function TinyRiserCardSheetPage() {
         {Array.from({ length: CARDS_PER_SHEET }).map((_, i) => (
           <div key={i} className="fold-card" style={{ display: 'flex', width: '296mm' }}>
             <CardFace />
-            <div style={{ transform: 'scaleX(-1)' }}>
-              <CardBack />
-            </div>
+            <CardBack />
           </div>
         ))}
       </div>
