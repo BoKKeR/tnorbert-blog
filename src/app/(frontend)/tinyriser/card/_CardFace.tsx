@@ -104,7 +104,7 @@ export function CardFace() {
           >
             Design by WifiCable — manufactured and assembled by Norbert in Sweden.
             Questions?{' '}
-            <span style={{ color: '#111111', fontWeight: 700 }}>deployonfri.day</span>
+            <span style={{ color: '#111111', fontWeight: 700 }}>deployonfri.day/contact</span>
           </p>
         </div>
       </div>
