@@ -75,11 +75,14 @@ export function CardBack() {
             <tbody>
               {[
                 ['hw', '6× ThinkCentre M920Q'],
+                ['os', 'Talos Linux'],
                 ['nodes', '3 ctrl · 3 workers'],
                 ['net', '25 GbE (workers)'],
+                ['ingress', 'Envoy Gateway'],
                 ['storage', 'Rook-Ceph via TinyRiser'],
                 ['gitops', 'Flux + Ansible'],
                 ['obs', 'Prometheus · Grafana · Loki'],
+                ['hosts', 'keeb.build'],
               ].map(([label, value]) => (
                 <tr key={label}>
                   <td
