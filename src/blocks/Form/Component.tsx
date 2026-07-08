@@ -189,6 +189,12 @@ export const FormBlock: React.FC<
               <Button form={formID} type="submit" variant="default">
                 {submitButtonLabel}
               </Button>
+              <p className="text-xs text-muted-foreground mt-2">
+                Protected by reCAPTCHA —{' '}
+                <a href="https://policies.google.com/privacy" className="underline hover:text-foreground transition-colors">Privacy</a>
+                {' & '}
+                <a href="https://policies.google.com/terms" className="underline hover:text-foreground transition-colors">Terms</a>
+              </p>
             </form>
           )}
         </FormProvider>
