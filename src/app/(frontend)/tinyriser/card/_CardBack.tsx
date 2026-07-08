@@ -108,7 +108,7 @@ export function CardBack() {
             deployonfri.day/homelab
           </p>
           <p style={{ fontSize: '6.5pt', color: '#374151', margin: 0, fontFamily: mono }}>
-            share yours → deployonfri.day/contact
+            share yours → @norbert@social.deployonfri.day
           </p>
         </div>
       </div>
