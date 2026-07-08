@@ -4,8 +4,8 @@ import React from 'react'
 
 const mono = 'ui-monospace, "Cascadia Code", "Fira Code", monospace'
 
-const CLUSTER_IMG =
-  'https://raw.githubusercontent.com/BoKKeR/awesome-thinkcentres/master/images/6bay-homelab.webp'
+const RACK_IMG =
+  'https://raw.githubusercontent.com/BoKKeR/awesome-thinkcentres/master/images/10inch-rack-mount.webp'
 
 export function CardBack() {
   return (
@@ -23,19 +23,12 @@ export function CardBack() {
         overflow: 'hidden',
       }}
     >
-      {/* Left: B&W cluster photo */}
-      <div
-        style={{
-          width: '74mm',
-          flexShrink: 0,
-          overflow: 'hidden',
-          position: 'relative',
-        }}
-      >
+      {/* Left: B&W rack photo */}
+      <div style={{ width: '74mm', flexShrink: 0, overflow: 'hidden' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={CLUSTER_IMG}
-          alt="Six ThinkCentre Tiny homelab cluster"
+          src={RACK_IMG}
+          alt="ThinkCentre rack"
           style={{
             width: '100%',
             height: '100%',
@@ -47,7 +40,7 @@ export function CardBack() {
         />
       </div>
 
-      {/* Right: homelab description */}
+      {/* Right: homelab summary */}
       <div
         style={{
           flex: 1,
@@ -64,38 +57,60 @@ export function CardBack() {
               fontSize: '10pt',
               fontWeight: 700,
               color: '#111111',
-              margin: '0 0 3mm 0',
+              margin: '0 0 3.5mm 0',
               fontFamily: mono,
               letterSpacing: '-0.02em',
             }}
           >
-            {'// my homelab'}
+            {'// 6-node k8s'}
           </p>
-          <p
+          <table
             style={{
-              fontSize: '7.5pt',
-              color: '#374151',
-              lineHeight: 1.6,
-              margin: 0,
+              borderCollapse: 'collapse',
+              width: '100%',
               fontFamily: mono,
+              fontSize: '6.5pt',
             }}
           >
-            Six ThinkCentre Tinys running
-            as a cluster at home. Needed
-            PCIe in a small form factor —
-            so I started making these.
-          </p>
+            <tbody>
+              {[
+                ['hw', '6× ThinkCentre M920Q'],
+                ['nodes', '3 ctrl · 3 workers'],
+                ['net', '25 GbE (workers)'],
+                ['storage', 'Rook-Ceph via TinyRiser'],
+                ['gitops', 'Flux + Ansible'],
+                ['obs', 'Prometheus · Grafana · Loki'],
+              ].map(([label, value]) => (
+                <tr key={label}>
+                  <td
+                    style={{
+                      color: '#9ca3af',
+                      paddingRight: '3mm',
+                      paddingBottom: '1.5mm',
+                      verticalAlign: 'top',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {label}
+                  </td>
+                  <td style={{ color: '#374151', paddingBottom: '1.5mm', lineHeight: 1.4 }}>
+                    {value}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         <p
           style={{
-            fontSize: '7pt',
+            fontSize: '6.5pt',
             color: '#9ca3af',
             margin: 0,
             fontFamily: mono,
           }}
         >
-          deployonfri.day/thinkcentre
+          deployonfri.day/homelab
         </p>
       </div>
     </div>
