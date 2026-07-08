@@ -66,7 +66,7 @@ export default function TinyRiserCardPage() {
             bgColor="#ffffff"
             fgColor="#111111"
             level="M"
-            aria-label="QR code linking to deployonfri.day/tinyriser"
+            aria-label="QR code linking to deployonfri.day/thinkcentre"
           />
           <p
             style={{
@@ -77,7 +77,7 @@ export default function TinyRiserCardPage() {
               fontFamily: 'ui-monospace, monospace',
             }}
           >
-            deployonfri.day/tinyriser
+            deployonfri.day/thinkcentre
           </p>
         </div>
 
@@ -106,15 +106,25 @@ export default function TinyRiserCardPage() {
             </p>
             <p
               style={{
-                fontSize: '8pt',
+                fontSize: '7.5pt',
                 color: '#374151',
                 lineHeight: 1.5,
-                margin: 0,
+                margin: '0 0 2.5mm 0',
                 fontFamily: 'ui-sans-serif, system-ui, sans-serif',
               }}
             >
-              Scan the QR code or visit the link for setup guides, compatible upgrades, and
-              use-case examples.
+              Scan the QR code for compatible PCIe cards, community builds, setup guides,
+              and upgrade references.
+            </p>
+            <p
+              style={{
+                fontSize: '7pt',
+                color: '#6b7280',
+                margin: 0,
+                fontFamily: 'ui-monospace, monospace',
+              }}
+            >
+              M920Q · M720Q · M920x · P340 Tiny Gen 2 · M70q Gen 3+
             </p>
           </div>
 
@@ -146,7 +156,7 @@ export default function TinyRiserCardPage() {
               fontFamily: 'ui-monospace, monospace',
             }}
           >
-            TinyRiser by Norbert
+            TinyRiser M920Q · Tiny6 — by Norbert
           </p>
         </div>
       </div>
