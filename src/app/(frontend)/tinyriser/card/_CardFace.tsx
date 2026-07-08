@@ -90,8 +90,8 @@ export function CardFace() {
               fontFamily: mono,
             }}
           >
-            scan the QR for PCIe compat, community builds, setup notes,
-            and upgrade refs for your ThinkCentre Tiny.
+            scan the QR for PCIe compatibility, community builds, setup
+            notes, and upgrade refs for your ThinkCentre Tiny.
           </p>
         </div>
 
