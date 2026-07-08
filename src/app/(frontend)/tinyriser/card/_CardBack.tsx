@@ -61,7 +61,7 @@ export function CardBack() {
               letterSpacing: '-0.02em',
             }}
           >
-            {'// what did you unlock?'}
+            {'// what did you build?'}
           </p>
 
           {/* Homelab URL under headline */}
