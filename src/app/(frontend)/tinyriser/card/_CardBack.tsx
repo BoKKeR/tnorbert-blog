@@ -82,7 +82,7 @@ export function CardBack() {
                 ['storage', 'Rook-Ceph via TinyRiser'],
                 ['gitops', 'Flux + Ansible'],
                 ['obs', 'Prometheus · Grafana · Loki'],
-                ['hosts', 'keeb.build'],
+                ['hosts', 'keeb.build · deployonfri.day'],
               ].map(([label, value]) => (
                 <tr key={label}>
                   <td
