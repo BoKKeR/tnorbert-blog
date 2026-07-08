@@ -3,6 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { CardFace } from './_CardFace'
+import { CardBack } from './_CardBack'
 
 export default function TinyRiserCardPage() {
   return (
@@ -12,38 +13,44 @@ export default function TinyRiserCardPage() {
           html, body { margin: 0; padding: 0; background: white; }
           .screen-only { display: none !important; }
           .card { width: 148mm; height: 74mm; margin: 0; box-shadow: none !important; border: none; }
-          @page { size: 148mm 74mm; margin: 0; }
+          .fold-card { display: flex; width: 296mm; }
+          @page { size: 296mm 74mm; margin: 0; }
         }
       `}</style>
 
-      {/* Screen-only: label + controls */}
-      <div className="screen-only flex flex-col items-center gap-6 py-10 px-4">
+      <div className="screen-only flex flex-col items-center gap-4 py-10 px-4">
         <div className="flex items-center gap-4 flex-wrap justify-center">
           <p className="text-sm text-muted-foreground font-mono">
-            Shipment insert — 148 × 74 mm
+            Fold card · print → fold right half behind left
           </p>
           <button
             onClick={() => window.print()}
             className="text-sm font-mono px-4 py-2 border border-border rounded-sm bg-background hover:bg-muted transition-colors"
           >
-            Print single →
+            Print →
           </button>
-          <Link
-            href="/tinyriser/card/back"
-            className="text-sm font-mono px-4 py-2 border border-border rounded-sm bg-background hover:bg-muted transition-colors"
-          >
-            Back side →
-          </Link>
           <Link
             href="/tinyriser/card/sheet"
             className="text-sm font-mono px-4 py-2 border border-border rounded-sm bg-background hover:bg-muted transition-colors"
           >
-            Print A4 sheet (4 cards) →
+            Print A4 sheet (2 cards) →
           </Link>
         </div>
+        <p className="text-xs text-muted-foreground font-mono tracking-widest">
+          ← front &nbsp;·&nbsp; fold here &nbsp;·&nbsp; back →
+        </p>
       </div>
 
-      <CardFace />
+      {/* Back is mirrored so it reads correctly after folding */}
+      <div
+        className="fold-card"
+        style={{ display: 'flex', width: '296mm', margin: '0 auto' }}
+      >
+        <CardFace />
+        <div style={{ transform: 'scaleX(-1)' }}>
+          <CardBack />
+        </div>
+      </div>
     </>
   )
 }

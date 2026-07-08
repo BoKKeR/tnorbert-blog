@@ -3,8 +3,9 @@
 import React from 'react'
 import Link from 'next/link'
 import { CardFace } from '../_CardFace'
+import { CardBack } from '../_CardBack'
 
-const CARDS_PER_SHEET = 4
+const CARDS_PER_SHEET = 2
 
 export default function TinyRiserCardSheetPage() {
   return (
@@ -14,16 +15,16 @@ export default function TinyRiserCardSheetPage() {
           html, body { margin: 0; padding: 0; background: white; }
           .screen-only { display: none !important; }
           .card { width: 148mm; height: 74mm; margin: 0; box-shadow: none !important; border: none; }
-          .card-sheet { width: 210mm; display: flex; flex-direction: column; align-items: center; }
-          @page { size: 210mm 297mm; margin: 0; }
+          .fold-card { display: flex; width: 296mm; }
+          .card-sheet { display: flex; flex-direction: column; width: 296mm; }
+          @page { size: 297mm 210mm; margin: 0; }
         }
       `}</style>
 
-      {/* Screen-only: label + controls */}
-      <div className="screen-only flex flex-col items-center gap-6 py-10 px-4">
+      <div className="screen-only flex flex-col items-center gap-4 py-10 px-4">
         <div className="flex items-center gap-4 flex-wrap justify-center">
           <p className="text-sm text-muted-foreground font-mono">
-            A4 sheet — {CARDS_PER_SHEET} cards · 210 × 297 mm
+            A4 landscape — {CARDS_PER_SHEET} fold cards · print → fold each right half behind left
           </p>
           <button
             onClick={() => window.print()}
@@ -40,13 +41,17 @@ export default function TinyRiserCardSheetPage() {
         </div>
       </div>
 
-      {/* 4 cards — stacked vertically, centred on the A4 sheet */}
       <div
         className="card-sheet"
-        style={{ width: '148mm', margin: '0 auto', display: 'flex', flexDirection: 'column' }}
+        style={{ display: 'flex', flexDirection: 'column', width: '296mm', margin: '0 auto' }}
       >
         {Array.from({ length: CARDS_PER_SHEET }).map((_, i) => (
-          <CardFace key={i} />
+          <div key={i} className="fold-card" style={{ display: 'flex', width: '296mm' }}>
+            <CardFace />
+            <div style={{ transform: 'scaleX(-1)' }}>
+              <CardBack />
+            </div>
+          </div>
         ))}
       </div>
     </>
