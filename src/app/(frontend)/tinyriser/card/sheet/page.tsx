@@ -7,9 +7,9 @@ import { CardBack } from '../_CardBack'
 
 type Side = 'fronts' | 'backs'
 
-// 2 cols × 4 rows = 8 cards per A4 portrait (105mm × 74mm each)
+// 2 cols × 5 rows = 10 cards per A4 portrait (105mm × 59mm each)
 const COLS = 2
-const ROWS = 4
+const ROWS = 5
 const TOTAL = COLS * ROWS
 
 export default function TinyRiserCardSheetPage() {
@@ -59,11 +59,11 @@ export default function TinyRiserCardSheetPage() {
         @media print {
           html, body { margin: 0; padding: 0; background: white; }
           .screen-only { display: none !important; }
-          .card { width: 105mm; height: 74mm; box-shadow: none !important; }
+          .card { width: 105mm; height: 59mm; box-shadow: none !important; }
           .card-grid {
             display: grid;
             grid-template-columns: repeat(${COLS}, 105mm);
-            grid-template-rows: repeat(${ROWS}, 74mm);
+            grid-template-rows: repeat(${ROWS}, 59mm);
             width: 210mm;
           }
           .card-cell {
@@ -125,7 +125,7 @@ export default function TinyRiserCardSheetPage() {
 
           <div className="border border-border rounded-sm p-4 flex items-start gap-4">
             <span className="font-mono text-xs text-muted-foreground w-12 shrink-0 pt-0.5">step 4</span>
-            <p className="text-sm font-mono">Cut along the dashed lines — 8 cards, each 105 × 74 mm.</p>
+            <p className="text-sm font-mono">Cut along the dashed lines — 10 cards, each 105 × 59 mm.</p>
           </div>
         </div>
 

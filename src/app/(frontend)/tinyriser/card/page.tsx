@@ -14,8 +14,8 @@ export default function TinyRiserCardPage() {
         @media print {
           html, body { margin: 0; padding: 0; background: white; }
           .screen-only { display: none !important; }
-          .card { width: 105mm; height: 74mm; margin: 0; box-shadow: none !important; }
-          @page { size: 105mm 74mm; margin: 0; }
+          .card { width: 105mm; height: 59mm; margin: 0; box-shadow: none !important; }
+          @page { size: 105mm 59mm; margin: 0; }
         }
       `}</style>
 
@@ -45,10 +45,10 @@ export default function TinyRiserCardPage() {
             href="/tinyriser/card/sheet"
             className="text-sm font-mono px-4 py-2 border border-border rounded-sm bg-background hover:bg-muted transition-colors"
           >
-            Print A4 sheet (8 cards) →
+            Print A4 sheet (10 cards) →
           </Link>
         </div>
-        <p className="text-xs text-muted-foreground font-mono">105 × 74 mm</p>
+        <p className="text-xs text-muted-foreground font-mono">105 × 59 mm</p>
       </div>
 
       {side === 'front' ? <CardFace /> : <CardBack />}
