@@ -45,29 +45,39 @@ export function CardBack() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: '8mm 8mm 6mm 8mm',
+          padding: '6mm 6mm 5mm 6mm',
           borderLeft: '1px solid #e5e7eb',
         }}
       >
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2mm' }}>
+          {/* Headline */}
           <p
             style={{
               fontSize: '10pt',
               fontWeight: 700,
               color: '#111111',
-              margin: '0 0 3.5mm 0',
+              margin: 0,
               fontFamily: mono,
               letterSpacing: '-0.02em',
             }}
           >
             {'// what did you unlock?'}
           </p>
+
+          {/* Homelab URL under headline */}
+          <p style={{ fontSize: '6.5pt', color: '#9ca3af', margin: 0, fontFamily: mono }}>
+            deployonfri.day/homelab
+          </p>
+
+          {/* Specs box */}
           <table
             style={{
               borderCollapse: 'collapse',
               width: '100%',
               fontFamily: mono,
-              fontSize: '6.5pt',
+              fontSize: '6pt',
+              border: '1px solid #e5e7eb',
+              padding: '2mm',
             }}
           >
             <tbody>
@@ -86,15 +96,16 @@ export function CardBack() {
                   <td
                     style={{
                       color: '#9ca3af',
-                      paddingRight: '3mm',
-                      paddingBottom: '1.5mm',
+                      paddingRight: '2mm',
+                      paddingBottom: '1mm',
+                      paddingLeft: '2mm',
                       verticalAlign: 'top',
                       whiteSpace: 'nowrap',
                     }}
                   >
                     {label}
                   </td>
-                  <td style={{ color: '#374151', paddingBottom: '1.5mm', lineHeight: 1.4 }}>
+                  <td style={{ color: '#374151', paddingBottom: '1mm', paddingRight: '2mm', lineHeight: 1.3 }}>
                     {value}
                   </td>
                 </tr>
@@ -103,14 +114,10 @@ export function CardBack() {
           </table>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1mm' }}>
-          <p style={{ fontSize: '6.5pt', color: '#9ca3af', margin: 0, fontFamily: mono }}>
-            deployonfri.day/homelab
-          </p>
-          <p style={{ fontSize: '6.5pt', color: '#374151', margin: 0, fontFamily: mono }}>
-            share yours → @norbert@social.deployonfri.day
-          </p>
-        </div>
+        {/* Mastodon CTA */}
+        <p style={{ fontSize: '6.5pt', color: '#374151', margin: 0, fontFamily: mono }}>
+          share yours → @norbert@social.deployonfri.day
+        </p>
       </div>
     </div>
   )
