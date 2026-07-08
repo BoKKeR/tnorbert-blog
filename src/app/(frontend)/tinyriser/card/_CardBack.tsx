@@ -61,7 +61,9 @@ export function CardBack() {
               letterSpacing: '-0.02em',
             }}
           >
-            {'// 6-node k8s'}
+            {'// I show you mine,'}
+            <br />
+            {'// you show me yours.'}
           </p>
           <table
             style={{
