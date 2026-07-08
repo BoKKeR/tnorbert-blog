@@ -4,7 +4,7 @@ import React from 'react'
 
 const mono = 'ui-monospace, "Cascadia Code", "Fira Code", monospace'
 
-const RACK_IMG = '/images/rack_combined_nobg.png'
+const RACK_IMG = '/images/rack_lineart.png'
 
 export function CardBack() {
   return (

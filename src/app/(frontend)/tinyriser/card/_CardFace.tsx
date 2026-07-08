@@ -79,7 +79,7 @@ export function CardFace() {
               letterSpacing: '-0.02em',
             }}
           >
-            {'> order_confirmed'}
+            {'> order_fulfilled'}
           </p>
           <p
             style={{
