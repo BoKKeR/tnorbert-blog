@@ -103,8 +103,7 @@ export function CardFace() {
               fontFamily: 'ui-sans-serif, system-ui, sans-serif',
             }}
           >
-            Design by WifiCable — manufactured and assembled by Norbert in Sweden,
-            the country that brought you Spotify.
+            Design by WifiCable — manufactured and assembled by Norbert in Sweden.
             Questions? <span style={{ color: '#111111' }}>deployonfri.day</span>
           </p>
         </div>
