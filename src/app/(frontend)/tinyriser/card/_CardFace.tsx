@@ -11,34 +11,32 @@ export function CardFace() {
     <div
       className="card"
       style={{
-        width: '148mm',
+        width: '105mm',
         height: '74mm',
         background: 'white',
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'stretch',
-        margin: '0 auto',
-        boxShadow: '0 2px 16px rgba(0,0,0,0.10)',
-        overflow: 'hidden',
+        boxSizing: 'border-box',
       }}
     >
-      {/* Left column: QR code */}
+      {/* Left: QR code */}
       <div
         style={{
-          width: '74mm',
+          width: '46mm',
+          flexShrink: 0,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           borderRight: '1.5pt solid #374151',
-          padding: '8mm',
-          gap: '3mm',
-          flexShrink: 0,
+          padding: '5mm',
+          gap: '2mm',
         }}
       >
         <QRCodeSVG
           value={TINYRISER_URL}
-          size={140}
+          size={106}
           bgColor="#ffffff"
           fgColor="#111111"
           level="M"
@@ -46,7 +44,7 @@ export function CardFace() {
         />
         <p
           style={{
-            fontSize: '7pt',
+            fontSize: '6pt',
             color: '#6b7280',
             textAlign: 'center',
             margin: 0,
@@ -57,24 +55,23 @@ export function CardFace() {
         </p>
       </div>
 
-      {/* Right column: text */}
+      {/* Right: text */}
       <div
         style={{
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: '8mm 8mm 6mm 8mm',
+          padding: '6mm 5mm 5mm 5mm',
         }}
       >
-        {/* Heading */}
         <div>
           <p
             style={{
-              fontSize: '13pt',
+              fontSize: '11pt',
               fontWeight: 700,
               color: '#111111',
-              margin: '0 0 3mm 0',
+              margin: '0 0 2.5mm 0',
               fontFamily: mono,
               letterSpacing: '-0.02em',
             }}
@@ -83,7 +80,7 @@ export function CardFace() {
           </p>
           <p
             style={{
-              fontSize: '7.5pt',
+              fontSize: '7pt',
               color: '#374151',
               lineHeight: 1.55,
               margin: 0,
@@ -95,23 +92,21 @@ export function CardFace() {
           </p>
         </div>
 
-        {/* Note */}
-        <div style={{ borderTop: '1.5pt solid #374151', paddingTop: '4mm' }}>
+        <div style={{ borderTop: '1.5pt solid #374151', paddingTop: '3mm' }}>
           <p
             style={{
-              fontSize: '7.5pt',
+              fontSize: '7pt',
               color: '#6b7280',
-              lineHeight: 1.55,
+              lineHeight: 1.5,
               margin: 0,
               fontFamily: mono,
             }}
           >
-            {'// '}design by WifiCable — made & assembled by Norbert in Sweden.
-            {' '}questions?{' '}
+            Design by WifiCable — manufactured and assembled by Norbert in Sweden.
+            Questions?{' '}
             <span style={{ color: '#111111', fontWeight: 700 }}>deployonfri.day</span>
           </p>
         </div>
-
       </div>
     </div>
   )
