@@ -9,8 +9,12 @@ const MATOMO_SITE_ID = process.env.NEXT_PUBLIC_MATOMO_SITE_ID || 'not-set'
 const MatomoComponent = () => {
   const [initialised, setInitialised] = useState(false)
   useEffect(() => {
-    if (MATOMO_URL && MATOMO_SITE_ID && !initialised) {
-      init({ url: MATOMO_URL, siteId: MATOMO_SITE_ID })
+    try {
+      if (MATOMO_URL && MATOMO_SITE_ID && !initialised) {
+        init({ url: MATOMO_URL, siteId: MATOMO_SITE_ID })
+      }
+    } catch {
+      // blocked by ad blocker — ignore silently
     }
     return () => {
       setInitialised(true)
@@ -23,10 +27,13 @@ const MatomoComponent = () => {
   const searchParamsString = searchParams.toString()
   useEffect(() => {
     if (!pathname) return
-    // may be necessary to decodeURIComponent searchParamsString ?
-    const url = pathname + (searchParamsString ? '?' + searchParamsString : '')
-    push(['setCustomUrl', url])
-    push(['trackPageView'])
+    try {
+      const url = pathname + (searchParamsString ? '?' + searchParamsString : '')
+      push(['setCustomUrl', url])
+      push(['trackPageView'])
+    } catch {
+      // blocked by ad blocker — ignore silently
+    }
   }, [pathname, searchParamsString])
   return null
 }
