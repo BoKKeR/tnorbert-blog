@@ -46,7 +46,7 @@ export function CardBack() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: '6mm 6mm 5mm 6mm',
-          borderLeft: '1px solid #e5e7eb',
+          borderLeft: '1.5pt solid #374151',
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2mm' }}>
@@ -76,7 +76,7 @@ export function CardBack() {
               width: '100%',
               fontFamily: mono,
               fontSize: '6pt',
-              border: '1px solid #e5e7eb',
+              border: '1.5pt solid #374151',
               padding: '2mm',
             }}
           >

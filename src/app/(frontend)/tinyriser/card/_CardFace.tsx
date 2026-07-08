@@ -30,7 +30,7 @@ export function CardFace() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          borderRight: '1px solid #e5e7eb',
+          borderRight: '1.5pt solid #374151',
           padding: '8mm',
           gap: '3mm',
           flexShrink: 0,
@@ -96,7 +96,7 @@ export function CardFace() {
         </div>
 
         {/* Note */}
-        <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '4mm' }}>
+        <div style={{ borderTop: '1.5pt solid #374151', paddingTop: '4mm' }}>
           <p
             style={{
               fontSize: '7.5pt',
