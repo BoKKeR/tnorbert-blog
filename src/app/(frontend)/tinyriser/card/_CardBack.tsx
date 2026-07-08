@@ -4,8 +4,7 @@ import React from 'react'
 
 const mono = 'ui-monospace, "Cascadia Code", "Fira Code", monospace'
 
-const RACK_FRONT = '/images/rack_nobg.png'
-const RACK_BACK  = '/images/rack_back_nobg.png'
+const RACK_IMG = '/images/rack_combined_nobg.png'
 
 export function CardBack() {
   return (
@@ -23,23 +22,20 @@ export function CardBack() {
         overflow: 'hidden',
       }}
     >
-      {/* Left: front + back rack photos side by side */}
-      <div style={{ width: '74mm', height: '74mm', flexShrink: 0, overflow: 'hidden', display: 'flex' }}>
-        {[RACK_FRONT, RACK_BACK].map((src, i) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            key={i}
-            src={src}
-            alt={i === 0 ? 'Rack front' : 'Rack back'}
-            style={{
-              width: '50%',
-              height: '100%',
-              objectFit: 'contain',
-              objectPosition: 'center',
-              display: 'block',
-            }}
-          />
-        ))}
+      {/* Left: combined rack photo (front + back in one image) */}
+      <div style={{ width: '74mm', height: '74mm', flexShrink: 0, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={RACK_IMG}
+          alt="Rack front and back"
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'contain',
+            objectPosition: 'center',
+            display: 'block',
+          }}
+        />
       </div>
 
       {/* Right: homelab summary */}
