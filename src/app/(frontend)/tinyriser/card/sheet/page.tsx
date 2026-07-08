@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { CardFace } from '../_CardFace'
 import { CardBack } from '../_CardBack'
@@ -14,6 +14,44 @@ const TOTAL = COLS * ROWS
 
 export default function TinyRiserCardSheetPage() {
   const [side, setSide] = useState<Side>('fronts')
+  const [pendingPrint, setPendingPrint] = useState(false)
+
+  // After React commits the new side to the DOM, wait for all images to load
+  // before opening the print dialog.
+  useEffect(() => {
+    if (!pendingPrint) return
+
+    const images = Array.from(document.querySelectorAll<HTMLImageElement>('img'))
+    const unloaded = images.filter(img => !img.complete)
+
+    const doPrint = () => {
+      setPendingPrint(false)
+      window.print()
+    }
+
+    if (unloaded.length === 0) {
+      doPrint()
+      return
+    }
+
+    let remaining = unloaded.length
+    const onDone = () => { if (--remaining === 0) doPrint() }
+    unloaded.forEach(img => {
+      img.addEventListener('load',  onDone, { once: true })
+      img.addEventListener('error', onDone, { once: true })
+    })
+    return () => {
+      unloaded.forEach(img => {
+        img.removeEventListener('load',  onDone)
+        img.removeEventListener('error', onDone)
+      })
+    }
+  }, [pendingPrint, side])
+
+  const handlePrint = (newSide: Side) => {
+    setSide(newSide)
+    setPendingPrint(true)
+  }
 
   return (
     <>
@@ -39,6 +77,10 @@ export default function TinyRiserCardSheetPage() {
         }
       `}</style>
 
+      {/* Preload the back image so it's cached before the user hits "Print backs" */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/images/rack_lineart.png" alt="" aria-hidden="true" style={{ display: 'none' }} />
+
       <div className="screen-only max-w-xl mx-auto px-4 py-10 flex flex-col gap-8">
         <Link href="/tinyriser/card" className="text-sm font-mono text-muted-foreground hover:text-foreground transition-colors">
           ← Single card
@@ -50,10 +92,11 @@ export default function TinyRiserCardSheetPage() {
             <div className="flex flex-col gap-2 flex-1">
               <p className="text-sm font-mono">Load A4, print the fronts.</p>
               <button
-                onClick={() => { setSide('fronts'); requestAnimationFrame(() => requestAnimationFrame(() => window.print())) }}
-                className="self-start text-sm font-mono px-4 py-2 border border-border rounded-sm bg-background hover:bg-muted transition-colors"
+                onClick={() => handlePrint('fronts')}
+                disabled={pendingPrint}
+                className="self-start text-sm font-mono px-4 py-2 border border-border rounded-sm bg-background hover:bg-muted transition-colors disabled:opacity-50"
               >
-                Print fronts →
+                {pendingPrint && side === 'fronts' ? 'Loading…' : 'Print fronts →'}
               </button>
             </div>
           </div>
@@ -71,10 +114,11 @@ export default function TinyRiserCardSheetPage() {
             <div className="flex flex-col gap-2 flex-1">
               <p className="text-sm font-mono">Print the backs on the same sheet.</p>
               <button
-                onClick={() => { setSide('backs'); requestAnimationFrame(() => requestAnimationFrame(() => window.print())) }}
-                className="self-start text-sm font-mono px-4 py-2 border border-border rounded-sm bg-background hover:bg-muted transition-colors"
+                onClick={() => handlePrint('backs')}
+                disabled={pendingPrint}
+                className="self-start text-sm font-mono px-4 py-2 border border-border rounded-sm bg-background hover:bg-muted transition-colors disabled:opacity-50"
               >
-                Print backs →
+                {pendingPrint && side === 'backs' ? 'Loading…' : 'Print backs →'}
               </button>
             </div>
           </div>
