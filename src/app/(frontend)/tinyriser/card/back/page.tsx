@@ -2,9 +2,9 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { CardFace } from './_CardFace'
+import { CardBack } from '../_CardBack'
 
-export default function TinyRiserCardPage() {
+export default function TinyRiserCardBackPage() {
   return (
     <>
       <style>{`
@@ -16,34 +16,33 @@ export default function TinyRiserCardPage() {
         }
       `}</style>
 
-      {/* Screen-only: label + controls */}
       <div className="screen-only flex flex-col items-center gap-6 py-10 px-4">
         <div className="flex items-center gap-4 flex-wrap justify-center">
           <p className="text-sm text-muted-foreground font-mono">
-            Shipment insert — 148 × 74 mm
+            Shipment insert — back side · 148 × 74 mm
           </p>
           <button
             onClick={() => window.print()}
             className="text-sm font-mono px-4 py-2 border border-border rounded-sm bg-background hover:bg-muted transition-colors"
           >
-            Print single →
+            Print →
           </button>
           <Link
-            href="/tinyriser/card/back"
+            href="/tinyriser/card"
             className="text-sm font-mono px-4 py-2 border border-border rounded-sm bg-background hover:bg-muted transition-colors"
           >
-            Back side →
+            ← Front side
           </Link>
           <Link
-            href="/tinyriser/card/sheet"
+            href="/tinyriser/card/sheet/back"
             className="text-sm font-mono px-4 py-2 border border-border rounded-sm bg-background hover:bg-muted transition-colors"
           >
-            Print A4 sheet (4 cards) →
+            Print A4 sheet (4 backs) →
           </Link>
         </div>
       </div>
 
-      <CardFace />
+      <CardBack />
     </>
   )
 }

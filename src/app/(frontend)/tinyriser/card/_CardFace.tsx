@@ -4,6 +4,8 @@ import React from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { TINYRISER_URL } from './constants'
 
+const mono = 'ui-monospace, "Cascadia Code", "Fira Code", monospace'
+
 export function CardFace() {
   return (
     <div
@@ -48,7 +50,7 @@ export function CardFace() {
             color: '#6b7280',
             textAlign: 'center',
             margin: 0,
-            fontFamily: 'ui-monospace, monospace',
+            fontFamily: mono,
           }}
         >
           deployonfri.day/thinkcentre
@@ -65,7 +67,7 @@ export function CardFace() {
           padding: '8mm 8mm 6mm 8mm',
         }}
       >
-        {/* Thank-you */}
+        {/* Heading */}
         <div>
           <p
             style={{
@@ -73,53 +75,43 @@ export function CardFace() {
               fontWeight: 700,
               color: '#111111',
               margin: '0 0 3mm 0',
-              fontFamily: 'ui-serif, Georgia, serif',
+              fontFamily: mono,
+              letterSpacing: '-0.02em',
             }}
           >
-            Thanks for your order!
+            {'> order_confirmed'}
           </p>
           <p
             style={{
               fontSize: '7.5pt',
               color: '#374151',
-              lineHeight: 1.5,
+              lineHeight: 1.55,
               margin: 0,
-              fontFamily: 'ui-sans-serif, system-ui, sans-serif',
+              fontFamily: mono,
             }}
           >
-            Scan the QR code for compatible PCIe cards, community builds, setup guides,
-            and upgrade references for your ThinkCentre Tiny.
+            scan the QR for PCIe compat, community builds, setup notes,
+            and upgrade refs for your ThinkCentre Tiny.
           </p>
         </div>
 
-        {/* Assembly + shipping note */}
+        {/* Note */}
         <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '4mm' }}>
           <p
             style={{
               fontSize: '7.5pt',
               color: '#6b7280',
-              lineHeight: 1.5,
+              lineHeight: 1.55,
               margin: 0,
-              fontFamily: 'ui-sans-serif, system-ui, sans-serif',
+              fontFamily: mono,
             }}
           >
-            Design by WifiCable — manufactured and assembled by Norbert in Sweden.
-            Questions? <span style={{ color: '#111111' }}>deployonfri.day</span>
+            {'// '}design by WifiCable — made & assembled by Norbert in Sweden.
+            {' '}questions?{' '}
+            <span style={{ color: '#111111', fontWeight: 700 }}>deployonfri.day</span>
           </p>
         </div>
 
-        {/* Brand */}
-        <p
-          style={{
-            fontSize: '6.5pt',
-            color: '#9ca3af',
-            margin: 0,
-            textAlign: 'right',
-            fontFamily: 'ui-monospace, monospace',
-          }}
-        >
-          TinyRiser by Norbert
-        </p>
       </div>
     </div>
   )
