@@ -4,7 +4,7 @@ import React from 'react'
 
 const mono = 'ui-monospace, "Cascadia Code", "Fira Code", monospace'
 
-const RACK_IMG = '/images/rack_front.jpg'
+const RACK_IMG = '/images/rack_nobg.png'
 
 export function CardBack() {
   return (
@@ -22,8 +22,8 @@ export function CardBack() {
         overflow: 'hidden',
       }}
     >
-      {/* Left: B&W rack photo */}
-      <div style={{ width: '74mm', flexShrink: 0, overflow: 'hidden' }}>
+      {/* Left: rack photo, no bg */}
+      <div style={{ width: '74mm', height: '74mm', flexShrink: 0, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={RACK_IMG}
@@ -31,9 +31,8 @@ export function CardBack() {
           style={{
             width: '100%',
             height: '100%',
-            objectFit: 'cover',
+            objectFit: 'contain',
             objectPosition: 'center',
-            filter: 'grayscale(100%) contrast(1.1)',
             display: 'block',
           }}
         />
