@@ -23,7 +23,7 @@ export const PCIE_NETWORKING = [
   {
     name: 'Intel X550',
     tag: '10G',
-    note: 'RJ45 or SFP+. Higher power draw than X520 — check chassis thermals before installing.',
+    note: 'RJ45 or SFP+. Higher power draw than X520 - check chassis thermals before installing.',
     image: `${IMG}/intel550.webp`,
   },
   {
@@ -72,11 +72,12 @@ export const PCIE_GPUS = [
     name: 'NVIDIA T1000',
     tag: 'GPU',
     note: 'Low-profile, 4× Mini DP, 50W TDP. Step up from T600 for heavier compute.',
+    image: '/images/t1000.jpg',
   },
   {
     name: 'NVIDIA RTX A2000',
     tag: 'GPU',
-    note: 'Low-profile, 70W TDP. Best compute option for the M920q — CUDA and inference tasks.',
+    note: 'Low-profile, 70W TDP. Best compute option for the M920q - CUDA and inference tasks.',
     image: `${IMG}/rtxa2000.webp`,
   },
 ] as const
@@ -94,7 +95,7 @@ export const BUILDS = [
     title: '6-bay 10G NAS',
     tag: 'nas',
     description:
-      '6-bay NAS with 10GbE networking built from an M720q — drives, NIC, and enclosure walkthrough.',
+      '6-bay NAS with 10GbE networking built from an M720q - drives, NIC, and enclosure walkthrough.',
     href: 'https://www.reddit.com/r/homelab/comments/1sdmgzm/built_a_6bay_10gbps_nas_from_a_lenovo_m720q/',
     image: `${IMG}/6-bay-10gbps-nas.webp`,
   },
@@ -102,7 +103,7 @@ export const BUILDS = [
     title: 'Kubernetes cluster',
     tag: 'k8s',
     description:
-      'Multi-node bare-metal K8s cluster using M920q nodes — hardware selection and cluster setup.',
+      'Multi-node bare-metal K8s cluster using M920q nodes - hardware selection and cluster setup.',
     href: 'https://blog.zolty.systems/posts/2026-02-07-choosing-the-hardware',
     image: `${IMG}/6bay-homelab.webp`,
   },
@@ -118,7 +119,7 @@ export const BUILDS = [
     title: 'Ceph storage mesh',
     tag: 'storage',
     description:
-      '10G Ceph storage mesh across multiple ThinkCentre nodes — distributed block storage for a homelab cluster.',
+      '10G Ceph storage mesh across multiple ThinkCentre nodes - distributed block storage for a homelab cluster.',
     href: 'https://heck.sh/posts/10g-ceph-mesh-tinyminimicro/',
   },
 ] as const
@@ -127,7 +128,7 @@ export const PRINTS = [
   {
     name: 'ThinkNAS 2/4/6-bay',
     description:
-      'NAS enclosures for M920q/M720q — fits 2, 4, or 6 drives around the machine in a compact form factor.',
+      'NAS enclosures for M920q/M720q - fits 2, 4, or 6 drives around the machine in a compact form factor.',
     href: 'https://makerworld.com/en/search?keyword=thinkcentre',
     image: `${IMG}/thinknas.webp`,
   },

@@ -15,52 +15,60 @@ export const USE_CASES = [
     title: '10G / 25G networking node',
     tag: 'networking',
     description:
-      'Slot an SFP+ NIC into the TinyRiser PCIe port. Pairs well with a managed switch for a high-throughput homelab backbone — used in my cluster for 25GbE node-to-node links.',
+      'Slot an SFP+ NIC into the TinyRiser PCIe port. Pairs well with a managed switch for a high-throughput homelab backbone - used in my cluster for 25GbE node-to-node links.',
   },
   {
     title: '2.5G edge router',
     tag: 'networking',
     description:
-      'Add a 2.5GbE PCIe NIC for multi-WAN or a segmented network. The M920Q runs cool and quiet on ~35 W — ideal as an always-on router or firewall node.',
+      'Add a 2.5GbE PCIe NIC for multi-WAN or a segmented network. The M920Q runs cool and quiet on ~35 W - ideal as an always-on router or firewall node.',
   },
   {
     title: 'GPU compute node',
     tag: 'compute',
     description:
-      'Mount a low-profile GPU or accelerator card via the PCIe x4 slot for local inference or CUDA workloads. Bandwidth is gen 3 x4 — suited for lighter workloads.',
+      'Mount a low-profile GPU or accelerator card via the PCIe x4 slot for local inference or CUDA workloads. Bandwidth is gen 3 x4 - suited for lighter workloads.',
   },
 ] as const
 
-export const ASSEMBLY_STEPS = [
+export const ASSEMBLY_STEPS: {
+  step: string
+  label: string
+  detail: string
+  image?: string
+}[] = [
   {
     step: '1',
     label: 'Stencil & paste',
     detail:
       'Apply solder paste through an SMD stencil onto the top-side pads. A 3D-printed jig holds the board steady. The stencil ensures consistent paste volume on the small SMD pads.',
+    image: '/images/smd.jpg',
   },
   {
     step: '2',
     label: 'Place SMD components',
     detail:
-      'Place capacitors, resistors, and ICs on the top side by hand using tweezers. No mandatory ICs — some resellers skip them — but I include them for reliability.',
+      'Place capacitors, resistors, and ICs on the top side by hand using tweezers. No mandatory ICs - some resellers skip them - but I include them for reliability.',
   },
   {
     step: '3',
     label: 'Reflow (hot plate)',
     detail:
-      'Reflow the top side on a USB-C hot plate. The paste melts and self-centres the components. Watch for bridges, especially around the NVMe pads — they need clearing under the microscope.',
+      'Reflow the top side on a USB-C hot plate. The paste melts and self-centres the components. Watch for bridges, especially around the NVMe pads - they need clearing under the microscope.',
+    image: '/images/hot-station.jpg',
   },
   {
     step: '4',
     label: 'Connectors & standoffs',
     detail:
       'Add top-side connectors and the standoff using a 3D-printed jig. Tape down the edge connector to keep solder off it before the drag-soldering step.',
+    image: '/images/jig.jpg',
   },
   {
     step: '5',
     label: 'Drag solder PCIe pins',
     detail:
-      'Drag solder approximately 90 PCIe edge connector pins by hand. Flux liberally, drag at a consistent angle. A soldering iron alone works fine — the hot plate is just faster for the SMD side.',
+      'Drag solder approximately 90 PCIe edge connector pins by hand. Flux liberally, drag at a consistent angle. A soldering iron alone works fine - the hot plate is just faster for the SMD side.',
   },
   {
     step: '6',
@@ -72,15 +80,16 @@ export const ASSEMBLY_STEPS = [
     step: '7',
     label: 'Clean & inspect',
     detail:
-      'Clean the board with isopropyl alcohol. Inspect all joints under a microscope — solder bridges on the NVMe pads are the most common issue and need to be cleared before the board ships.',
+      'Clean the board with isopropyl alcohol. Inspect all joints under a microscope - solder bridges on the NVMe pads are the most common issue and need to be cleared before the board ships.',
   },
   {
     step: '8',
     label: 'Tape & test',
     detail:
-      'Apply insulation tape to the back of the board. Install in an M920Q and confirm the PCIe slot is detected in the BIOS — every board is tested before it goes out.',
+      'Apply insulation tape to the back of the board. Install in an M920Q and confirm the PCIe slot is detected in the BIOS - every board is tested before it goes out.',
+    image: '/images/tinyriser-board.jpg',
   },
-] as const
+]
 
 export const UPGRADES = [
   {
@@ -91,7 +100,7 @@ export const UPGRADES = [
   {
     label: 'NVMe (boot)',
     slot: 'M.2 2280 (M key)',
-    note: 'Built-in M.2 slot — PCIe 3.0 x4. No TinyRiser required for this one.',
+    note: 'Built-in M.2 slot - PCIe 3.0 x4. No TinyRiser required for this one.',
   },
   {
     label: 'NVMe (expansion)',

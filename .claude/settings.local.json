@@ -6,7 +6,17 @@
       "Bash(pnpm build *)",
       "Bash(git commit *)",
       "Bash(pnpm tsc *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(git push *)",
+      "Bash(/Users/bokker/.claude/plugins/cache/claude-plugins-official/superpowers/6.1.1/skills/subagent-driven-development/scripts/review-package 20454e35f7c0099991d743636097b0c1510eca8f *)",
+      "Bash(/Users/bokker/.claude/plugins/cache/claude-plugins-official/superpowers/6.1.1/skills/subagent-driven-development/scripts/task-brief *)",
+      "Bash(npx vitest *)",
+      "Bash(/Users/bokker/.claude/plugins/cache/claude-plugins-official/superpowers/6.1.1/skills/subagent-driven-development/scripts/review-package aa6e6924a7109b608888b9a9bcbcbc10a792f92f *)",
+      "Bash(git -C /Users/bokker/git_personal/tnorbert-blog stash)",
+      "Bash(npx tsc *)",
+      "Bash(git -C /Users/bokker/git_personal/tnorbert-blog stash pop)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }

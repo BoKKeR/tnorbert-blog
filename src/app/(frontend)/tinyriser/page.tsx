@@ -6,9 +6,9 @@ import { ClickableImage } from '@/components/ClickableImage'
 import { USE_CASES, ASSEMBLY_STEPS, UPGRADES } from './data'
 
 export const metadata: Metadata = {
-  title: 'TinyRiser — deployonfri.day',
+  title: 'TinyRiser - deployonfri.day',
   description:
-    'PCIe expansion board for the Lenovo ThinkCentre M920Q. Adds a PCIe x4 slot to an otherwise sealed chassis — enabling NVMe drives, SFP+ NICs, and more.',
+    'PCIe expansion board for the Lenovo ThinkCentre M920Q. Adds a PCIe x4 slot to an otherwise 1L chassis - enabling NVMe drives, SFP+ NICs, and more.',
 }
 
 const TAG_STYLES: Record<string, string> = {
@@ -39,11 +39,11 @@ export default function TinyRiserPage() {
             TinyRiser
           </h1>
           <p className="text-base text-foreground/80 leading-relaxed mb-6">
-            A PCIe expansion board for the Lenovo ThinkCentre M920Q, M720Q, and M920x. The M920Q
-            is a capable mini-PC — but its sealed chassis has no PCIe slot. TinyRiser adds one: a
-            PCIe x4 connection routed from the M920Q&apos;s proprietary riser interface, giving you
-            NVMe drives, SFP+ NICs, GPU cards, and more in a machine that would otherwise top out
-            at its built-in M.2 slot.
+            A PCIe expansion board for the Lenovo ThinkCentre M920Q, M720Q, and M920x. The M920Q is
+            a capable mini-PC - but its sealed chassis has no PCIe slot. TinyRiser adds one: a PCIe
+            x4 connection routed from the M920Q&apos;s proprietary riser interface, giving you NVMe
+            drives, SFP+ NICs, GPU cards, and more in a machine that would otherwise top out at its
+            built-in M.2 slot.
           </p>
           <div className="relative w-full h-56 sm:h-72 rounded-sm overflow-hidden border border-border bg-muted">
             <ClickableImage
@@ -70,7 +70,7 @@ export default function TinyRiserPage() {
               {
                 label: 'PCIe x4 slot',
                 value:
-                  "Full PCIe 3.0 x4 connection — the same bus that drives the M920Q's NVMe slot, now exposed for any compatible card.",
+                  "Full PCIe 3.0 x4 connection - the same bus that drives the M920Q's NVMe slot, now exposed for any compatible card.",
               },
               {
                 label: 'NVMe support',
@@ -90,7 +90,7 @@ export default function TinyRiserPage() {
               {
                 label: 'GPU / accelerator',
                 value:
-                  'Low-profile cards fit the PCIe x4 slot. Gen 3 x4 bandwidth — suited for lighter inference workloads or CUDA experiments.',
+                  'Low-profile cards fit the PCIe x4 slot. Gen 3 x4 bandwidth - suited for lighter inference workloads or CUDA experiments.',
               },
               {
                 label: 'Power LED',
@@ -150,7 +150,7 @@ export default function TinyRiserPage() {
             How It&apos;s Made
           </h2>
           <p className="text-sm text-foreground/80 leading-relaxed mb-8">
-            Each board is hand-assembled. I do the full process myself — stencil, reflow, drag
+            Each board is hand-assembled. I do the full process myself - stencil, reflow, drag
             soldering, inspection. Here&apos;s what that looks like.
           </p>
           <ol className="flex flex-col gap-0">
@@ -177,7 +177,7 @@ export default function TinyRiserPage() {
             <p className="text-xs font-mono text-muted-foreground">
               <span className="text-foreground font-semibold">Hand-assembled & tested.</span> Every
               board is inspected under a microscope before it ships. I own all the equipment from
-              other hobbies — these aren&apos;t factory-produced, and that&apos;s intentional.
+              other hobbies - these aren&apos;t factory-produced, and that&apos;s intentional.
             </p>
           </div>
         </section>
@@ -191,7 +191,7 @@ export default function TinyRiserPage() {
             Other M920Q Upgrades
           </h2>
           <p className="text-sm text-foreground/80 leading-relaxed mb-6">
-            TinyRiser opens the PCIe slot — but there are other worthwhile upgrades for the M920Q
+            TinyRiser opens the PCIe slot - but there are other worthwhile upgrades for the M920Q
             that don&apos;t require it.
           </p>
           <dl className="flex flex-col gap-3">
@@ -261,7 +261,7 @@ export default function TinyRiserPage() {
             setup guides and upgrade references.
           </p>
           <a
-            href="SHOP_URL_PLACEHOLDER"
+            href="https://www.tindie.com/stores/bokker/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-mono text-primary hover:underline"
