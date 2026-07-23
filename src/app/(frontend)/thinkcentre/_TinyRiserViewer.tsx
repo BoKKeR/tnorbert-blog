@@ -1,20 +1,20 @@
 'use client'
 
 import React, { useState } from 'react'
-import Image from 'next/image'
+import { ClickableImage } from '@/components/ClickableImage'
 
 const VARIANTS = [
   {
     id: 'tiny5',
     label: 'Tiny5',
     sub: 'M920q · M720q · M920x',
-    image: '/images/tinyriser-board.jpg',
+    image: '/images/tinyriser-tiny5.jpg',
   },
   {
     id: 'tiny6',
     label: 'Tiny6',
     sub: 'M90q Gen 1 & 2 · P340 · P350 Tiny',
-    image: '/images/tinyriser-board.jpg',
+    image: '/images/tinyriser-tiny6.jpg',
   },
 ] as const
 
@@ -45,7 +45,7 @@ export function TinyRiserViewer() {
       {/* Image */}
       <div className="p-2">
         <div className="relative aspect-square rounded-sm overflow-hidden bg-background">
-          <Image fill src={variant.image} alt={`TinyRiser ${variant.label}`} className="object-cover" sizes="400px" />
+          <ClickableImage fill src={variant.image} alt={`TinyRiser ${variant.label}`} className="object-cover" sizes="400px" />
         </div>
       </div>
     </div>
