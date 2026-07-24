@@ -68,8 +68,8 @@ const projects = [
 ]
 
 const socialLinks = [
-  { label: 'GitHub', href: 'https://github.com', icon: '⌥' },
-  { label: 'Mastodon', href: 'https://mastodon.social', icon: '🐘' },
+  { label: 'GitHub', href: 'https://github.com/BoKKeR', icon: '⌥' },
+  { label: 'Mastodon', href: 'https://social.deployonfri.day/@norbert', icon: '🐘' },
   { label: 'RSS Feed', href: '/posts-sitemap.xml', icon: '⊕' },
   { label: 'Email', href: 'mailto:hello@deployonfri.day', icon: '✉' },
 ]
