@@ -3,9 +3,9 @@ import Link from 'next/link'
 import React from 'react'
 import { LightboxProvider } from '@/components/Lightbox'
 import { ClickableImage } from '@/components/ClickableImage'
-import { PCIE_NETWORKING, PCIE_STORAGE, PCIE_GPUS, BUILDS, PRINTS } from './data'
+import { PCIE_NETWORKING, PCIE_STORAGE, PCIE_GPUS, BUILDS } from './data'
 import { TinyRiserViewer } from './_TinyRiserViewer'
-import { USE_CASES, ASSEMBLY_STEPS } from '../tinyriser/data'
+import { ASSEMBLY_STEPS } from '../tinyriser/data'
 
 export const metadata: Metadata = {
   title: 'ThinkCentre Tiny - deployonfri.day',
@@ -20,11 +20,6 @@ const BUILD_TAG_STYLES: Record<string, string> = {
   storage: 'bg-primary/10 text-primary border-primary/20',
 }
 
-const USE_CASE_TAG_STYLES: Record<string, string> = {
-  storage: 'bg-primary/10 text-primary border-primary/20',
-  networking: 'bg-accent/10 text-accent border-accent/20',
-  compute: 'bg-warning/10 text-warning border-warning/20',
-}
 
 const TC_IMG = 'https://raw.githubusercontent.com/BoKKeR/awesome-thinkcentres/master/images'
 
@@ -89,9 +84,9 @@ export default function ThinkCentrePage() {
           <p className="text-base text-foreground/80 leading-relaxed mb-8">
             Compact Intel mini-PCs that punch above their size. The models below all share a
             proprietary riser port inside the chassis - the same port the{' '}
-            <a href="/tinyriser" className="text-primary hover:underline">
+            <Link href="/tinyriser" className="text-primary hover:underline">
               TinyRiser
-            </a>{' '}
+            </Link>{' '}
             uses to add a PCIe x4 slot and an extra NVMe M.2 slot to an otherwise 1 liter machine.
           </p>
 
@@ -105,9 +100,9 @@ export default function ThinkCentrePage() {
                   note: (
                     <>
                       The most common and cheapest to find used. I run six of these in my own{' '}
-                      <a href="/homelab" className="text-primary hover:underline">
+                      <Link href="/homelab" className="text-primary hover:underline">
                         homelab
-                      </a>
+                      </Link>
                       .
                     </>
                   ),
