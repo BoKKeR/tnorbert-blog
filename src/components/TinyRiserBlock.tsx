@@ -3,7 +3,7 @@ import { ClickableImage } from '@/components/ClickableImage'
 import { TinyRiserViewer } from '@/app/(frontend)/thinkcentre/_TinyRiserViewer'
 import { ASSEMBLY_STEPS } from '@/app/(frontend)/tinyriser/data'
 
-export function TinyRiserBlock() {
+export function TinyRiserBlock({ defaultOpenHowItsMade = false }: { defaultOpenHowItsMade?: boolean }) {
   return (
     <div className="rounded-sm border border-primary/40 bg-primary/[0.03] overflow-hidden">
       {/* Label bar */}
@@ -67,7 +67,7 @@ export function TinyRiserBlock() {
       </div>
 
       {/* Expandable: How It's Made */}
-      <details className="group border-t border-primary/20">
+      <details className="group border-t border-primary/20" open={defaultOpenHowItsMade}>
         <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden px-5 sm:px-6 py-4 flex items-center justify-between select-none hover:bg-primary/5 transition-colors">
           <span className="font-serif font-semibold text-sm text-foreground">
             How It&apos;s Made

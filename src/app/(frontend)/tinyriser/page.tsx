@@ -22,7 +22,7 @@ export default function TinyRiserPage() {
           </Link>
         </div>
 
-        <TinyRiserBlock />
+        <TinyRiserBlock defaultOpenHowItsMade />
 
         <div className="mt-8 pt-6 border-t border-border">
           <Link
