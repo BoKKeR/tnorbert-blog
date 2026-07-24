@@ -24,12 +24,18 @@ export default function TinyRiserPage() {
 
         <TinyRiserBlock defaultOpenHowItsMade />
 
-        <div className="mt-8 pt-6 border-t border-border">
+        <div className="mt-8 pt-6 border-t border-border flex flex-col gap-2">
           <Link
             href="/thinkcentre"
             className="text-sm text-muted-foreground hover:text-primary transition-colors font-mono"
           >
             PCIe card compatibility + community builds →
+          </Link>
+          <Link
+            href="/homelab"
+            className="text-sm text-muted-foreground hover:text-primary transition-colors font-mono"
+          >
+            See it running in my homelab →
           </Link>
         </div>
       </main>
