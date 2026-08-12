@@ -145,7 +145,7 @@ export function CardBack() {
             {'// next_product_build'}
           </p>
           <p style={{ fontSize: '9.5pt', fontWeight: 700, color: '#111111', margin: 0, fontFamily: mono, lineHeight: 1.15, letterSpacing: '-0.02em' }}>
-            10{'″'} 1U Rack UPS<br />with USB-C PD
+            10{'″'} 1U Rack UPS<br />with USB-C PD outputs
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8mm' }}>
             <p style={{ fontSize: '5.5pt', color: '#374151', margin: 0, fontFamily: mono }}>
@@ -159,8 +159,8 @@ export function CardBack() {
 
         <div style={{ borderTop: '1.5pt solid #374151', paddingTop: '2.5mm' }}>
           <p style={{ fontSize: '5.5pt', color: '#374151', margin: '0 0 0.8mm', fontFamily: mono, lineHeight: 1.4 }}>
-            Interested in giving feedback?{' '}
-            <span style={{ fontWeight: 700, color: '#111111' }}>Sign up for updates.</span>
+            <span style={{ fontWeight: 700, color: '#111111' }}>Sign up for updates,</span>{' '}
+            share your feedback.
           </p>
           <p style={{ fontSize: '5.5pt', color: '#6b7280', margin: 0, fontFamily: mono }}>
             deployonfri.day/ups
