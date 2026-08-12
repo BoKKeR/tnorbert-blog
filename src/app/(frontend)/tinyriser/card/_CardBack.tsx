@@ -167,7 +167,7 @@ export function CardBack() {
         <div style={{ borderTop: '1.5pt solid #374151', paddingTop: '2.5mm' }}>
           <p style={{ fontSize: '5.5pt', color: '#374151', margin: '0 0 0.8mm', fontFamily: mono, lineHeight: 1.4 }}>
             <span style={{ fontWeight: 700, color: '#111111' }}>Sign up for updates,</span>{' '}
-            share your feedback.
+            share your feedback. No spam.
           </p>
           <p style={{ fontSize: '5.5pt', color: '#6b7280', margin: 0, fontFamily: mono }}>
             deployonfri.day/ups
