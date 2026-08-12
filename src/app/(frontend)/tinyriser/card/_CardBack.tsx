@@ -5,24 +5,23 @@ import React from 'react'
 const mono = 'ui-monospace, "Cascadia Code", "Fira Code", monospace'
 
 /*
-  Cabinet oblique projection — 30° angle, 50% depth foreshortening.
-  Front face is a true rectangle.  Depth goes up-right:
-    dx_per_unit = cos(30°)*0.5 = 0.433
-    dy_per_unit = sin(30°)*0.5 = 0.250  (negative = up in screen)
+  Cabinet oblique — 30°, 50% foreshortening. Depth recedes UP-RIGHT.
+    Δx_per_depth = cos(30°)×0.5 ≈ +0.433   (rightward)
+    Δy_per_depth = sin(30°)×0.5 ≈ −0.250   (upward in screen coords)
 
-  1U 10" chassis:
-    W = 84   (10" width, to scale)
-    H = 15   (1U height, slightly exaggerated for legibility)
-    D = 26   (depth)  →  dx=11.3, dy=6.5 in screen
+  Chassis  W=84  H=19 (1U exaggerated)  D=28
+    Δx = 28×0.433 = 12.1   Δy = 28×0.250 = 7.0
 
-  Front face corners (y=0):
-    TL=(8,10)  TR=(92,10)  BR=(92,25)  BL=(8,25)
-  Top face:
-    FL=(8,10)  FR=(92,10)  BR=(103.3,16.5)  BL=(19.3,16.5)
-  Right side:
-    TF=(92,10)  TB=(103.3,16.5)  BB=(103.3,31.5)  BF=(92,25)
+  Front face (y=0):
+    TL=(8,22)  TR=(92,22)  BR=(92,41)  BL=(8,41)
 
-  ViewBox: "0 0 110 40"
+  Top face — back edge is 12.1 right and 7.0 UP:
+    FL=(8,22)  FR=(92,22)  BR=(104,15)  BL=(20,15)
+
+  Right side face:
+    TF=(92,22)  TB=(104,15)  BB=(104,34)  BF=(92,41)
+
+  ViewBox "0 10 108 36"  →  y visible 10..46, x 0..108
 */
 
 export function CardBack() {
@@ -40,92 +39,89 @@ export function CardBack() {
       }}
     >
       {/* Left: 1U 10" rack UPS line art */}
-      <div style={{ width: '44mm', height: '59mm', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRight: '1.5pt solid #374151', padding: '2mm 1mm' }}>
-        <svg viewBox="0 0 110 40" style={{ width: '100%' }} aria-hidden="true">
+      <div style={{ width: '44mm', height: '59mm', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRight: '1.5pt solid #374151', padding: '2mm 1.5mm' }}>
+        <svg viewBox="0 10 108 36" style={{ width: '100%' }} aria-hidden="true">
           <defs>
-            {/* Diagonal crosshatch for vent grille */}
-            <pattern id="grille" x="0" y="0" width="3.5" height="3.5" patternUnits="userSpaceOnUse">
-              <line x1="0" y1="3.5" x2="3.5" y2="0" stroke="#555" strokeWidth="0.4"/>
-              <line x1="0" y1="0"   x2="3.5" y2="3.5" stroke="#555" strokeWidth="0.4"/>
+            <pattern id="grille" x="0" y="0" width="3.2" height="3.2" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="3.2" x2="3.2" y2="0"   stroke="#666" strokeWidth="0.45"/>
+              <line x1="0" y1="0"   x2="3.2" y2="3.2" stroke="#666" strokeWidth="0.45"/>
             </pattern>
-            {/* Clip for the grille area */}
-            <clipPath id="grilleClip">
-              <rect x="16" y="11" width="52" height="13"/>
+            <clipPath id="gc">
+              <rect x="16" y="23" width="50" height="17"/>
             </clipPath>
           </defs>
 
-          {/* ── TOP FACE ── */}
+          {/* ── RIGHT SIDE FACE (draw first — behind top) ── */}
           <polygon
-            points="8,10 92,10 103.3,16.5 19.3,16.5"
-            fill="#e8e8e8" stroke="#111" strokeWidth="1.3" strokeLinejoin="round"/>
+            points="92,22 104,15 104,34 92,41"
+            fill="#d0d0d0" stroke="#111" strokeWidth="1.3" strokeLinejoin="round"/>
+          {/* right side shading lines */}
+          <line x1="92" y1="26" x2="104" y2="19" stroke="#bbb" strokeWidth="0.35"/>
+          <line x1="92" y1="30" x2="104" y2="23" stroke="#bbb" strokeWidth="0.35"/>
+          <line x1="92" y1="34" x2="104" y2="27" stroke="#bbb" strokeWidth="0.35"/>
+          <line x1="92" y1="38" x2="104" y2="31" stroke="#bbb" strokeWidth="0.35"/>
 
-          {/* Top face depth lines (vent slots) */}
-          <line x1="19.3" y1="16.5" x2="103.3" y2="16.5" stroke="#bbb" strokeWidth="0.4"/>
-          <line x1="11" y1="11.8" x2="95" y2="11.8" stroke="#ccc" strokeWidth="0.35"/>
-          <line x1="13" y1="13.4" x2="97" y2="13.4" stroke="#ccc" strokeWidth="0.35"/>
-          <line x1="15" y1="15.0" x2="99" y2="15.0" stroke="#ccc" strokeWidth="0.35"/>
-
-          {/* ── RIGHT SIDE FACE ── */}
+          {/* ── TOP FACE (recedes up-right) ── */}
           <polygon
-            points="92,10 103.3,16.5 103.3,31.5 92,25"
-            fill="#c8c8c8" stroke="#111" strokeWidth="1.3" strokeLinejoin="round"/>
+            points="8,22 92,22 104,15 20,15"
+            fill="#ebebeb" stroke="#111" strokeWidth="1.3" strokeLinejoin="round"/>
+          {/* top face depth seam lines */}
+          <line x1="8"  y1="22" x2="20"  y2="15" stroke="#bbb" strokeWidth="0.4"/>
+          <line x1="92" y1="22" x2="104" y2="15" stroke="#bbb" strokeWidth="0.4"/>
+          {/* vent slot marks on top */}
+          <line x1="28"  y1="21.2" x2="40.2"  y2="14.2" stroke="#aaa" strokeWidth="0.5"/>
+          <line x1="33"  y1="21.2" x2="45.2"  y2="14.2" stroke="#aaa" strokeWidth="0.5"/>
+          <line x1="55"  y1="21.2" x2="67.2"  y2="14.2" stroke="#aaa" strokeWidth="0.5"/>
+          <line x1="60"  y1="21.2" x2="72.2"  y2="14.2" stroke="#aaa" strokeWidth="0.5"/>
 
-          {/* Right side subtle depth line */}
-          <line x1="92" y1="10" x2="103.3" y2="16.5" stroke="#aaa" strokeWidth="0.5"/>
-
-          {/* ── FRONT FACE (main rectangle) ── */}
-          <rect x="8" y="10" width="84" height="15" fill="white" stroke="#111" strokeWidth="1.5"/>
+          {/* ── FRONT FACE ── */}
+          <rect x="8" y="22" width="84" height="19" fill="white" stroke="#111" strokeWidth="1.5"/>
 
           {/* ── LEFT RACK EAR ── */}
-          <rect x="8" y="10" width="7" height="15" fill="#e0e0e0" stroke="#111" strokeWidth="0.9"/>
-          {/* Mounting holes */}
-          <circle cx="11.5" cy="13.5" r="1.4" fill="white" stroke="#333" strokeWidth="0.55"/>
-          <circle cx="11.5" cy="21.5" r="1.4" fill="white" stroke="#333" strokeWidth="0.55"/>
-          {/* Ear detail line */}
-          <line x1="15" y1="10" x2="15" y2="25" stroke="#888" strokeWidth="0.4"/>
+          <rect x="8" y="22" width="7" height="19" fill="#ddd" stroke="#111" strokeWidth="0.9"/>
+          <circle cx="11.5" cy="25.5" r="1.5" fill="white" stroke="#444" strokeWidth="0.55"/>
+          <circle cx="11.5" cy="37.5" r="1.5" fill="white" stroke="#444" strokeWidth="0.55"/>
+          <line x1="15" y1="22" x2="15" y2="41" stroke="#999" strokeWidth="0.5"/>
 
           {/* ── RIGHT RACK EAR ── */}
-          <rect x="85" y="10" width="7" height="15" fill="#e0e0e0" stroke="#111" strokeWidth="0.9"/>
-          <circle cx="88.5" cy="13.5" r="1.4" fill="white" stroke="#333" strokeWidth="0.55"/>
-          <circle cx="88.5" cy="21.5" r="1.4" fill="white" stroke="#333" strokeWidth="0.55"/>
-          <line x1="85" y1="10" x2="85" y2="25" stroke="#888" strokeWidth="0.4"/>
+          <rect x="85" y="22" width="7" height="19" fill="#ddd" stroke="#111" strokeWidth="0.9"/>
+          <circle cx="88.5" cy="25.5" r="1.5" fill="white" stroke="#444" strokeWidth="0.55"/>
+          <circle cx="88.5" cy="37.5" r="1.5" fill="white" stroke="#444" strokeWidth="0.55"/>
+          <line x1="85" y1="22" x2="85" y2="41" stroke="#999" strokeWidth="0.5"/>
 
-          {/* ── GRILLE AREA (between ears) ── */}
-          {/* Grille border */}
-          <rect x="16" y="11" width="52" height="13" fill="url(#grille)" stroke="#444" strokeWidth="0.6"/>
-
-          {/* Grille inner shadow lines (top and left edge) */}
-          <line x1="16" y1="11" x2="68" y2="11" stroke="#999" strokeWidth="0.3"/>
-          <line x1="16" y1="11" x2="16" y2="24" stroke="#999" strokeWidth="0.3"/>
+          {/* ── VENT GRILLE ── */}
+          <rect x="16" y="23" width="50" height="17"
+            fill="url(#grille)" stroke="#444" strokeWidth="0.65"/>
+          {/* grille inset shadow */}
+          <line x1="16" y1="23" x2="66" y2="23" stroke="#aaa" strokeWidth="0.35"/>
+          <line x1="16" y1="23" x2="16" y2="40" stroke="#aaa" strokeWidth="0.35"/>
 
           {/* ── DIVIDER ── */}
-          <line x1="68" y1="10" x2="68" y2="25" stroke="#555" strokeWidth="0.8"/>
+          <line x1="66" y1="22" x2="66" y2="41" stroke="#666" strokeWidth="0.9"/>
 
           {/* ── CONTROL / PORT PANEL ── */}
-          <rect x="68" y="10" width="17" height="15" fill="#f8f8f8" stroke="none"/>
+          <rect x="66" y="22" width="19" height="19" fill="#f6f6f6" stroke="none"/>
 
-          {/* 6 USB-C ports in 3×2 grid */}
+          {/* 6 USB-C ports in 3 rows × 2 cols */}
           {([
-            [71.5, 13.0], [78.5, 13.0],
-            [71.5, 17.5], [78.5, 17.5],
-            [71.5, 22.0], [78.5, 22.0],
+            [70, 26], [78, 26],
+            [70, 31.5], [78, 31.5],
+            [70, 37],   [78, 37],
           ] as [number, number][]).map(([cx, cy], i) => (
             <g key={i}>
-              {/* Port housing */}
-              <rect x={cx - 2} y={cy - 1.2} width="4" height="2.4" rx="0.8"
-                fill="white" stroke="#333" strokeWidth="0.55"/>
-              {/* USB-C center tongue (tiny) */}
-              <rect x={cx - 0.7} y={cy - 0.45} width="1.4" height="0.9" rx="0.2"
-                fill="#ccc" stroke="none"/>
+              <rect x={cx-2.2} y={cy-1.4} width="4.4" height="2.8" rx="1.0"
+                fill="white" stroke="#333" strokeWidth="0.6"/>
+              <rect x={cx-0.8} y={cy-0.5} width="1.6" height="1.0" rx="0.25"
+                fill="#bbb" stroke="none"/>
             </g>
           ))}
 
           {/* Status LED */}
-          <circle cx="81.5" cy="13.5" r="1.1" fill="none" stroke="#111" strokeWidth="0.5"/>
-          <circle cx="81.5" cy="13.5" r="0.55" fill="#22c55e"/>
+          <circle cx="82" cy="26" r="1.3" fill="none" stroke="#111" strokeWidth="0.55"/>
+          <circle cx="82" cy="26" r="0.65" fill="#22c55e"/>
 
-          {/* ── FRONT FACE OUTER STROKE (on top of everything) ── */}
-          <rect x="8" y="10" width="84" height="15"
+          {/* ── FRONT FACE OUTER STROKE (redraw on top) ── */}
+          <rect x="8" y="22" width="84" height="19"
             fill="none" stroke="#111" strokeWidth="1.5"/>
         </svg>
 
