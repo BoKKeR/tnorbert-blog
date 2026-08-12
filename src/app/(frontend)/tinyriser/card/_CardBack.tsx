@@ -5,13 +5,24 @@ import React from 'react'
 const mono = 'ui-monospace, "Cascadia Code", "Fira Code", monospace'
 
 /*
-  Isometric projection — translate(36, 20):
-    screen_x = x * 0.866 - y * 0.866 + 36
-    screen_y = x * 0.5  + y * 0.5  - z  + 20
+  Cabinet oblique projection — 30° angle, 50% depth foreshortening.
+  Front face is a true rectangle.  Depth goes up-right:
+    dx_per_unit = cos(30°)*0.5 = 0.433
+    dy_per_unit = sin(30°)*0.5 = 0.250  (negative = up in screen)
 
-  Chassis  W=40, D=20, H=10  (1U wide, 20″ deep)
-  3 prismatic cells  x:[2-12] [15-25] [28-38], y:[2-18], z:[0-8]
-  ViewBox 0 0 76 55
+  1U 10" chassis:
+    W = 84   (10" width, to scale)
+    H = 15   (1U height, slightly exaggerated for legibility)
+    D = 26   (depth)  →  dx=11.3, dy=6.5 in screen
+
+  Front face corners (y=0):
+    TL=(8,10)  TR=(92,10)  BR=(92,25)  BL=(8,25)
+  Top face:
+    FL=(8,10)  FR=(92,10)  BR=(103.3,16.5)  BL=(19.3,16.5)
+  Right side:
+    TF=(92,10)  TB=(103.3,16.5)  BB=(103.3,31.5)  BF=(92,25)
+
+  ViewBox: "0 0 110 40"
 */
 
 export function CardBack() {
@@ -28,94 +39,97 @@ export function CardBack() {
         boxSizing: 'border-box',
       }}
     >
-      {/* Left: isometric open-top UPS */}
-      <div style={{ width: '44mm', height: '59mm', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRight: '1.5pt solid #374151', padding: '2mm' }}>
-        <svg viewBox="0 0 76 55" style={{ width: '100%' }} aria-hidden="true">
+      {/* Left: 1U 10" rack UPS line art */}
+      <div style={{ width: '44mm', height: '59mm', flexShrink: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRight: '1.5pt solid #374151', padding: '2mm 1mm' }}>
+        <svg viewBox="0 0 110 40" style={{ width: '100%' }} aria-hidden="true">
+          <defs>
+            {/* Diagonal crosshatch for vent grille */}
+            <pattern id="grille" x="0" y="0" width="3.5" height="3.5" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="3.5" x2="3.5" y2="0" stroke="#555" strokeWidth="0.4"/>
+              <line x1="0" y1="0"   x2="3.5" y2="3.5" stroke="#555" strokeWidth="0.4"/>
+            </pattern>
+            {/* Clip for the grille area */}
+            <clipPath id="grilleClip">
+              <rect x="16" y="11" width="52" height="13"/>
+            </clipPath>
+          </defs>
 
-          {/* ── INTERIOR BACK WALL (y=20) ── */}
-          <polygon points="19,20 54,40 54,50 19,30"
-            fill="#1e293b" stroke="#0f172a" strokeWidth="0.6"/>
+          {/* ── TOP FACE ── */}
+          <polygon
+            points="8,10 92,10 103.3,16.5 19.3,16.5"
+            fill="#e8e8e8" stroke="#111" strokeWidth="1.3" strokeLinejoin="round"/>
 
-          {/* ── INTERIOR LEFT WALL (x=0) ── */}
-          <polygon points="36,10 19,20 19,30 36,20"
-            fill="#1e293b" stroke="#0f172a" strokeWidth="0.6"/>
+          {/* Top face depth lines (vent slots) */}
+          <line x1="19.3" y1="16.5" x2="103.3" y2="16.5" stroke="#bbb" strokeWidth="0.4"/>
+          <line x1="11" y1="11.8" x2="95" y2="11.8" stroke="#ccc" strokeWidth="0.35"/>
+          <line x1="13" y1="13.4" x2="97" y2="13.4" stroke="#ccc" strokeWidth="0.35"/>
+          <line x1="15" y1="15.0" x2="99" y2="15.0" stroke="#ccc" strokeWidth="0.35"/>
 
-          {/* ── INTERIOR FLOOR (z=0) ── */}
-          <polygon points="36,20 71,40 54,50 19,30"
-            fill="#0f172a" stroke="none"/>
+          {/* ── RIGHT SIDE FACE ── */}
+          <polygon
+            points="92,10 103.3,16.5 103.3,31.5 92,25"
+            fill="#c8c8c8" stroke="#111" strokeWidth="1.3" strokeLinejoin="round"/>
 
-          {/* ── PRISMATIC CELL 1 (x 2-12) ── */}
-          {/* front face y=2, z 0-8 */}
-          <polygon points="36,14 45,19 45,27 36,22"
-            fill="#2563eb" stroke="#1d4ed8" strokeWidth="0.6"/>
-          {/* top face z=8 */}
-          <polygon points="36,14 45,19 31,27 22,22"
-            fill="#dbeafe" stroke="#93c5fd" strokeWidth="0.6"/>
-          {/* terminal tabs */}
-          <rect x="29" y="13.5" width="2" height="1.2" rx="0.4" fill="#1e40af"/>
-          <rect x="38.5" y="17.5" width="2" height="1.2" rx="0.4" fill="#1e40af"/>
+          {/* Right side subtle depth line */}
+          <line x1="92" y1="10" x2="103.3" y2="16.5" stroke="#aaa" strokeWidth="0.5"/>
 
-          {/* ── PRISMATIC CELL 2 (x 15-25) ── */}
-          <polygon points="47,20.5 56,25.5 56,33.5 47,28.5"
-            fill="#2563eb" stroke="#1d4ed8" strokeWidth="0.6"/>
-          <polygon points="47,20.5 56,25.5 42,33.5 33.5,28.5"
-            fill="#dbeafe" stroke="#93c5fd" strokeWidth="0.6"/>
-          <rect x="40" y="20" width="2" height="1.2" rx="0.4" fill="#1e40af"/>
-          <rect x="49.5" y="23.5" width="2" height="1.2" rx="0.4" fill="#1e40af"/>
+          {/* ── FRONT FACE (main rectangle) ── */}
+          <rect x="8" y="10" width="84" height="15" fill="white" stroke="#111" strokeWidth="1.5"/>
 
-          {/* ── PRISMATIC CELL 3 (x 28-38) ── */}
-          <polygon points="58.5,28 67,32 67,40 58.5,35"
-            fill="#2563eb" stroke="#1d4ed8" strokeWidth="0.6"/>
-          {/* right face x=38 — only rightmost cell visible */}
-          <polygon points="67,32 53,40 53,48 67,40"
-            fill="#1d4ed8" stroke="#1e40af" strokeWidth="0.6"/>
-          <polygon points="58.5,28 67,32 53,40 45,35"
-            fill="#dbeafe" stroke="#93c5fd" strokeWidth="0.6"/>
-          <rect x="51" y="27" width="2" height="1.2" rx="0.4" fill="#1e40af"/>
-          <rect x="60.5" y="30.5" width="2" height="1.2" rx="0.4" fill="#1e40af"/>
+          {/* ── LEFT RACK EAR ── */}
+          <rect x="8" y="10" width="7" height="15" fill="#e0e0e0" stroke="#111" strokeWidth="0.9"/>
+          {/* Mounting holes */}
+          <circle cx="11.5" cy="13.5" r="1.4" fill="white" stroke="#333" strokeWidth="0.55"/>
+          <circle cx="11.5" cy="21.5" r="1.4" fill="white" stroke="#333" strokeWidth="0.55"/>
+          {/* Ear detail line */}
+          <line x1="15" y1="10" x2="15" y2="25" stroke="#888" strokeWidth="0.4"/>
 
-          {/* ── CHASSIS FRONT WALL EXTERIOR (y=0) ── */}
-          <polygon points="36,10 71,30 71,40 36,20"
-            fill="#1e293b" stroke="#0f172a" strokeWidth="1.0"/>
+          {/* ── RIGHT RACK EAR ── */}
+          <rect x="85" y="10" width="7" height="15" fill="#e0e0e0" stroke="#111" strokeWidth="0.9"/>
+          <circle cx="88.5" cy="13.5" r="1.4" fill="white" stroke="#333" strokeWidth="0.55"/>
+          <circle cx="88.5" cy="21.5" r="1.4" fill="white" stroke="#333" strokeWidth="0.55"/>
+          <line x1="85" y1="10" x2="85" y2="25" stroke="#888" strokeWidth="0.4"/>
 
-          {/* Vent slot (lower third of front panel) */}
-          <line x1="36" y1="36.5" x2="71" y2="36.5" stroke="#334155" strokeWidth="0.4"/>
-          <line x1="36" y1="37.5" x2="71" y2="37.5" stroke="#334155" strokeWidth="0.4"/>
-          <line x1="36" y1="38.5" x2="71" y2="38.5" stroke="#334155" strokeWidth="0.4"/>
+          {/* ── GRILLE AREA (between ears) ── */}
+          {/* Grille border */}
+          <rect x="16" y="11" width="52" height="13" fill="url(#grille)" stroke="#444" strokeWidth="0.6"/>
 
-          {/* 6 USB-C port cutouts on front panel (z≈5, x=4,9,14,19,24,29)
-              Each port: parallelogram matching face angle, fill white */}
+          {/* Grille inner shadow lines (top and left edge) */}
+          <line x1="16" y1="11" x2="68" y2="11" stroke="#999" strokeWidth="0.3"/>
+          <line x1="16" y1="11" x2="16" y2="24" stroke="#999" strokeWidth="0.3"/>
+
+          {/* ── DIVIDER ── */}
+          <line x1="68" y1="10" x2="68" y2="25" stroke="#555" strokeWidth="0.8"/>
+
+          {/* ── CONTROL / PORT PANEL ── */}
+          <rect x="68" y="10" width="17" height="15" fill="#f8f8f8" stroke="none"/>
+
+          {/* 6 USB-C ports in 3×2 grid */}
           {([
-            [39.5, 17],
-            [43.8, 19.5],
-            [48.1, 22],
-            [52.5, 24.5],
-            [56.8, 27],
-            [61.1, 29.5],
+            [71.5, 13.0], [78.5, 13.0],
+            [71.5, 17.5], [78.5, 17.5],
+            [71.5, 22.0], [78.5, 22.0],
           ] as [number, number][]).map(([cx, cy], i) => (
-            <polygon key={i}
-              points={`${cx-0.87},${cy-1.05} ${cx+0.87},${cy-0.05} ${cx+0.87},${cy+1.05} ${cx-0.87},${cy+0.05}`}
-              fill="#e2e8f0" stroke="#64748b" strokeWidth="0.3"/>
+            <g key={i}>
+              {/* Port housing */}
+              <rect x={cx - 2} y={cy - 1.2} width="4" height="2.4" rx="0.8"
+                fill="white" stroke="#333" strokeWidth="0.55"/>
+              {/* USB-C center tongue (tiny) */}
+              <rect x={cx - 0.7} y={cy - 0.45} width="1.4" height="0.9" rx="0.2"
+                fill="#ccc" stroke="none"/>
+            </g>
           ))}
 
           {/* Status LED */}
-          <circle cx="68.5" cy="34.5" r="1.3" fill="#22c55e"/>
+          <circle cx="81.5" cy="13.5" r="1.1" fill="none" stroke="#111" strokeWidth="0.5"/>
+          <circle cx="81.5" cy="13.5" r="0.55" fill="#22c55e"/>
 
-          {/* ── CHASSIS RIGHT WALL EXTERIOR (x=40) ── */}
-          <polygon points="71,30 54,40 54,50 71,40"
-            fill="#0f172a" stroke="#0f172a" strokeWidth="1.0"/>
-
-          {/* ── TOP RIM (open edge, bold) ── */}
-          <polyline points="36,10 71,30 54,40 19,20 36,10"
-            fill="none" stroke="#111827" strokeWidth="2.0" strokeLinejoin="round"/>
-
-          {/* Inner rim highlight */}
-          <polyline points="36,10 71,30 54,40 19,20 36,10"
-            fill="none" stroke="#475569" strokeWidth="0.6" strokeLinejoin="round"
-            strokeDasharray="2 2"/>
+          {/* ── FRONT FACE OUTER STROKE (on top of everything) ── */}
+          <rect x="8" y="10" width="84" height="15"
+            fill="none" stroke="#111" strokeWidth="1.5"/>
         </svg>
 
-        <p style={{ fontSize: '4.5pt', color: '#6b7280', margin: '1mm 0 0', fontFamily: mono, textAlign: 'center', lineHeight: 1.3 }}>
+        <p style={{ fontSize: '4.5pt', color: '#6b7280', margin: '1.5mm 0 0', fontFamily: mono, textAlign: 'center' }}>
           1U · 10{'″'} rack
         </p>
       </div>
