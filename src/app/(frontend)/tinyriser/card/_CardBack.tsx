@@ -140,20 +140,27 @@ export function CardBack() {
           padding: '4mm 4mm 3.5mm 4mm',
         }}
       >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5mm' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2mm' }}>
           <p style={{ fontSize: '5pt', fontWeight: 700, color: '#9ca3af', margin: 0, fontFamily: mono }}>
             {'// next_product_build'}
           </p>
           <p style={{ fontSize: '9.5pt', fontWeight: 700, color: '#111111', margin: 0, fontFamily: mono, lineHeight: 1.15, letterSpacing: '-0.02em' }}>
             10{'″'} 1U Rack UPS<br />with USB-C PD outputs
           </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8mm' }}>
-            <p style={{ fontSize: '5.5pt', color: '#374151', margin: 0, fontFamily: mono }}>
-              6{'×'} USB-PD 3.0 outputs
-            </p>
-            <p style={{ fontSize: '5.5pt', color: '#374151', margin: 0, fontFamily: mono }}>
-              PPS - 5V to 20V per port
-            </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.55mm', marginTop: '0.5mm' }}>
+            {[
+              '6× USB-PD 3.0 · 5–20V PPS',
+              'per-port power monitoring',
+              'Prometheus · Home Assistant',
+              'NUT server built-in',
+              'USB-C to barrel jack support',
+              'web UI · per-port shutdown',
+            ].map((f) => (
+              <p key={f} style={{ fontSize: '5pt', color: '#374151', margin: 0, fontFamily: mono, display: 'flex', gap: '1.5mm', alignItems: 'baseline' }}>
+                <span style={{ color: '#9ca3af', flexShrink: 0 }}>-</span>
+                {f}
+              </p>
+            ))}
           </div>
         </div>
 
