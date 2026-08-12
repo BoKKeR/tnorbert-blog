@@ -154,7 +154,7 @@ export function CardBack() {
               'Prometheus · Home Assistant',
               'NUT server built-in',
               'USB-C to barrel jack support',
-              'web UI · per-port shutdown',
+              'web UI · per-port power control',
             ].map((f) => (
               <p key={f} style={{ fontSize: '5pt', color: '#374151', margin: 0, fontFamily: mono, display: 'flex', gap: '1.5mm', alignItems: 'baseline' }}>
                 <span style={{ color: '#9ca3af', flexShrink: 0 }}>-</span>
