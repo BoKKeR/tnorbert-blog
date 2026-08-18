@@ -9,9 +9,9 @@ export function SignupForm() {
   if (state.success) {
     return (
       <div className="border border-primary/40 bg-primary/[0.03] rounded-sm px-5 py-4">
-        <p className="font-mono text-sm text-primary font-semibold">You're in.</p>
+        <p className="font-mono text-sm text-primary font-semibold">You&apos;re in.</p>
         <p className="font-mono text-xs text-muted-foreground mt-1">
-          We'll reach out when there's something worth sharing.
+          We&apos;ll reach out when there&apos;s something worth sharing.
         </p>
       </div>
     )
